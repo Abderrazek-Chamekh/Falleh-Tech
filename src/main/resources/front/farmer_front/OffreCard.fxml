@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox spacing="10" prefWidth="250" styleClass="card" xmlns:fx="">
+    <Label fx:id="lblTitre" styleClass="card-title"/>
+    <Label fx:id="lblDescription" styleClass="card-sub"/>
+    <Label text="Salary:" styleClass="card-label"/>
+    <Label fx:id="lblSalaire" styleClass="card-value"/>
+    <Label text="Location:" styleClass="card-label"/>
+    <Label fx:id="lblLocation" styleClass="card-value"/>
+    <HBox spacing="10">
+        <Button fx:id="btnView" text="👁" styleClass="icon-btn"/>
+        <Button fx:id="btnEdit" text="✏️" styleClass="icon-btn"/>
+        <Button fx:id="btnDelete" text="🗑" styleClass="icon-btn"/>
+    </HBox>
+</VBox>
+

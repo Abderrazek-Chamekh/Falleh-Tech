@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="tn.esprit.fx.OffreController">
+
+    <!-- Centered VBox Form -->
+    <VBox fx:id="formContainer"
+          spacing="15"
+          alignment="CENTER"
+          prefWidth="400"
+          maxWidth="400">
+
+        <!-- Input Fields -->
+        <TextField fx:id="titreField" promptText="Titre"/>
+        <TextField fx:id="descriptionField" promptText="Description"/>
+        <TextField fx:id="salaireField" promptText="Salaire"/>
+        <TextField fx:id="lieuField" promptText="Lieu"/>
+        <Button text="Ajouter" onAction="#ajouterOffre"/>
+
+        <!-- Toggle Button -->
+        <Button fx:id="toggleTableButton"
+                text="Afficher/Masquer la Table"
+                onAction="#toggleTableVisibility"
+                maxWidth="Infinity"/>
+
+        <!-- Expandable TableView -->
+        <TableView fx:id="offreTable"
+                   VBox.vgrow="ALWAYS"
+                   visible="true"
+                   managed="true">
+            <columns>
+                <TableColumn fx:id="titreCol" text="Titre"/>
+                <TableColumn fx:id="descriptionCol" text="Description"/>
+                <TableColumn fx:id="lieuCol" text="Lieu"/>
+            </columns>
+        </TableView>
+    </VBox>
+</StackPane>

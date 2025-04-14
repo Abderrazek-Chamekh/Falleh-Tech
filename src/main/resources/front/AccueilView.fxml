@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.fx.AccueilController"
+            stylesheets="@../styles/agri-style.css">
+
+    <children>
+        <Pane fx:id="productsPane" layoutX="50" layoutY="50" prefWidth="700" prefHeight="180">
+            <children>
+                <VBox spacing="10" styleClass="section-card">
+                    <Label text="🛒 Produits en vedette" styleClass="section-title"/>
+                    <HBox spacing="15">
+                        <VBox spacing="8" styleClass="product-card">
+                            <ImageView fx:id="carottesImage" fitWidth="120" fitHeight="90" preserveRatio="true"/>
+                            <Label text="Carottes"/>
+                            <Label text="1,200 DT"/>
+                        </VBox>
+                        <VBox spacing="8" styleClass="product-card">
+                            <ImageView fx:id="laitueImage" fitWidth="120" fitHeight="90" preserveRatio="true"/>
+                            <Label text="Laitue"/>
+                            <Label text="600 DT"/>
+                        </VBox>
+                        <VBox spacing="8" styleClass="product-card">
+                            <ImageView fx:id="tomatesImage" fitWidth="120" fitHeight="90" preserveRatio="true"/>
+                            <Label text="Tomates"/>
+                            <Label text="1,800 DT"/>
+                        </VBox>
+                        <VBox spacing="8" styleClass="product-card">
+                            <ImageView fx:id="pommesImage" fitWidth="120" fitHeight="90" preserveRatio="true"/>
+                            <Label text="Pommes de terre"/>
+                            <Label text="1,400 DT"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </children>
+        </Pane>
+
+        <Pane fx:id="offresPane" layoutX="50" layoutY="250" prefWidth="400">
+            <VBox spacing="10" styleClass="section-card">
+                <Label text="🌾 Offres de travail" styleClass="section-title"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="📈" styleClass="stat-icon"/>
+                    <Label text="4 offres disponibles" styleClass="stat-label"/>
+                </HBox>
+                <Label text="• Récolte – Gafsa (Urgent)"/>
+                <Label text="• Tractoriste – Kairouan"/>
+                <Hyperlink text="Voir toutes les offres »" />
+            </VBox>
+        </Pane>
+
+        <Pane fx:id="blogPane" layoutX="500" layoutY="250" prefWidth="400">
+            <VBox spacing="10" styleClass="section-card">
+                <Label text="📰 Publications du blog" styleClass="section-title"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="🕒" styleClass="stat-icon"/>
+                    <Label text="Dernier article : Récolte d’olives – Saida A." styleClass="stat-label"/>
+                </HBox>
+                <Label text="• Nouvelle méthode d’irrigation – Ahmed B."/>
+                <Hyperlink text="Voir toutes les publications »" onAction="#goToBlog"/>
+            </VBox>
+        </Pane>
+
+        <Pane fx:id="statsPane" layoutX="275" layoutY="450" prefWidth="600">
+            <VBox spacing="10" styleClass="section-card">
+                <Label text="📊 Statistiques des stocks" styleClass="section-title"/>
+                <HBox spacing="30" alignment="CENTER">
+                    <VBox spacing="5" alignment="CENTER">
+                        <Label text="Produits en Stock"/>
+                        <ImageView fx:id="stockImage" fitWidth="150" preserveRatio="true"/>
+                    </VBox>
+
+                    <VBox spacing="5" alignment="CENTER_LEFT">
+                        <Label text="Plus Vendu :" styleClass="stat-subtitle"/>
+                        <GridPane hgap="10" vgap="5">
+                            <Label text="Num" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="table-header"/>
+                            <Label text="Designation" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="table-header"/>
+                            <Label text="Qty" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="table-header"/>
+
+                            <Label text="1" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                            <Label text="Tomates" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                            <Label text="18" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+                            <Label text="2" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                            <Label text="Carottes" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                            <Label text="14" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+
+                            <Label text="3" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                            <Label text="Pommes de terre" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                            <Label text="12" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+
+                            <Label text="4" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                            <Label text="Poivrons" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                            <Label text="10" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+                        </GridPane>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </Pane>
+    </children>
+</AnchorPane>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.fx.FrontViewController"
+            stylesheets="@../styles/sidebar_front.css">
+
+    <children>
+        <BorderPane AnchorPane.topAnchor="0"
+                    AnchorPane.bottomAnchor="0"
+                    AnchorPane.leftAnchor="0"
+                    AnchorPane.rightAnchor="0">
+
+            <!-- ✅ NAVBAR EN HAUT -->
+            <top>
+                <HBox spacing="10" alignment="CENTER_RIGHT" styleClass="navbar">
+                    <padding>
+                        <Insets top="10" bottom="10" left="20" right="20"/>
+                    </padding>
+
+                    <!-- 👇 Le titre de la page active -->
+                    <Label fx:id="activePageLabel" styleClass="navbar-title"/>
+
+                    <Region fx:id="navbarSpacer" HBox.hgrow="ALWAYS"/>
+
+                    <!-- 👇 NEW: Role Label -->
+                    <Label fx:id="roleLabel" style="-fx-font-size: 13px; -fx-text-fill: #888;" />
+
+                    <!-- ✅ Menu Profil déroulant -->
+                    <MenuButton fx:id="profileMenu" popupSide="BOTTOM" styleClass="profile-menu-button">
+                        <graphic>
+                            <HBox spacing="8" alignment="CENTER">
+                                <ImageView fx:id="menuAvatar" fitWidth="24" fitHeight="24" preserveRatio="true"/>
+                                <Label fx:id="profileNameLabel" text="Sarah" styleClass="profile-name-label"/>
+                            </HBox>
+                        </graphic>
+                        <items>
+                            <MenuItem text="👤 Profile" styleClass="profile-item" onAction="#openProfile"/>
+                            <MenuItem text="🚪 Déconnexion" styleClass="logout-item" onAction="#logout"/>
+                        </items>
+                    </MenuButton>
+                </HBox>
+            </top>
+
+
+            <!-- ✅ SIDEBAR À GAUCHE -->
+            <left>
+                <VBox spacing="20" alignment="TOP_LEFT" styleClass="sidebar">
+                    <padding>
+                        <Insets top="20" bottom="20" left="20" right="10"/>
+                    </padding>
+
+                    <VBox alignment="CENTER" spacing="8" styleClass="logo-section">
+                        <ImageView fx:id="logoImage" fitWidth="140" preserveRatio="true"/>
+                    </VBox>
+
+                    <Button fx:id="accueilButton" text="Page d'accueil" onAction="#goToAccueil" styleClass="sidebar-button"/>
+                    <Button fx:id="produitsButton" text="Produits" onAction="#goToProduits" styleClass="sidebar-button"/>
+
+                    <VBox fx:id="categorieTreeContainer" visible="false" managed="false" spacing="5" styleClass="tree-container">
+                        <Label text="Catégories disponibles" styleClass="tree-title"/>
+                        <TreeView fx:id="categorieTree"/>
+                    </VBox>
+
+                    <Button fx:id="panierButton" text="Panier" onAction="#goToPanier" styleClass="sidebar-button"/>
+                    <Button fx:id="commandesButton" text="Commandes" onAction="#goToCommandes" styleClass="sidebar-button"/>
+                    <Button fx:id="offresButton" text="Offres de travail" onAction="#goToMesOffres" styleClass="sidebar-button"/>
+                    <Button fx:id="blogButton" text="Blog" onAction="#goToBlog" styleClass="sidebar-button"/>
+
+                    <!-- ❌ Retiré le bouton Déconnexion ici (déjà dans la navbar) -->
+                </VBox>
+            </left>
+
+            <!-- ✅ CONTENU CENTRAL -->
+            <center>
+                <StackPane fx:id="contentPane"/>
+            </center>
+
+        </BorderPane>
+    </children>
+</AnchorPane>

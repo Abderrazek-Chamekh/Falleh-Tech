@@ -1,0 +1,226 @@
+/* Sidebar background: earthy green tone */
+.sidebar {
+    -fx-background-color: #4CAF50; /* vibrant natural green */
+    -fx-background-radius: 0px 50px 0px 0px;
+}
+
+/* Buttons: soft off-white with earthy green text */
+.labbtn {
+    -fx-text-fill: #2E7D32; /* darker green for contrast */
+    -fx-background-color: #F1F8E9; /* light greenish-white */
+    -fx-background-radius: 50px;
+}
+
+/* Sidebar button: transparent background */
+.sidebar-btn {
+    -fx-background-color: transparent;
+}
+
+/* Button text: softer green tone */
+.sidebar-btn-text {
+    -fx-text-fill: #C8E6C9; /* pale green for harmony */
+}
+
+/* On hover: highlight with fresh leaf green */
+.sidebar-btn:hover .sidebar-btn-text {
+    -fx-text-fill: #81C784; /* soft hover green */
+}
+.sidebar-btn-text {
+    -fx-cursor: hand;
+    -fx-background-color: transparent;
+}
+.sidebar-btn-text:hover {
+    -fx-background-color: #2c3e50;
+}
+/* === TabPane Styling === */
+
+
+/* === TableView Styling === */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #C8E6C9;
+    -fx-border-radius: 8px;
+    -fx-padding: 10px;
+}
+
+.table-view .column-header {
+    -fx-background-color: #81C784;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: #E0E0E0;
+}
+
+.table-view .table-row-cell:filled:selected {
+    -fx-background-color: #C8E6C9;
+    -fx-text-fill: black;
+}
+
+/* === Form Fields Styling === */
+.text-field {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #AED581;
+    -fx-padding: 6px;
+}
+
+/* === Buttons Styling === */
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #388E3C;
+}
+
+/* === Retour Button Specific === */
+.button.retour {
+    -fx-background-color: transparent;
+    -fx-border-color: #4CAF50;
+    -fx-text-fill: #4CAF50;
+    -fx-border-radius: 10;
+    -fx-font-weight: bold;
+}
+
+.button.retour:hover {
+    -fx-background-color: #E8F5E9;
+}
+/* === Modern Tab Header Styling === */
+.tab-pane .tab-header-area {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 10px 0;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #E8F5E9;
+    -fx-border-radius: 10 10 0 0;
+    -fx-background-radius: 10 10 0 0;
+    -fx-padding: 5 10 5 10;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2E7D32;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #81C784;
+    -fx-text-fill: white;
+}
+
+.tab-pane .tab-label {
+    -fx-font-size: 14px;
+}
+
+/* Optional shadow for selected tab */
+.tab-pane .tab:selected {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0.5, 0.0, 2.0);
+}
+.success-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-padding: 5 15;
+}
+
+.ghost-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #4CAF50;
+    -fx-text-fill: #4CAF50;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-padding: 5 15;
+}
+.profile-card {
+    -fx-background-color: linear-gradient(to bottom right, #2c3e50, #3498db);
+    -fx-background-radius: 20px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 5);
+    -fx-max-width: 300px;
+    -fx-max-height: 180px;
+    -fx-alignment: center;
+    -fx-layout-x: 800; /* You can adjust this manually if not using layoutX in FXML */
+    -fx-layout-y: 150;
+}
+
+#profileImage {
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);
+}
+
+#userNameLabel {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+}
+
+#userEmailLabel {
+    -fx-font-size: 13px;
+    -fx-text-fill: #dddddd;
+}
+
+#editProfileButton {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #3498db;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15px;
+    -fx-padding: 6px 12px;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.1), 2, 0, 0, 2);
+}
+
+#editProfileButton:hover {
+    -fx-background-color: #1ee582;
+    -fx-text-fill: white;
+}
+.profile-card {
+    -fx-background-color: linear-gradient(to bottom right, #226a12, #2a9d5e);
+    -fx-background-radius: 20px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.2, 0, 4);
+    -fx-alignment: center;
+}
+
+#profileImage {
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.2), 4, 0, 0, 2);
+}
+
+#userNameLabel {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+}
+
+#userEmailLabel {
+    -fx-font-size: 14px;
+    -fx-text-fill: #eeeeee;
+}
+
+#editProfileButton {
+    -fx-background-color: white;
+    -fx-text-fill: #1ee582;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15px;
+    -fx-padding: 6px 12px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.15), 2, 0, 0, 2);
+}
+
+#editProfileButton:hover {
+    -fx-background-color: #1ee582;
+    -fx-text-fill: white;
+}

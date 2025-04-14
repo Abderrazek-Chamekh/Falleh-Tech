@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.farmer.CandidaturesController"
+            stylesheets="@/styles/mesoffres.css">
+    <VBox spacing="20" style="-fx-padding: 30;" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
+          AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+        <Label text="📄 Liste des Candidatures" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+        <ScrollPane fitToWidth="true">
+            <VBox fx:id="candidaturesContainer" spacing="15" />
+        </ScrollPane>
+    </VBox>
+</AnchorPane>

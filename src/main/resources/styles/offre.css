@@ -1,0 +1,183 @@
+/* ==== Global ==== */
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #f4f9f4;
+}
+
+/* ==== Header ==== */
+.header-bar {
+    -fx-background-color: white;
+    -fx-border-color: #ddd;
+    -fx-border-width: 0 0 1 0;
+    -fx-spacing: 10;
+}
+
+.search-field {
+    -fx-pref-width: 250;
+    -fx-font-size: 13px;
+    -fx-padding: 8;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #ccc;
+}
+
+.search-btn {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 8 14;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.search-btn:hover {
+    -fx-background-color: #43a047;
+}
+
+.avatar {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.3, 0, 1);
+    -fx-border-radius: 50%;
+}
+
+/* ==== Main Content ==== */
+.content-wrapper {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 10, 0.1, 0, 4);
+}
+
+.section-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+/* ==== Add Button ==== */
+.add-btn {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-padding: 8 16;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+
+}
+
+.add-btn:hover {
+    -fx-background-color: #43a047;
+}
+
+/* === TableView Root === */
+.table-view {
+    -fx-background-color: #f5fdf7;
+    -fx-border-color: transparent;
+    -fx-padding: 10;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 100, 0, 0.1), 6, 0.2, 0, 2);
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 13px;
+}
+
+/* === Column Headers === */
+/* === HEADER BACKGROUND STYLING === */
+
+/* === HEADER TEXT === */
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, #81c784, #66bb6a);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 0;
+    -fx-background-repeat: stretch;
+    -fx-padding: 0;
+}
+
+.table-view .filler {
+    -fx-background-color: linear-gradient(to bottom, #81c784, #66bb6a);
+}
+
+.table-view .corner {
+    -fx-background-color: linear-gradient(to bottom, #81c784, #66bb6a);
+}
+
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 10;
+}
+/* === Table Rows === */
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-padding: 8;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f1f8e9;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #c8e6c9;
+    -fx-text-fill: black;
+}
+
+/* === Table Cells === */
+.table-cell {
+    -fx-padding: 6 12;
+    -fx-alignment: CENTER_LEFT;
+    -fx-text-fill: #333333;
+}
+
+/* === Optional: Custom Status Tags via Pseudo Classes === */
+.table-cell:filled:status-ready {
+    -fx-background-color: #c8e6c9;
+    -fx-text-fill: #2e7d32;
+}
+
+.table-cell:filled:status-growing {
+    -fx-background-color: #fff9c4;
+    -fx-text-fill: #f9a825;
+}
+
+.table-cell:filled:status-harvested {
+    -fx-background-color: #ffe0b2;
+    -fx-text-fill: #ef6c00;
+}
+
+/* ComboBox Styling */
+.combo-box {
+    -fx-font-size: 14px;
+    -fx-background-color: white;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-border-color: #a5d6a7;
+    -fx-padding: 4 10;
+}
+
+.combo-box .list-cell {
+    -fx-padding: 6 10;
+}
+
+/* Green Flat Button */
+.nav-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 8 18;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.nav-button:hover {
+    -fx-background-color: #388E3C;
+}

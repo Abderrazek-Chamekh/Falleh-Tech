@@ -1,0 +1,157 @@
+/* === ROOT BACKGROUND === */
+#dashboardPane {
+    -fx-background-color: linear-gradient(to bottom right, #d0ead0, #c1e1c1);
+    -fx-padding: 20;
+}
+
+/* === DASHBOARD CARD STYLES === */
+.stat-card {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20;
+    -fx-spacing: 10;
+    -fx-pref-width: 180;
+    -fx-pref-height: 100;
+    -fx-alignment: center;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0.3, 0, 3);
+    -fx-cursor: hand;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 12, 0.4, 0, 4);
+}
+
+/* === TEXT INSIDE CARDS === */
+.card-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #444;
+}
+
+.card-value {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e7d32;
+}
+
+/* === LABELS / HEADERS === */
+.label-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e7d32;
+}
+
+/* === QUICK NAVIGATION BUTTON === */
+.nav-button, #btnApply {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 20;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+}
+
+.nav-button:hover, #btnApply:hover {
+    -fx-background-color: #45a049;
+}
+
+/* === ICON BUTTONS === */
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 16px;
+    -fx-text-fill: #444;
+}
+
+.icon-button:hover {
+    -fx-background-color: #e0e0e0;
+    -fx-cursor: hand;
+}
+
+/* === PROFILE MENU === */
+.profile-menu {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2e7d32;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.profile-menu .label {
+    -fx-text-fill: #2e7d32;
+}
+
+/* === DATE PICKERS === */
+.date-picker {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 6;
+    -fx-font-size: 13px;
+    -fx-border-color: #cfe9d7;
+    -fx-border-width: 1px;
+    -fx-background-color: white;
+}
+
+/* === TABLEVIEW === */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-font-size: 13px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #cfe9d7;
+    -fx-border-radius: 8 8 0 0;
+}
+
+.table-view .column-header, .table-view .cell {
+    -fx-padding: 10;
+    -fx-font-weight: normal;
+}
+
+/* === PIE CHART === */
+.chart-pie {
+    -fx-pie-label-visible: true;
+}
+/* === Unified Green Action Button Style === */
+.btn-show,
+.btn-edit,
+.btn-delete {
+    -fx-background-color: #e8f5e9;
+    -fx-border-color: #a5d6a7;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-padding: 4 10;
+    -fx-font-size: 13px;
+    -fx-text-fill: #2e7d32;
+    -fx-font-weight: bold;
+    -fx-graphic-text-gap: 0;
+    -fx-content-display: CENTER;
+    -fx-alignment: CENTER;
+}
+
+.btn-show:hover,
+.btn-edit:hover,
+.btn-delete:hover {
+    -fx-background-color: #c8e6c9;
+    -fx-text-fill: #1b5e20;
+    -fx-border-color: #81c784;
+}
+.close-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #999;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+    -fx-padding: 2;
+}
+
+.close-btn:hover {
+    -fx-text-fill: #e53935;
+}

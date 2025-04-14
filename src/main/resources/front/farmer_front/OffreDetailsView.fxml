@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.farmer.OffreDetailsController"
+            stylesheets="@/styles/mesoffres.css">
+
+    <VBox spacing="20" style="-fx-padding: 30;" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+        <Label fx:id="titreLabel" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+        <Label fx:id="lieuLabel" />
+        <Label fx:id="periodeLabel" />
+        <TextArea fx:id="descriptionText" editable="false" wrapText="true" prefRowCount="10" />
+
+        <HBox spacing="10">
+            <Button text="🔙 Retour" onAction="#goBack"/>
+            <Button text="📄 Voir les candidatures" onAction="#goToCandidatures"/>
+        </HBox>
+    </VBox>
+</AnchorPane>

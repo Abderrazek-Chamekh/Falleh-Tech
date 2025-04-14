@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.fx.DashboardController"
+            fx:id="rootBorderPane">
+
+    <left>
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <Button fx:id="homeBtn" text="🏠 Home" />
+            <Button fx:id="offreBtn" text="🧑‍🌾 Offres" />
+            <Button fx:id="offreBtn1" text="🧑‍🌾 Offres" />
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="10" alignment="CENTER" style="-fx-padding: 30;">
+            <Label text="Welcome, Amino!" fx:id="welcomeLabel" style="-fx-font-size: 24;" />
+        </VBox>
+    </center>
+
+</BorderPane>

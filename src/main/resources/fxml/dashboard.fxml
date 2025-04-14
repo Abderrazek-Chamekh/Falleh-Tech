@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="dashboardPane"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.DashboardController"
+            stylesheets="@/styles/dashboard.css">
+
+    <top>
+        <VBox spacing="15" alignment="CENTER" style="-fx-padding: 20;">
+            <!-- Customize Button -->
+            <HBox alignment="CENTER_RIGHT" prefWidth="700">
+                <Button fx:id="btnCustomize" text="➕ Personnaliser" onAction="#customizeCards" styleClass="nav-button"/>
+            </HBox>
+
+            <!-- Stat Cards with Close Buttons -->
+            <HBox fx:id="cardContainer" spacing="20" alignment="CENTER">
+                <StackPane fx:id="wrapperCandidatures">
+                    <VBox fx:id="cardCandidatures" styleClass="stat-card">
+                        <Label text="Candidatures" styleClass="card-title"/>
+                        <Label fx:id="lblCandidatures" text="0" styleClass="card-value"/>
+                    </VBox>
+                    <Button text="✖" onAction="#closeCard" styleClass="close-btn" StackPane.alignment="TOP_RIGHT"/>
+                </StackPane>
+
+                <StackPane fx:id="wrapperOffres">
+                    <VBox fx:id="cardOffres" styleClass="stat-card">
+                        <Label text="Offres" styleClass="card-title"/>
+                        <Label fx:id="lblOffres" text="0" styleClass="card-value"/>
+                    </VBox>
+                    <Button text="✖" onAction="#closeCard" styleClass="close-btn" StackPane.alignment="TOP_RIGHT"/>
+                </StackPane>
+
+                <StackPane fx:id="wrapperProduits">
+                    <VBox fx:id="cardProduits" styleClass="stat-card">
+                        <Label text="Produits" styleClass="card-title"/>
+                        <Label fx:id="lblProduits" text="0" styleClass="card-value"/>
+                    </VBox>
+                    <Button text="✖" onAction="#closeCard" styleClass="close-btn" StackPane.alignment="TOP_RIGHT"/>
+                </StackPane>
+
+                <StackPane fx:id="wrapperUsers">
+                    <VBox fx:id="cardUsers" styleClass="stat-card">
+                        <Label text="Utilisateurs" styleClass="card-title"/>
+                        <Label fx:id="lblUsers" text="0" styleClass="card-value"/>
+                    </VBox>
+                    <Button text="✖" onAction="#closeCard" styleClass="close-btn" StackPane.alignment="TOP_RIGHT"/>
+                </StackPane>
+            </HBox>
+
+            <Separator prefWidth="700"/>
+
+            <HBox spacing="15" alignment="CENTER">
+                <Label text="Voir statistiques pour :" />
+                <ComboBox fx:id="comboStatsType" promptText="Sélectionnez une catégorie"/>
+                <Button fx:id="btnShowStats" text="Voir les stats" onAction="#showSelectedStats" styleClass="nav-button"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox fx:id="statsBox" alignment="TOP_CENTER" spacing="10" style="-fx-padding: 30;">
+            <Label fx:id="statsTitle" text="Veuillez sélectionner une catégorie..." styleClass="label-title"/>
+            <AnchorPane fx:id="chartContainer" prefHeight="300" prefWidth="600"/>
+        </VBox>
+    </center>
+
+</BorderPane>

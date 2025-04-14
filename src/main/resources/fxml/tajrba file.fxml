@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.OffreTableController"
+            prefWidth="1000" prefHeight="700" stylesheets="@/styles/offre.css">
+
+    <!-- Header -->
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="header-bar">
+            <padding><Insets top="15" bottom="15" left="20" right="20"/></padding>
+            <TextField fx:id="searchField" promptText="Rechercher une offre..." styleClass="search-field"/>
+            <Button text="🔍"  styleClass="search-btn"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <ImageView fitHeight="35" fitWidth="35" styleClass="avatar"/>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <VBox spacing="15" styleClass="content-wrapper" VBox.vgrow="ALWAYS">
+            <padding><Insets top="20" bottom="20" left="25" right="25"/></padding>
+
+            <!-- Title and Add Button -->
+            <HBox alignment="CENTER_LEFT">
+                <Label text="📋 Offres d'emploi" styleClass="section-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="➕ Ajouter Offre" onAction="#onAddOffre" styleClass="add-btn"/>
+            </HBox>
+
+            <!-- Table -->
+            <TableView fx:id="offreTable" styleClass="modern-table" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="titreColumn" text="Titre" prefWidth="180"/>
+                    <TableColumn fx:id="lieuColumn" text="Lieu" prefWidth="120"/>
+                    <TableColumn fx:id="salaireColumn" text="Salaire (DT)" prefWidth="120"/>
+                    <TableColumn fx:id="dateExpirationColumn" text="Date Expiration" prefWidth="140"/>
+                    <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="200"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

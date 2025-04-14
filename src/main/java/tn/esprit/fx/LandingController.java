@@ -1,0 +1,146 @@
+package tn.esprit.fx;
+
+import javafx.animation.FadeTransition;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import tn.esprit.entities.User;
+
+import java.io.IOException;
+
+public class LandingController {
+
+    @FXML private Button btnFrontOffice;
+    @FXML private Button btnBackOffice;
+    @FXML private VBox roleBox;
+
+    @FXML
+    private void toggleRoleSelection() {
+        boolean showing = roleBox.isVisible();
+        roleBox.setVisible(!showing);
+        roleBox.setManaged(!showing);
+    }
+
+    @FXML
+    private void toggleRoleBox() {
+        boolean isVisible = roleBox.isVisible();
+        roleBox.setVisible(!isVisible);
+        roleBox.setManaged(!isVisible); // ensures layout updates correctly
+    }
+
+
+    @FXML
+    private void goToFrontOffice() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/frontview.fxml"));
+            Parent root = loader.load();
+
+            // 💡 Pass dummy user with role "ouvrier"
+            FrontViewController controller = loader.getController();
+            User user = new User();
+            user.setRole("ouvrier");
+            controller.setCurrentUser(user);
+
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) btnFrontOffice.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void goToBackOffice() {
+        loadSceneWithFade("/fxml/main_layout.fxml", btnBackOffice);
+    }
+    @FXML
+    private void goToClient() {
+        loadFrontOfficeWithRole("client");
+    }
+
+    @FXML
+    private void goToAgriculteur() {
+        loadFrontOfficeWithRole("agriculteur");
+    }
+
+    @FXML
+    private void goToOuvrier() {
+        loadFrontOfficeWithRole("ouvrier");
+    }
+
+
+    private void loadSceneWithFade(String fxmlPath, Button sourceButton) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent nextRoot = loader.load();
+
+            Scene scene = new Scene(nextRoot);
+            scene.getStylesheets().addAll(
+                    getClass().getResource("/styles/main.css").toExternalForm(),
+                    getClass().getResource("/styles/dashboard.css").toExternalForm(),
+                    getClass().getResource("/styles/offre.css").toExternalForm(),
+                    getClass().getResource("/styles/popup.css").toExternalForm(),
+                    getClass().getResource("/styles/sidebar.css").toExternalForm()
+            );
+
+            Stage stage = (Stage) sourceButton.getScene().getWindow();
+            stage.setScene(scene);
+
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(400), nextRoot);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.play();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private User createFakeUser(String role) {
+        User user = new User();
+        user.setName("Test " + role);
+        user.setRole(role);
+        return user;
+    }
+
+    private void loadFrontOfficeWithRole(String role) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/frontview.fxml"));
+            Parent root = loader.load();
+
+            // Set role dynamically
+            FrontViewController controller = loader.getController();
+            User user = new User();
+            user.setRole(role);
+            controller.setCurrentUser(user);
+
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) btnFrontOffice.getScene().getWindow();
+            stage.setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void goToFrontOfficeClient() {
+        loadFrontOfficeWithRole("client");
+    }
+
+    @FXML
+    private void goToFrontOfficeAgriculteur() {
+        loadFrontOfficeWithRole("agriculteur");
+    }
+
+    @FXML
+    private void goToFrontOfficeOuvrier() {
+        loadFrontOfficeWithRole("ouvrier");
+    }
+
+
+}

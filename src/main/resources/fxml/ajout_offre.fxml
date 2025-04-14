@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.controllers.AjoutOffreController"
+      spacing="12" alignment="CENTER"
+      styleClass="popup-container">
+
+    <!-- ✅ Dynamic Title -->
+    <Label fx:id="popupTitle" text="Ajouter une Offre" styleClass="popup-title"/>
+
+    <TextField fx:id="titreField" promptText="Titre" styleClass="popup-field"/>
+    <TextField fx:id="lieuField" promptText="Lieu" styleClass="popup-field"/>
+    <TextField fx:id="salaireField" promptText="Salaire" styleClass="popup-field"/>
+    <DatePicker fx:id="dateExpirationPicker" promptText="Date d'expiration" styleClass="popup-field"/>
+    <TextArea fx:id="descriptionArea" promptText="Description" prefRowCount="3" styleClass="popup-area"/>
+
+    <!-- ✅ Dynamic Buttons -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="submitButton" text="Ajouter" onAction="#handleAjouter" styleClass="btn-green"/>
+        <Button text="Annuler" onAction="#handleClose" styleClass="btn-red"/>
+    </HBox>
+</VBox>

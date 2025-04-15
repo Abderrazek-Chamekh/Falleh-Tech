@@ -106,4 +106,30 @@ public class ServiceOffreEmploi implements services<OffreEmploi> {
         }
         return offres;
     }
+    public List<OffreEmploi> getByEmployeurId(int id) {
+        List<OffreEmploi> list = new ArrayList<>();
+        String sql = "SELECT * FROM offre_emploi WHERE id_employeur_id = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                OffreEmploi o = new OffreEmploi();
+                o.setId(rs.getInt("id"));
+                o.setTitre(rs.getString("titre"));
+                o.setDescription(rs.getString("description"));
+                o.setSalaire(rs.getFloat("salaire"));
+                o.setLieu(rs.getString("lieu"));
+                o.setStartDate(rs.getDate("start_date").toLocalDate());
+                o.setDateExpiration(rs.getDate("date_expiration").toLocalDate());
+                list.add(o);
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ Erreur SQL: " + e.getMessage());
+        }
+
+        return list;
+    }
+
 }

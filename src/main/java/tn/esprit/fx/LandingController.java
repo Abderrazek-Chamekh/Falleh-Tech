@@ -30,34 +30,19 @@ public class LandingController {
     private void toggleRoleBox() {
         boolean isVisible = roleBox.isVisible();
         roleBox.setVisible(!isVisible);
-        roleBox.setManaged(!isVisible); // ensures layout updates correctly
+        roleBox.setManaged(!isVisible);
     }
-
 
     @FXML
     private void goToFrontOffice() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/frontview.fxml"));
-            Parent root = loader.load();
-
-            // 💡 Pass dummy user with role "ouvrier"
-            FrontViewController controller = loader.getController();
-            User user = new User();
-            user.setRole("ouvrier");
-            controller.setCurrentUser(user);
-
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) btnFrontOffice.getScene().getWindow();
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadFrontOfficeWithRole("ouvrier");
     }
 
     @FXML
     private void goToBackOffice() {
         loadSceneWithFade("/fxml/main_layout.fxml", btnBackOffice);
     }
+
     @FXML
     private void goToClient() {
         loadFrontOfficeWithRole("client");
@@ -72,7 +57,6 @@ public class LandingController {
     private void goToOuvrier() {
         loadFrontOfficeWithRole("ouvrier");
     }
-
 
     private void loadSceneWithFade(String fxmlPath, Button sourceButton) {
         try {
@@ -100,22 +84,24 @@ public class LandingController {
             e.printStackTrace();
         }
     }
-    private User createFakeUser(String role) {
-        User user = new User();
-        user.setName("Test " + role);
-        user.setRole(role);
-        return user;
-    }
 
     private void loadFrontOfficeWithRole(String role) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/frontview.fxml"));
             Parent root = loader.load();
 
-            // Set role dynamically
-            FrontViewController controller = loader.getController();
             User user = new User();
             user.setRole(role);
+
+            // Assign static ID based on role
+            switch (role) {
+                case "agriculteur" -> user.setId(16);
+                case "ouvrier"     -> user.setId(21);
+                case "client"      -> user.setId(26);
+                default             -> user.setId(0);
+            }
+
+            FrontViewController controller = loader.getController();
             controller.setCurrentUser(user);
 
             Scene scene = new Scene(root);
@@ -127,20 +113,7 @@ public class LandingController {
         }
     }
 
-    @FXML
-    private void goToFrontOfficeClient() {
-        loadFrontOfficeWithRole("client");
-    }
-
-    @FXML
-    private void goToFrontOfficeAgriculteur() {
-        loadFrontOfficeWithRole("agriculteur");
-    }
-
-    @FXML
-    private void goToFrontOfficeOuvrier() {
-        loadFrontOfficeWithRole("ouvrier");
-    }
-
-
+    @FXML private void goToFrontOfficeClient() { loadFrontOfficeWithRole("client"); }
+    @FXML private void goToFrontOfficeAgriculteur() { loadFrontOfficeWithRole("agriculteur"); }
+    @FXML private void goToFrontOfficeOuvrier() { loadFrontOfficeWithRole("ouvrier"); }
 }

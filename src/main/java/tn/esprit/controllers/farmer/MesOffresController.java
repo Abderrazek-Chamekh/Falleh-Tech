@@ -4,79 +4,104 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import tn.esprit.entities.OffreEmploi;
+import tn.esprit.services.ServiceOffreEmploi;
+
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class MesOffresController implements Initializable {
 
     @FXML private ScrollPane scrollPane;
     @FXML private FlowPane offersGrid;
+    @FXML private ToggleButton btnAllOffers;
+    @FXML private ToggleButton btnMyOffers;
+    @FXML private Button btnAddOffer;
+    @FXML private StackPane contentPaneRef;
 
-    // Static pane to swap views from FrontViewController
-    private static StackPane contentPaneRef;
+    private final ServiceOffreEmploi service = new ServiceOffreEmploi();
+    private static StackPane staticContentPane;
+    private int currentUserId = 30; // 👤 Replace with logged-in user if dynamic
 
     public static void setContentPaneRef(StackPane pane) {
-        contentPaneRef = pane;
+        staticContentPane = pane;
     }
+
+    public void setCurrentUserId(int id) {
+        this.currentUserId = id;
+        loadAllOffers(); // 👈 auto-load after setting user
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("🔍 Loading all job offers...");
+        ToggleGroup toggleGroup = new ToggleGroup();
+        btnAllOffers.setToggleGroup(toggleGroup);
+        btnMyOffers.setToggleGroup(toggleGroup);
 
-        // Sample data
-        List<OffreEmploi> offres = List.of(
-                new OffreEmploi("Récolte d’olives", "Saida", "2025-04-12", "2025-04-15", "Récolte manuelle d’olives..."),
-                new OffreEmploi("Tractoriste", "Kairouan", "2025-04-20", "2025-04-22", "Conduite de tracteur dans les champs..."),
-                new OffreEmploi("Plantation de tomates", "Gafsa", "2025-05-05", "2025-05-10", "Préparation et plantation de jeunes plants...")
-        );
+        btnAllOffers.setOnAction(e -> {
+            if (btnAllOffers.isSelected()) loadAllOffers();
+        });
 
+        btnMyOffers.setOnAction(e -> {
+            if (btnMyOffers.isSelected()) loadMyOffers();
+        });
+
+        btnAddOffer.setOnAction(e -> openAddOfferPopup());
+
+        loadAllOffers(); // Load all offers by default
+    }
+
+    private void loadAllOffers() {
+        List<OffreEmploi> offres = service.getAll();
+        displayOffers(offres);
+    }
+
+    private void loadMyOffers() {
+        List<OffreEmploi> myOffres = service.getByEmployeurId(currentUserId);
+        displayOffers(myOffres);
+    }
+
+    private void displayOffers(List<OffreEmploi> offers) {
         offersGrid.getChildren().clear();
+        boolean isMyOffers = btnMyOffers.isSelected();
 
-        for (OffreEmploi offre : offres) {
-            VBox card = createCard(offre);
-            offersGrid.getChildren().add(card);
+        for (OffreEmploi o : offers) {
+            try {
+                String fxmlFile = isMyOffers ? "/front/farmer_front/card_offre_my.fxml" : "/front/farmer_front/card_offre.fxml";
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+                VBox card = loader.load();
+
+                OffreCardController controller = loader.getController();
+                controller.setData(o); // Your controller sets labels + button handlers
+
+                offersGrid.getChildren().add(card);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    private VBox createCard(OffreEmploi offre) {
-        Label titreLabel = new Label("🧑‍🌾 " + offre.getTitre());
-        titreLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
-        Label lieuLabel = new Label("📍 " + offre.getLieu());
-        Label dateLabel = new Label("📅 " + offre.getStartDate() + " - " + offre.getDateExpiration());
-
-        Button detailsBtn = new Button("Voir détails");
-        detailsBtn.setOnAction(e -> showDetails(offre));
-
-        VBox card = new VBox(10);
-        card.setStyle("-fx-background-color: #f8f8f8; -fx-padding: 15; -fx-border-color: #ccc; -fx-border-radius: 8; -fx-background-radius: 8;");
-        card.setPrefWidth(200);
-        card.getChildren().addAll(titreLabel, lieuLabel, dateLabel, detailsBtn);
-
-        return card;
-    }
-
-    private void showDetails(OffreEmploi offre) {
+    private void openAddOfferPopup() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/farmer_front/OffreDetailsView.fxml"));
-            Parent detailsView = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/farmer_front/AddOffreDialog.fxml"));
+            DialogPane dialogPane = loader.load();
 
-            OffreDetailsController controller = loader.getController();
-            controller.setOffre(offre, contentPaneRef); // 🤝 Pass offer and parent StackPane
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane(dialogPane);
+            dialog.setTitle("Nouvelle Offre");
+            dialog.showAndWait();
 
-            contentPaneRef.getChildren().setAll(detailsView);
+            loadAllOffers(); // Refresh after add
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 }

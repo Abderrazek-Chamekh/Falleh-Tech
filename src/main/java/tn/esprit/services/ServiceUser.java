@@ -66,6 +66,25 @@ public class ServiceUser implements services<User> {
 
         return list;
     }
+    public User findById(int id) {
+        String sql = "SELECT * FROM user WHERE id = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                User u = new User();
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("name"));
+                u.setLastName(rs.getString("last_name"));
+                u.setRole(rs.getString("role"));
+                u.setEmail(rs.getString("email"));
+                return u;
+            }
+        } catch (SQLException e) {
+            System.out.println("❌ Erreur lors de la récupération de l'utilisateur: " + e.getMessage());
+        }
+        return null;
+    }
 
     // Other methods from the interface not implemented for now
     @Override public void ajouter(User user) {}

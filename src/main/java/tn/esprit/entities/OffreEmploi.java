@@ -152,4 +152,11 @@ public class OffreEmploi {
     public String toString() {
         return this.titre;
     }
+    public OffreEmploi(String titre, String description, Float salaire, String lieu) {
+        this.titre = titre;
+        this.description = description;
+        this.salaire = salaire;
+        this.lieu = lieu;
+    }
+
 }

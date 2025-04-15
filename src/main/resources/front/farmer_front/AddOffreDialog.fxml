@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21.0.1"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.controllers.farmer.AddOffreDialogController"
+      spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 20;">
+
+    <Label text="➕ Ajouter une offre"
+           style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+    <TextField fx:id="txtTitre" promptText="Titre de l'offre" />
+    <TextArea fx:id="txtDescription" promptText="Description" prefRowCount="3" />
+    <TextField fx:id="txtSalaire" promptText="Salaire" />
+    <TextField fx:id="txtLieu" promptText="Lieu" />
+    <DatePicker fx:id="dpStartDate" promptText="Date de début" />
+    <DatePicker fx:id="dpEndDate" promptText="Date d'expiration" />
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Annuler" onAction="#handleCancel" />
+        <Button text="Ajouter" onAction="#handleAjouter" styleClass="btn-success" />
+    </HBox>
+</VBox>

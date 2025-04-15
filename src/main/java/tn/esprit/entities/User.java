@@ -136,7 +136,7 @@ public class User {
     }
 
     public String getNom() {
-        return name;
+        return name ;
     }
 
 }

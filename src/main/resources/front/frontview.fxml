@@ -69,7 +69,7 @@
 
                     <Button fx:id="panierButton" text="Panier" onAction="#goToPanier" styleClass="sidebar-button"/>
                     <Button fx:id="commandesButton" text="Commandes" onAction="#goToCommandes" styleClass="sidebar-button"/>
-                    <Button fx:id="offresButton" text="Offres de travail" onAction="#goToMesOffres" styleClass="sidebar-button"/>
+                    <Button fx:id="offresButton" text="Offres de travail" onAction="#goToOffres" styleClass="sidebar-button"/>
                     <Button fx:id="blogButton" text="Blog" onAction="#goToBlog" styleClass="sidebar-button"/>
 
                     <!-- ❌ Retiré le bouton Déconnexion ici (déjà dans la navbar) -->

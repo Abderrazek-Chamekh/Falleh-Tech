@@ -1,0 +1,102 @@
+.root {
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-background-color: linear-gradient(to right, #e0f2f1, #ffffff);
+}
+
+.left-pane {
+    -fx-background-color: linear-gradient(to bottom right, #43cea2, #185a9d);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 20, 0.5, 0, 0);
+}
+
+.login-card {
+    -fx-background-color: white;
+    -fx-padding: 40 30;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-background-color: rgba(255, 255, 255, 0.95);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 15, 0.3, 0, 4);
+    -fx-spacing: 15;
+    -fx-alignment: center;
+    -fx-opacity: 0;
+    -fx-translate-y: 30;
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e7d32;
+}
+
+.input-field {
+    -fx-pref-width: 250;
+    -fx-padding: 10;
+    -fx-background-color: #f1f8e9;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-font-size: 14px;
+    -fx-text-fill: #33691E;
+    -fx-prompt-text-fill: #9e9e9e;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0.0, 0, 1);
+}
+
+.input-field:focused {
+    -fx-border-color: #689F38;
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, #aed581, 4, 0.2, 0, 0);
+}
+
+.green-button {
+    -fx-background-color: linear-gradient(to right, #7cb342, #558b2f);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-padding: 10 25;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 128, 0, 0.4), 6, 0.2, 0, 2);
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+.green-button:hover {
+    -fx-background-color: linear-gradient(to right, #9ccc65, #7cb342);
+}
+
+.google-button {
+    -fx-background-color: #E53935;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-padding: 10 25;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(gaussian, rgba(244, 67, 54, 0.4), 6, 0.2, 0, 2);
+}
+
+.google-button:hover {
+    -fx-background-color: #f44336;
+}
+
+.forgot-password {
+    -fx-text-fill: #e53935;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 10 0;
+}
+.hyperlink:hover {
+    -fx-text-fill: #558b2f;
+    -fx-underline: true;
+}
+
+.error-label {
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 10px 0;
+    -fx-alignment: center;
+}
+
+.error-label {
+    -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.3), 5, 0, 0, 1);
+}

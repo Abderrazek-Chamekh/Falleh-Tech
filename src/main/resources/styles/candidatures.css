@@ -1,0 +1,57 @@
+/* === Candidature Card === */
+.candidature-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #dcdcdc;
+    -fx-padding: 12;
+    -fx-spacing: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 4, 0.1, 0, 1);
+}
+
+/* === Status coloring === */
+.candidature-card.accepted {
+    -fx-background-color: #e8f5e9;
+    -fx-border-color: #81c784;
+}
+
+.candidature-card.rejected {
+    -fx-background-color: #fdecea;
+    -fx-border-color: #ef5350;
+}
+
+/* === Buttons === */
+.btn-accept, .btn-reject {
+    -fx-background-radius: 8;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-pref-width: 90;
+}
+
+.btn-accept {
+    -fx-background-color: #81c784;
+    -fx-text-fill: white;
+}
+
+.btn-reject {
+    -fx-background-color: #e57373;
+    -fx-text-fill: white;
+}
+
+.btn-active {
+    -fx-border-color: #333;
+    -fx-border-width: 2;
+}
+
+/* Labels */
+.label-name {
+    -fx-font-weight: bold;
+    -fx-text-fill: #1a73e8;
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+.label-email, .label-date, .label-statut, .label-exp {
+    -fx-font-size: 13px;
+    -fx-text-fill: #444;
+}

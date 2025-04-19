@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="tn.esprit.Controllers.User.Admin.UserStatsController"
+      stylesheets="@user-stats.css"
+      alignment="CENTER" spacing="20" >
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <!-- Header Section with Gradient Background -->
+    <StackPane>
+        <Rectangle arcWidth="10" arcHeight="10" height="80"
+                   styleClass="header-rectangle"/>
+        <VBox alignment="CENTER">
+            <Label text="USER ANALYTICS DASHBOARD" styleClass="dashboard-title"/>
+            <Label text="Comprehensive User Statistics and Insights" styleClass="dashboard-subtitle"/>
+        </VBox>
+    </StackPane>
+
+    <!-- Key Metrics Cards -->
+    <HBox alignment="CENTER" spacing="20" styleClass="stats-cards-container">
+        <!-- Total Users Card -->
+        <VBox styleClass="stats-card" fx:id="totalUsersCard">
+            <ImageView fitWidth="40" fitHeight="40">
+                <image>
+                    <Image url="@/Images/icons/profile.png"/>
+                </image>
+            </ImageView>
+            <Label text="TOTAL USERS" styleClass="stats-card-title"/>
+            <Label fx:id="totalUsersLabel" styleClass="stats-card-value"/>
+            <Label fx:id="totalUsersNote" styleClass="stats-card-note"/>
+        </VBox>
+
+        <!-- Active Users Card -->
+        <VBox styleClass="stats-card" fx:id="activeUsersCard">
+            <ImageView fitWidth="40" fitHeight="40">
+                <image>
+                    <Image url="@/Images/icons/active.png"/>
+                </image>
+            </ImageView>
+            <Label text="ACTIVE USERS" styleClass="stats-card-title"/>
+            <Label fx:id="activeUsersLabel" styleClass="stats-card-value"/>
+            <Label fx:id="activeUsersNote" styleClass="stats-card-note"/>
+        </VBox>
+
+        <!-- Roles Distribution Card -->
+        <VBox styleClass="stats-card" fx:id="rolesCard">
+            <ImageView fitWidth="40" fitHeight="40">
+                <image>
+                    <Image url="@/Images/icons/role.png"/>
+                </image>
+            </ImageView>
+            <Label text="ROLES DISTRIBUTION" styleClass="stats-card-title"/>
+            <Label fx:id="rolesCountLabel" styleClass="stats-card-value"/>
+            <Label fx:id="rolesNote" styleClass="stats-card-note"/>
+        </VBox>
+    </HBox>
+
+    <!-- Charts Section -->
+    <GridPane hgap="20" vgap="20" alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="50"/>
+            <ColumnConstraints percentWidth="50"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints percentHeight="50"/>
+            <RowConstraints percentHeight="50"/>
+        </rowConstraints>
+
+        <!-- Top Left - Roles Pie Chart -->
+        <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="chart-container">
+            <Label text="USER ROLES DISTRIBUTION" styleClass="chart-title"/>
+            <PieChart fx:id="rolesPieChart" legendVisible="true" styleClass="chart"/>
+            <Label fx:id="rolesChartNote" styleClass="chart-note"/>
+        </VBox>
+
+        <!-- Top Right - Status Donut Chart -->
+        <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="chart-container">
+            <Label text="ACCOUNT STATUS" styleClass="chart-title"/>
+            <PieChart fx:id="statusPieChart" legendVisible="true" styleClass="donut-chart"/>
+            <Label fx:id="statusChartNote" styleClass="chart-note"/>
+        </VBox>
+    </GridPane>
+
+    <!-- Footer -->
+    <Button text="CLOSE DASHBOARD" onAction="#handleClose" styleClass="close-button"/>
+</VBox>

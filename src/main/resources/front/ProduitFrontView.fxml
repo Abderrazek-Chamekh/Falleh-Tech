@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.fx.ProduitFrontViewController"
+      stylesheets="@../styles/agri-style.css"
+      spacing="20"
+      style="-fx-padding: 30;">
+
+    <Label text="🛒 Choisissez une catégorie de produits"
+           styleClass="section-title"/>
+
+    <FlowPane fx:id="categorieFlowPane"
+              hgap="20" vgap="20"
+              prefWrapLength="800"/>
+
+</VBox>

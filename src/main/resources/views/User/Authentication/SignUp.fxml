@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Controllers.User.Authentication.SignUpController"
+            stylesheets="@/styles/loginstyle.css"
+            prefWidth="800" prefHeight="500">
+
+    <!-- 🌿 Left Side Branding -->
+    <left>
+        <VBox alignment="TOP_CENTER" spacing="20" styleClass="left-section">
+            <!-- Welcome block -->
+            <VBox styleClass="profile-card" alignment="CENTER" spacing="10">
+                <ImageView fitWidth="100" fitHeight="100">
+                    <image>
+                        <Image url="@/Images/user_icon.png"/>
+                    </image>
+                </ImageView>
+                <Label text="Bienvenue !" styleClass="profile-name"/>
+                <Label text="Créez votre compte pour commencer 🌱" styleClass="brand-subtitle"/>
+            </VBox>
+
+            <!-- App name block -->
+            <VBox spacing="5" alignment="CENTER">
+                <Label text="Falleh Tech" styleClass="brand-title"/>
+                <Label text="Cultivez votre avenir avec nous" styleClass="brand-subtitle"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- ✍️ Signup Form -->
+    <center>
+        <VBox fx:id="signupCard" alignment="CENTER" spacing="12" styleClass="login-section" prefWidth="300" maxWidth="300">
+
+            <Label text="Inscription à Falleh Tech" styleClass="title"/>
+
+            <TextField fx:id="nomField" promptText="Nom" styleClass="input-field"/>
+            <TextField fx:id="prenomField" promptText="Prénom" styleClass="input-field"/>
+            <TextField fx:id="emailField" promptText="Email" styleClass="input-field"/>
+
+            <StackPane styleClass="input-field" alignment="CENTER_RIGHT">
+                <StackPane fx:id="passwordPane" alignment="CENTER_LEFT" style="-fx-pref-width: 100%;">
+                    <PasswordField fx:id="passwordField" promptText="Mot de passe" style="-fx-pref-width: 100%;"/>
+                    <TextField fx:id="visiblePasswordField" promptText="Mot de passe" style="-fx-pref-width: 100%;" visible="false" managed="false"/>
+                </StackPane>
+                <ImageView fx:id="toggleEye" fitWidth="20" fitHeight="20" preserveRatio="true">
+                    <StackPane.margin>
+                        <Insets right="10"/>
+                    </StackPane.margin>
+                    <image>
+                        <Image url="@/Images/eye.gif"/>
+                    </image>
+                </ImageView>
+            </StackPane>
+
+            <TextField fx:id="telField" promptText="Numéro de téléphone" styleClass="input-field"/>
+            <TextField fx:id="cinField" promptText="Carte d'identité" styleClass="input-field"/>
+
+            <ComboBox fx:id="roleComboBox" styleClass="input-field" promptText="Rôle">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Agriculteur"/>
+                        <String fx:value="Client"/>
+                        <String fx:value="Ouvrier"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <!-- Fields visible only for Ouvrier -->
+            <VBox fx:id="ouvrierFields" visible="false" managed="false" spacing="10">
+                <DatePicker fx:id="disponibilityField" promptText="Disponibilité" styleClass="input-field"/>
+                <TextField fx:id="locationField" promptText="Localisation" styleClass="input-field"/>
+                <TextField fx:id="experienceField" promptText="Expérience (années)" styleClass="input-field"/>
+            </VBox>
+
+            <Button fx:id="signupButton" text="S'inscrire" styleClass="green-button"/>
+
+            <HBox spacing="5" alignment="CENTER">
+                <Label text="Vous avez déjà un compte ?" />
+                <Hyperlink fx:id="login" text="Se connecter"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

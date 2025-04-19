@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.Controllers.ouvrier.OffresOuvrierController"
+
+      spacing="20" style="-fx-padding: 30;">
+
+    <Label text="🛠️ Offres de Travail" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+
+    <ScrollPane fitToWidth="true">
+        <FlowPane fx:id="offersGrid" hgap="20" vgap="20" style="-fx-padding: 10;" />
+    </ScrollPane>
+    <Label text="✅ THIS IS THE OUVRIER PAGE" style="-fx-text-fill: green; -fx-font-size: 18px;" />
+
+</VBox>

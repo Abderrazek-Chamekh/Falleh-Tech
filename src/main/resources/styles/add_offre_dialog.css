@@ -1,0 +1,186 @@
+/* === DialogPane base === */
+.dialog-pane {
+    -fx-background-color: #ffffff;
+    -fx-padding: 0;
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/* === ScrollPane Content === */
+.scroll-pane {
+    -fx-max-height: 500px; /* limit height to avoid huge window */
+    -fx-pref-height: 500px;
+    -fx-fit-to-width: true;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .content {
+    -fx-padding: 20;
+}
+
+/* === VBox spacing inside the form === */
+.scroll-pane VBox {
+    -fx-spacing: 10;
+}
+
+/* === Labels === */
+.label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+}
+
+/* === Error labels under input === */
+.error-label {
+    -fx-text-fill: red;
+    -fx-font-size: 11px;
+    -fx-padding: 0 0 5 5;
+}
+
+/* === Input Fields (TextField, TextArea) === */
+.text-field,
+.text-area,
+.date-picker {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #ccc;
+    -fx-padding: 6;
+    -fx-pref-height: 36px;
+    -fx-pref-width: 100%;
+}
+
+.text-area {
+    -fx-pref-height: 80px;
+}
+
+.text-field:focused,
+.text-area:focused,
+.date-picker:focused {
+    -fx-border-color: #64b5f6;
+    -fx-background-color: #ffffff;
+}
+
+/* === DatePicker Enhancements === */
+.date-picker .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 8;
+}
+
+.date-picker .arrow {
+    -fx-background-color: #64b5f6;
+    -fx-shape: "M 0 0 L 4 4 L 8 0 Z"; /* triangle */
+    -fx-scale-shape: true;
+}
+
+/* === Buttons === */
+.button {
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.button:default {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: white;
+}
+
+.button:cancel {
+    -fx-background-color: #eeeeee;
+    -fx-text-fill: #444;
+}
+/* === DialogPane base === */
+.dialog-pane {
+    -fx-background-color: #ffffff;
+    -fx-padding: 0;
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/* === ScrollPane Content === */
+.scroll-pane {
+    -fx-max-height: 500px; /* limit height to avoid huge window */
+    -fx-pref-height: 500px;
+    -fx-fit-to-width: true;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .content {
+    -fx-padding: 20;
+}
+
+/* === VBox spacing inside the form === */
+.scroll-pane VBox {
+    -fx-spacing: 10;
+}
+
+/* === Labels === */
+.label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+}
+
+/* === Error labels under input === */
+.error-label {
+    -fx-text-fill: red;
+    -fx-font-size: 11px;
+    -fx-padding: 0 0 5 5;
+}
+
+/* === Input Fields (TextField, TextArea) === */
+.text-field,
+.text-area,
+.date-picker {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #ccc;
+    -fx-padding: 6;
+    -fx-pref-height: 36px;
+    -fx-pref-width: 100%;
+}
+
+.text-area {
+    -fx-pref-height: 80px;
+}
+
+.text-field:focused,
+.text-area:focused,
+.date-picker:focused {
+    -fx-border-color: #64b5f6;
+    -fx-background-color: #ffffff;
+}
+
+/* === DatePicker Enhancements === */
+.date-picker .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 8;
+}
+
+.date-picker .arrow {
+    -fx-background-color: #64b5f6;
+    -fx-shape: "M 0 0 L 4 4 L 8 0 Z"; /* triangle */
+    -fx-scale-shape: true;
+}
+
+/* === Buttons === */
+.button {
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.button:default {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: white;
+}
+
+.button:cancel {
+    -fx-background-color: #eeeeee;
+    -fx-text-fill: #444;
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.Controllers.produitfront.ProduitFrontViewController"
+      stylesheets="@/styles/agri-stylesa.css"
+      spacing="20"
+      style="-fx-padding: 30;">
+
+    <!-- Barre du haut avec retour + titre -->
+    <HBox alignment="CENTER">
+        <Label fx:id="notifLabel" visible="false" styleClass="notif-label"/>
+    </HBox>
+
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button fx:id="retourButton" text="← Retour" visible="false"/>
+        <Label fx:id="sectionLabel" text="🛒 Choisissez une catégorie de produits" styleClass="section-title"/>
+    </HBox>
+
+    <!-- Contenu dynamique -->
+    <FlowPane fx:id="categorieFlowPane"
+              hgap="20" vgap="20"
+              prefWrapLength="1200"/>
+
+</VBox>

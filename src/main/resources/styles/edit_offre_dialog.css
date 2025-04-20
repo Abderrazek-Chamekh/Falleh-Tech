@@ -1,0 +1,15 @@
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+.text-field, .text-area, .date-picker {
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+.button {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: white;
+}
+.button:hover {
+    -fx-background-color: #43a047;
+}

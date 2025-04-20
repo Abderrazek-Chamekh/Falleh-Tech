@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Controllers.Blog.Comment.CommentaireController"
+            stylesheets="@Comment.css"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="20" styleClass="container">
+
+            <!-- Header Section -->
+            <HBox alignment="CENTER_LEFT" styleClass="header">
+                <Label text="🗨️ Manage Comment" styleClass="title-label" />
+                <Region HBox.hgrow="ALWAYS" />
+            </HBox>
+
+
+            <!-- Selected Comment Display -->
+            <VBox spacing="10" styleClass="section">
+                <Label text="📋 Selected Comment:" styleClass="section-title" />
+                <TextArea fx:id="txtCommentaire" editable="true" wrapText="true"
+                          promptText="Modify your comment here..." styleClass="comment-area" />
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox spacing="30" alignment="CENTER" styleClass="button-container">
+                <Button text="✏️ Update Comment" onAction="#modifierCommentaire" styleClass="update-btn" />
+                <Button text="🗑️ Delete Comment" onAction="#supprimerCommentaire" styleClass="delete-btn" />
+                <Button text="↩️ Back" onAction="#handleBack" styleClass="back-btn" />
+            </HBox>
+
+        </VBox>
+    </center>
+
+
+</BorderPane>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="tn.esprit.Controllers.User.Profile.UpdateProfileController"
+      spacing="20"
+      stylesheets="@profile.css">
+
+    <Label text="Edit Profile" styleClass="edit-title"/>
+
+    <GridPane styleClass="form-grid" hgap="10" vgap="15">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="30" halignment="RIGHT"/>
+            <ColumnConstraints percentWidth="70"/>
+        </columnConstraints>
+
+        <!-- Row 1 -->
+        <Label text="First Name:" styleClass="form-label" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="firstNameField" styleClass="form-field" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <!-- Row 2 -->
+        <Label text="Last Name:" styleClass="form-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="lastNameField" styleClass="form-field" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <!-- Row 3 -->
+        <Label text="Email:" styleClass="form-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="emailField" styleClass="form-field" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <!-- Row 4 -->
+        <Label text="Phone:" styleClass="form-label" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="phoneField" styleClass="form-field" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <!-- Row 5 -->
+        <Label text="ID Card:" styleClass="form-label" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <TextField fx:id="cinField" styleClass="form-field" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+        <!-- Ouvrier-specific fields -->
+        <VBox fx:id="ouvrierFields" visible="false" GridPane.columnSpan="2" GridPane.rowIndex="5" spacing="10">
+            <Label text="Professional Information" styleClass="section-title"/>
+
+            <GridPane hgap="10" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="30" halignment="RIGHT"/>
+                    <ColumnConstraints percentWidth="70"/>
+                </columnConstraints>
+
+                <!-- Row 1 -->
+                <Label text="Availability:" styleClass="form-label" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="availabilityField" styleClass="form-field" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <!-- Row 2 -->
+                <Label text="Location:" styleClass="form-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="locationField" styleClass="form-field" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <!-- Row 3 -->
+                <Label text="Experience:" styleClass="form-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="experienceField" styleClass="form-field" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            </GridPane>
+        </VBox>
+    </GridPane>
+
+    <HBox spacing="20" alignment="CENTER_RIGHT">
+        <Button text="Cancel" styleClass="cancel-btn" onAction="#handleCancel"/>
+        <Button text="Save Changes" styleClass="save-btn" onAction="#handleSave"/>
+    </HBox>
+</VBox>

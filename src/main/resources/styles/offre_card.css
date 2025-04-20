@@ -1,0 +1,60 @@
+/* 🔲 Card container */
+.offre-card {
+    -fx-background-color: #fdfdfd;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #d0e9c6;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.07), 6, 0.2, 0, 2);
+}
+
+/* 🔠 Title */
+.offre-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e7d32;
+}
+
+/* 📃 Description */
+.offre-description {
+    -fx-font-size: 13px;
+    -fx-text-fill: #444;
+}
+
+/* 📌 Label-value rows */
+.offre-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #777;
+    -fx-font-weight: bold;
+}
+
+.offre-value {
+    -fx-font-size: 12px;
+    -fx-text-fill: #333;
+}
+
+/* ✏️ Modifier button */
+.btn-edit {
+    -fx-background-color: #aed581;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+}
+
+/* 🗑️ Supprimer button */
+.btn-delete {
+    -fx-background-color: #e57373;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+}
+
+/* 📄 Candidature button */
+.btn-candidatures {
+    -fx-background-color: #64b5f6;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 6 12;
+    -fx-margin-top: 8px;
+}

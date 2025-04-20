@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.Controllers.MainController"
+            fx:id="rootLayout"
+            stylesheets="@/styles/sidebar.css">
+
+    <!-- SIDEBAR -->
+    <left>
+        <VBox fx:id="sidebar"
+              prefWidth="240"
+              minWidth="0"
+              maxWidth="240"
+              spacing="10"
+              style="-fx-background-color: #b6d7a8; -fx-padding: 20;">
+            <children>
+                <HBox alignment="CENTER" prefHeight="140">
+                    <ImageView fx:id="profileImage"
+                               fitHeight="140"
+                               fitWidth="140"
+                               preserveRatio="true"
+                               style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.3, 0, 1);"/>
+                </HBox>
+                <VBox spacing="5">
+                    <Button fx:id="btnDashboard" onAction="#goToDashboard" styleClass="sidebar-button" text="🏠 Dashboard"/>
+                    <Button fx:id="btnUsers" onAction="#goToUsers" styleClass="sidebar-button" text="👥 Utilisateurs"/>
+                    <Button fx:id="btnOffres" onAction="#goToOffres" styleClass="sidebar-button" text="📋 Offres"/>
+                    <Button fx:id="btnCandidature" onAction="#goToCandidature" styleClass="sidebar-button" text="📋 Candidature"/>
+                    <Button fx:id="btnCommande" onAction="#goToCommande" styleClass="sidebar-button" text="📋 Commande"/>
+
+                <!-- Gérer Produits (Bouton principal + sous-menu caché) -->
+                <Button fx:id="btnToggleProduits"
+                        text="📋 Gérer Produits"
+                        onAction="#toggleProduitsSubmenu"
+                        styleClass="sidebar-button"/>
+
+                <VBox fx:id="produitsSubmenu" spacing="5" visible="false" managed="false" style="-fx-padding: 0 0 0 10;">
+                    <Button fx:id="btnCategorie" text="📁 Catégories" onAction="#goToCategorie" styleClass="sidebar-sub-button"/>
+                    <Button fx:id="btnSousCategorie" text="📂 Sous-catégories" onAction="#goToSousCategorie" styleClass="sidebar-sub-button"/>
+                    <Button fx:id="btnProduit" text="🛒 Produits" onAction="#goToProduit" styleClass="sidebar-sub-button"/>
+                </VBox>
+                </VBox>
+            </children>
+        </VBox>
+    </left>
+
+    <!-- NAVBAR -->
+    <top>
+        <HBox style="-fx-background-color: white; -fx-padding: 10;" spacing="10" alignment="CENTER_LEFT">
+            <children>
+                <Button fx:id="toggleSidebarBtn" text="☰" onAction="#toggleSidebar" styleClass="toggle-button"/>
+                <Label fx:id="navTitle" text="App Navigation" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="notificationBtn" text="🔔" styleClass="icon-button"/>
+                <MenuButton fx:id="profileMenu" text="👤 Mohamed ▼" styleClass="profile-menu">
+                    <items>
+                        <MenuItem text="Profile"/>
+                        <MenuItem text="Déconnexion" onAction="#goToLogout"/>
+                    </items>
+                </MenuButton>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- MAIN CONTENT -->
+    <center>
+        <AnchorPane fx:id="mainContent" />
+    </center>
+
+</BorderPane>

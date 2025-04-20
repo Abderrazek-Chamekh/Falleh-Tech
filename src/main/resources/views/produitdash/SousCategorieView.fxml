@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane stylesheets="@/styles/agri-stylesa.css"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.Controllers.produitdash.SousCategorieController">
+
+    <VBox spacing="15" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10"
+          AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10">
+
+        <Label text="Gestion des Sous-Catégories" styleClass="form-title" alignment="CENTER"/>
+        <HBox spacing="10">
+            <Label text="Recherche par nom :"/>
+            <TextField fx:id="searchFieldSousCategorie" promptText="Rechercher..."/>
+        </HBox>
+
+
+        <HBox alignment="CENTER">
+            <Label fx:id="notifLabel"
+                   visible="false"
+                   wrapText="true"
+                   maxWidth="400"
+                   alignment="CENTER"
+                   styleClass="notif-label warning"/>
+        </HBox>
+
+
+        <HBox alignment="TOP_RIGHT">
+            <Button text="➕ Ajouter une Sous-Catégorie"
+                    onAction="#ouvrirPopupAjout"
+                    styleClass="add-button"/>
+        </HBox>
+
+        <TableView fx:id="tableView" prefHeight="350">
+            <columns>
+
+                <TableColumn fx:id="nomCol" text="Nom" style="-fx-font-weight: bold;"/>
+                <TableColumn fx:id="categorieCol" text="Catégorie"/>
+                <TableColumn fx:id="imageCol" text="Image"/>
+                <TableColumn fx:id="actionCol" text="Actions"/>
+            </columns>
+        </TableView>
+    </VBox>
+</AnchorPane>

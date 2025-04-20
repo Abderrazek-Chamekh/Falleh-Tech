@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Controllers.front.AccueilController"
+            stylesheets="@../styles/agri-style.css"
+            prefWidth="1000" prefHeight="700">
+
+    <!-- 🧠 HEADER (Top Bar) -->
+    <top>
+        <HBox spacing="20" alignment="CENTER_LEFT" style="-fx-background-color: #e8f5e9; -fx-padding: 15 25;">
+            <Label text="📊 Tableau de Bord" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="btnAddWidget" text="➕ Ajouter un Widget" />
+        </HBox>
+    </top>
+
+    <!-- 📦 MAIN CONTENT (SCROLLABLE) -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" pannable="true">
+            <content>
+                <GridPane fx:id="widgetGrid" hgap="20" vgap="20" style="-fx-padding: 20;">
+                    <!-- === Your original widgets go here === -->
+                    <!-- 🥕 Produits Widget -->
+                    <VBox fx:id="produitsWidget" id="produitsWidget" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                          spacing="10" styleClass="section-card">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="🛒 Produits en vedette" styleClass="section-title"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="❌" onAction="#onRemoveProduits"/>
+                        </HBox>
+                        <HBox spacing="15">
+                            <VBox spacing="8" styleClass="product-card">
+                                <ImageView fx:id="carottesImage" fitWidth="120" fitHeight="90" preserveRatio="true"/>
+                                <Label text="Carottes"/>
+                                <Label text="1,200 DT"/>
+                            </VBox>
+                            <VBox spacing="8" styleClass="product-card">
+                                <ImageView fx:id="laitueImage" fitWidth="120" fitHeight="90" preserveRatio="true"/>
+                                <Label text="Laitue"/>
+                                <Label text="600 DT"/>
+                            </VBox>
+                            <VBox spacing="8" styleClass="product-card">
+                                <ImageView fx:id="tomatesImage" fitWidth="120" fitHeight="90" preserveRatio="true"/>
+                                <Label text="Tomates"/>
+                                <Label text="1,800 DT"/>
+                            </VBox>
+                            <VBox spacing="8" styleClass="product-card">
+                                <ImageView fx:id="pommesImage" fitWidth="120" fitHeight="90" preserveRatio="true"/>
+                                <Label text="Pommes de terre"/>
+                                <Label text="1,400 DT"/>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+
+                    <!-- 🌾 Offres Widget -->
+                    <VBox fx:id="offresWidget" GridPane.rowIndex="0" GridPane.columnIndex="1" spacing="10" styleClass="section-card">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="🌾 Offres de travail" styleClass="section-title"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="❌" onAction="#onRemoveOffres"/>
+                        </HBox>
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="📈" styleClass="stat-icon"/>
+                            <Label text="4 offres disponibles" styleClass="stat-label"/>
+                        </HBox>
+                        <Label text="• Récolte – Gafsa (Urgent)"/>
+                        <Label text="• Tractoriste – Kairouan"/>
+                        <Hyperlink text="Voir toutes les offres »"/>
+                    </VBox>
+
+                    <!-- 📰 Blog Widget -->
+                    <VBox fx:id="blogWidget" GridPane.rowIndex="1" GridPane.columnIndex="0" spacing="10" styleClass="section-card">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="📰 Publications du blog" styleClass="section-title"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="❌" onAction="#onRemoveBlog"/>
+                        </HBox>
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="🕒" styleClass="stat-icon"/>
+                            <Label text="Dernier article : Récolte d’olives – Saida A." styleClass="stat-label"/>
+                        </HBox>
+                        <Label text="• Nouvelle méthode d’irrigation – Ahmed B."/>
+                        <Hyperlink text="Voir toutes les publications »" onAction="#goToBlog"/>
+                    </VBox>
+
+                    <!-- 📊 Stats Widget -->
+                    <VBox fx:id="statsWidget" GridPane.rowIndex="1" GridPane.columnIndex="1" spacing="10" styleClass="section-card">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="📊 Statistiques des stocks" styleClass="section-title"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="❌" onAction="#onRemoveStats"/>
+                        </HBox>
+                        <HBox spacing="30" alignment="CENTER">
+                            <VBox spacing="5" alignment="CENTER">
+                                <Label text="Produits en Stock"/>
+                                <ImageView fx:id="stockImage" fitWidth="150" preserveRatio="true"/>
+                            </VBox>
+                            <VBox spacing="5" alignment="CENTER_LEFT">
+                                <Label text="Plus Vendu :" styleClass="stat-subtitle"/>
+                                <GridPane hgap="10" vgap="5">
+                                    <Label text="Num" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="table-header"/>
+                                    <Label text="Designation" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="table-header"/>
+                                    <Label text="Qty" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="table-header"/>
+
+                                    <Label text="1" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                                    <Label text="Tomates" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                    <Label text="18" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+                                    <Label text="2" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                                    <Label text="Carottes" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                                    <Label text="14" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+
+                                    <Label text="3" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                                    <Label text="Pommes de terre" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                                    <Label text="12" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+
+                                    <Label text="4" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                                    <Label text="Poivrons" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                                    <Label text="10" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+                                </GridPane>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </GridPane>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

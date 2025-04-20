@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15"
+      xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.Controllers.condidature.EditCandidatureController"
+      alignment="CENTER_LEFT"
+      styleClass="popup-container"
+>
+
+    <!-- Title -->
+    <Label text="📝 Modifier la Candidature"
+           styleClass="popup-title" />
+
+    <!-- Statut -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Statut:" />
+        <ComboBox fx:id="statutCombo" prefWidth="200" />
+    </HBox>
+
+    <!-- Note -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Note (facultatif):" />
+        <TextField fx:id="ratingField" promptText="Entrez une note" />
+    </HBox>
+
+    <!-- Buttons -->
+    <HBox spacing="15" alignment="CENTER_RIGHT">
+        <Button text="✅ Enregistrer" onAction="#onSave" styleClass="btn-green" />
+        <Button text="❌ Annuler" onAction="#onCancel" styleClass="btn-red" />
+    </HBox>
+
+</VBox>

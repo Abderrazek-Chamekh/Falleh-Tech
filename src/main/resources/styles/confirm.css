@@ -1,0 +1,51 @@
+/* Style the popup container */
+.custom-confirm {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #4CAF50;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.1, 0, 4);
+}
+
+/* Title text */
+.confirm-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Message label */
+.confirm-message {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-padding: 10 0 20 0;
+}
+
+/* Confirm + Cancel buttons */
+.confirm-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 6 20 6 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 2, 0.1, 0, 1);
+}
+
+.confirm-button:hover {
+    -fx-background-color: #43a047;
+}
+
+.cancel-button {
+    -fx-background-color: #cccccc;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 6 20 6 20;
+    -fx-cursor: hand;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #bbbbbb;
+}

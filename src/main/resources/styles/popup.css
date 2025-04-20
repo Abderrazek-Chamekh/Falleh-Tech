@@ -1,0 +1,139 @@
+/* Container Styling */
+.popup-container {
+    -fx-background-color: #ffffff;
+    -fx-padding: 25px;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1;
+    -fx-spacing: 12;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0.3, 0, 4);
+}
+
+/* Title Label */
+.popup-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Input Fields */
+.popup-field {
+    -fx-pref-width: 260px;
+    -fx-font-size: 14px;
+    -fx-padding: 8px;
+    -fx-background-radius: 6;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+}
+
+.popup-area {
+    -fx-pref-width: 260px;
+    -fx-font-size: 14px;
+    -fx-padding: 8px;
+    -fx-background-radius: 6;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+}
+
+/* Buttons */
+.btn-green {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 8 18;
+}
+
+.btn-red {
+    -fx-background-color: #e57373;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 8 18;
+}
+
+/* Hover States */
+.btn-green:hover {
+    -fx-background-color: #388E3C;
+}
+
+.btn-red:hover {
+    -fx-background-color: #d32f2f;
+}
+
+/* Error Label Styling (used inline via -fx-text-fill) */
+.label {
+    -fx-wrap-text: true;
+    -fx-font-size: 12px;
+}
+/* Clean DatePicker look */
+.date-picker {
+    -fx-pref-width: 260px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1;
+    -fx-padding: 6 10;
+}
+
+/* Clean calendar button */
+.date-picker .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-background-color: #666;
+}
+.dialog-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-color: #4CAF50;
+    -fx-border-width: 2px;
+    -fx-padding: 20;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: transparent;
+}
+
+.dialog-pane .content.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2e7d32;
+    -fx-font-weight: bold;
+}
+
+.dialog-pane .button-bar .button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.dialog-pane .button-bar .button:hover {
+    -fx-background-color: #388E3C;
+}
+.button {
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+}
+
+.button:hover {
+    -fx-opacity: 0.9;
+}
+
+.text-field, .combo-box {
+    -fx-pref-width: 200;
+    -fx-background-radius: 6;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 6;
+}

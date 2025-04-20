@@ -1,0 +1,298 @@
+.root {
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-background-color: #f5f8f4;
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2e7d32; /* vert foncé */
+}
+
+.button {
+    -fx-background-color: #a5d6a7; /* vert pastel */
+    -fx-text-fill: #1b5e20;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #81c784;
+}
+
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c8e6c9;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: #c8e6c9;
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #a5d6a7;
+    -fx-border-radius: 4;
+}
+.sidebar {
+    -fx-background-color: #f1f8e9; /* vert nature très clair */
+    -fx-padding: 30;
+    -fx-spacing: 30;
+}
+
+.sidebar-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e7d32;
+    -fx-alignment: CENTER_LEFT;
+}
+
+
+/* Boutons */
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1b5e20;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-graphic-text-gap: 8px;
+    -fx-padding: 5 10;
+}
+.sidebar-button:hover {
+    -fx-background-color: #c8e6c9;
+    -fx-cursor: hand;
+    -fx-text-fill: #2e7d32;
+}
+.welcome-text {
+    -fx-font-size: 22px;
+    -fx-text-fill: #2e5e3e;
+    -fx-font-weight: bold;
+}
+
+.card, .product-card {
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-border-color: #d0d0d0;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 4, 0, 0, 2);
+}
+
+
+.card-info {
+    -fx-text-fill: #4d784e;
+    -fx-font-weight: bold;
+}
+
+.section-title {
+    -fx-font-size: 16px;
+    -fx-text-fill: #2e5e3e;
+    -fx-font-weight: bold;
+}
+
+.product-card {
+    -fx-background-color: #ffffff;
+    -fx-padding: 10;
+    -fx-border-color: #d0d0d0;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-alignment: CENTER;
+}
+
+.hyperlink {
+    -fx-text-fill: #4caf50;
+    -fx-underline: true;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: #2e7d32;
+}
+.product-card:hover {
+    -fx-background-color: #eefae4;
+    -fx-cursor: hand;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+/* Avatar rond */
+.profile-pic {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0.1, 0, 2);
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+}
+
+.profile-name {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #6b1d1d;
+    -fx-alignment: center;
+}
+
+.section-card {
+    -fx-background-color: #f0fdf4; /* Vert très pâle */
+    -fx-border-color: #d0e8cc;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.1, 0, 2);
+}
+
+
+.section-card Label {
+    -fx-text-fill: #2e7d32;
+    -fx-font-size: 13px;
+}
+
+.section-card .section-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-fill: #1b5e20;
+}
+
+.section-card Hyperlink {
+    -fx-text-fill: #2e7d32;
+    -fx-underline: true;
+}
+/* Nom de l'app à côté ou sous le logo */
+.app-name {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e7d32; /* vert profond */
+}
+.section-card:hover {
+    -fx-background-color: #f1f8e9;
+    -fx-cursor: hand;
+}
+/* Logo + App Title */
+.logo-section {
+    -fx-alignment: CENTER;
+    -fx-spacing: 8;
+}
+/* Déconnexion spéciale */
+.logout {
+    -fx-background-color: #a5d6a7;
+    -fx-text-fill: #1b5e20;
+    -fx-border-radius: 8;
+    -fx-font-weight: bold;
+}
+
+.logout:hover {
+    -fx-background-color: #81c784;
+}
+
+/* Separator */
+.separator {
+    -fx-background-color: #aed581;
+}
+.app-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #6b1d1d; /* orange profond = captivant */
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0.2, 0, 2);
+    -fx-translate-y: -10;
+    -fx-text-alignment: center;
+}
+.section-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c5f2d; /* Vert forêt */
+}
+.section-subtitle {
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #4a7c59; /* vert doux mais contrasté */
+}
+.stat-icon {
+    -fx-font-size: 18px;
+}
+
+.stat-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2e7d32; /* vert dynamique */
+    -fx-font-weight: bold;
+}
+.stat-section {
+    -fx-background-color: #f0fdf5;
+    -fx-border-radius: 8;
+    -fx-padding: 20;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 4, 0, 0, 2);
+}
+
+.stat-subtitle {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-underline: true;
+}
+
+.table-header {
+    -fx-font-weight: bold;
+    -fx-underline: true;
+}
+.sidebar-button.active {
+    -fx-background-color: #a4d4ae;
+    -fx-text-fill: #1f4d2b;
+    -fx-font-weight: bold;
+}
+.active-button {
+    -fx-background-color: #C8F7C5; /* Vert pastel clair */
+    -fx-text-fill: #006400; /* Vert foncé pour le texte */
+    -fx-font-weight: bold;
+    -fx-border-color: #4CAF50;
+    -fx-border-width: 2px;
+}
+
+.category-button {
+    -fx-background-color: #e8f5e9;
+    -fx-text-fill: #2e7d32;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-color: #c8e6c9;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+}
+.category-button:hover {
+    -fx-background-color: #c8e6c9;
+}
+.section-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e7d32;
+}
+
+.category-card {
+    -fx-padding: 15;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 5, 0, 0, 3);
+    -fx-alignment: center;
+    -fx-pref-width: 170;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+.category-card:hover {
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+    -fx-background-color: #f1f8e9;
+}
+
+.category-name {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-text-alignment: center;
+}
+
+.category-count {
+    -fx-font-size: 12px;
+    -fx-text-fill: #777;
+}

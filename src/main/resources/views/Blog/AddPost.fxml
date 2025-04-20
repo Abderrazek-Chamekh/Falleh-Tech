@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+
+<?import javafx.scene.image.Image?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Controllers.Blog.Post.AddPostController"
+            stylesheets="@AddPost.css"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <!-- Left Sidebar (same as dashboard) -->
+    <left>
+        <VBox prefWidth="220" spacing="20" styleClass="sidebar">
+            <!-- Logo and Title Container -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="logo-title-container">
+                <ImageView fitHeight="50" fitWidth="50" preserveRatio="true">
+                    <image>
+                        <Image url="@/Images/logo.png" />
+                    </image>
+                </ImageView>
+                <Label text="Falleh Tech" styleClass="project-title"/>
+            </HBox>
+
+            <!-- Navigation Menu -->
+            <VBox spacing="8" styleClass="nav-menu">
+                <Button styleClass="nav-btn" text="Profil">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@/Images/icons/profile.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button styleClass="nav-btn" text="Dashboard" onAction="#loadDashboard">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@/Images/icons/dashboard.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button styleClass="nav-btn active" text="Blog" >
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@/Images/icons/blog.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button styleClass="nav-btn" text="Candidature">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@/Images/icons/application.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button styleClass="nav-btn" text="Starred">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@/Images/icons/starred.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button styleClass="nav-btn" text="Offres">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@/Images/icons/offer.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </VBox>
+
+            <!-- User Profile Section -->
+            <VBox spacing="10" styleClass="user-profile">
+                <ImageView fitHeight="60" fitWidth="60" styleClass="profile-img">
+                    <image>
+                        <Image url="@/Images/icons/profile.png" />
+                    </image>
+                </ImageView>
+                <Label styleClass="profile-name" text="Admin User" />
+                <Button styleClass="logout-btn" text="Logout" onAction="#handleLogout">
+                    <graphic>
+                        <ImageView fitHeight="16" fitWidth="16" preserveRatio="true">
+                            <image>
+                                <Image url="@/Images/icons/LOGOUT.gif" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </VBox>
+        </VBox>
+    </left>
+    <center>
+        <VBox spacing="20" styleClass="content-container">
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" styleClass="header">
+                <Label text="📝 Ajouter une Publication" styleClass="title-label" />
+                <Region HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <!-- Add this after the Description section in your FXML -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="📌 Category:" styleClass="label" />
+                <ComboBox fx:id="categoryComboBox" styleClass="input-field" promptText="Select a category">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Agriculture News"/>
+                            <String fx:value="Farming Tips"/>
+                            <String fx:value="Crop Management"/>
+                            <String fx:value="Livestock Care"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </HBox>
+
+            <!-- 📷 Image Selection Section -->
+            <HBox spacing="20" alignment="CENTER">
+                <ImageView fx:id="imageView" fitWidth="300.0" fitHeight="200.0" preserveRatio="true" styleClass="image-preview" />
+                <Button onAction="#handleSelectImage" text="📷 Sélectionner une Image" styleClass="image-button" />
+            </HBox>
+
+            <VBox spacing="15" alignment="CENTER">
+
+                <!-- 👤 User Name -->
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="👤 Utilisateur :" styleClass="label" />
+                    <Label fx:id="userNameLabel" styleClass="user-name-label" />
+                </HBox>
+
+                <!-- 📋 Contenu -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="📝 Title :" styleClass="label" />
+                    <TextField fx:id="contenuField" promptText="Entrez le contenu de la publication" styleClass="input-field" />
+                </HBox>
+
+                <!-- 🗒️ Description -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="🗒️ Description :" styleClass="label" />
+                    <TextArea fx:id="descriptionField" promptText="Entrez la description de la publication" prefHeight="120" styleClass="input-area" />
+                </HBox>
+            </VBox>
+
+            <!-- ✅ Action Buttons -->
+            <HBox spacing="30" alignment="CENTER">
+                <Button onAction="#handleAddAction" text="✅ Ajouter" styleClass="submit-button" />
+                <Button fx:id="returnButton" text="🔙 Return" styleClass="help-button" />
+            </HBox>
+        </VBox>
+    </center>
+
+
+</BorderPane>

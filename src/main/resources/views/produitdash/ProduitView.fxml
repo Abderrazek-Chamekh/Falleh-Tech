@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.Controllers.produitdash.ProduitController"
+            prefWidth="1000" prefHeight="600" stylesheets="@/styles/agri-stylesa.css">
+
+    <VBox spacing="15" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10">
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Filtrer par:"/>
+            <ComboBox fx:id="filtreTypeComboBox" promptText="Type" prefWidth="150"/>
+            <TextField fx:id="rechercheField" promptText="Recherche par nom" prefWidth="150"/>
+            <ComboBox fx:id="filtreCategorieComboBox" promptText="Catégorie" prefWidth="150"/>
+            <ComboBox fx:id="filtreSousCategorieComboBox" promptText="Sous-catégorie" prefWidth="150"/>
+            <ComboBox fx:id="filtreStockComboBox" promptText="Stock" prefWidth="150"/>
+            <Button text="Appliquer" onAction="#appliquerFiltres"/>
+        </HBox>
+
+        <HBox spacing="10" alignment="TOP_RIGHT">
+            <Button text="➕ Ajouter Produit" onAction="#ouvrirPopupAjout" styleClass="add-button"/>
+            <Button text="📊 Voir Statistiques" onAction="#ouvrirPopupStatistiques" styleClass="add-button"/>
+            <Button fx:id="btnFavoris" text="Voir Favoris" onAction="#ouvrirPopupFavoris"/>
+
+
+        </HBox>
+
+
+        <TableView fx:id="tableView" prefHeight="400">
+            <columns>
+
+                <TableColumn fx:id="nomCol" text="Nom" prefWidth="120"/>
+                <TableColumn fx:id="descCol" text="Description" prefWidth="150"/>
+                <TableColumn fx:id="prixCol" text="Prix" prefWidth="80"/>
+                <TableColumn fx:id="stockCol" text="Stock" prefWidth="80"/>
+                <TableColumn fx:id="categorieCol" text="Catégorie" prefWidth="100"/>
+                <TableColumn fx:id="sousCategorieCol" text="Sous-catégorie" prefWidth="120"/>
+                <TableColumn fx:id="imageCol" text="Image" prefWidth="100"/>
+                <TableColumn fx:id="actionCol" text="Actions" prefWidth="120"/>
+            </columns>
+        </TableView>
+    </VBox>
+</AnchorPane>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane fx:id="borderPane" stylesheets="@profile.css" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.User.Profile.ProfileController">
+
+    <!-- Left Sidebar Navigation -->
+    <left>
+        <VBox prefWidth="220" spacing="20" styleClass="sidebar">
+            <!-- Logo and Title Container -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="logo-title-container">
+                <ImageView fitHeight="50" fitWidth="50" preserveRatio="true">
+                    <image>
+                        <Image url="@/Images/logo.png" />
+                    </image>
+                </ImageView>
+                <Label text="Falleh Tech" styleClass="project-title"/>
+            </HBox>
+
+            <!-- Navigation Menu -->
+            <VBox spacing="8" styleClass="nav-menu">
+                <Button styleClass="nav-btn active" text="Profil">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@/Images/icons/profile.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="dashboardBtn" onAction="#loadDashboard" styleClass="nav-btn" text="Dashboard" visible="false">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@/Images/icons/dashboard.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button styleClass="nav-btn" text="Blog" onAction="#loadPosts" >
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@/Images/icons/blog.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button styleClass="nav-btn" text="Candidature">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@/Images/icons/application.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button styleClass="nav-btn" text="Starred">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@/Images/icons/starred.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button styleClass="nav-btn" text="Offres">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@/Images/icons/offer.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </VBox>
+
+            <!-- User Profile Section -->
+            <VBox spacing="10" styleClass="user-profile">
+                <ImageView fitHeight="60" fitWidth="60" styleClass="profile-img">
+                    <image>
+                        <Image url="@/Images/icons/profile.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="userRoleLabel" styleClass="user-role" />
+                <Button onAction="#handleLogout" styleClass="logout-btn" text="Logout">
+                    <graphic>
+                        <ImageView fitHeight="16" fitWidth="16" preserveRatio="true">
+                            <image>
+                                <Image url="@/Images/icons/LOGOUT.gif" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </VBox>
+        </VBox>
+    </left>
+    <!-- Center Content -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+            <VBox styleClass="profile-container">
+                <!-- Profile Header -->
+                <HBox styleClass="profile-header">
+                    <VBox styleClass="profile-info">
+                        <Label fx:id="fullNameLabel" styleClass="full-name" />
+                        <Label fx:id="roleLabel" styleClass="role-label" />
+                    </VBox>
+                </HBox>
+
+                <!-- Profile Details -->
+                <VBox styleClass="details-section">
+                    <Label text="Personal Information" styleClass="section-title" />
+
+                    <GridPane styleClass="info-grid">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="40" />
+                            <ColumnConstraints percentWidth="60" />
+                        </columnConstraints>
+
+                        <!-- Row 1 -->
+                        <Label text="First Name:" styleClass="field-label" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <Label fx:id="firstNameLabel" styleClass="field-value" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <!-- Row 2 -->
+                        <Label text="Last Name:" styleClass="field-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <Label fx:id="lastNameLabel" styleClass="field-value" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <!-- Row 3 -->
+                        <Label text="Email:" styleClass="field-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <Label fx:id="emailLabel" styleClass="field-value" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                        <!-- Row 4 -->
+                        <Label text="Phone:" styleClass="field-label" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <Label fx:id="phoneLabel" styleClass="field-value" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                        <!-- Row 5 -->
+                        <Label text="ID Card:" styleClass="field-label" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                        <Label fx:id="cinLabel" styleClass="field-value" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                    </GridPane>
+                </VBox>
+
+                <!-- Additional Info Section (for Ouvrier) -->
+                <VBox fx:id="additionalInfoSection" styleClass="details-section" visible="false">
+                    <Label text="Professional Information" styleClass="section-title" />
+
+                    <GridPane styleClass="info-grid">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="40" />
+                            <ColumnConstraints percentWidth="60" />
+                        </columnConstraints>
+
+                        <!-- Row 1 -->
+                        <Label text="Availability:" styleClass="field-label" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <Label fx:id="availabilityLabel" styleClass="field-value" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <!-- Row 2 -->
+                        <Label text="Location:" styleClass="field-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <Label fx:id="locationLabel" styleClass="field-value" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <!-- Row 3 -->
+                        <Label text="Experience:" styleClass="field-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <Label fx:id="experienceLabel" styleClass="field-value" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    </GridPane>
+                </VBox>
+
+                <!-- Action Buttons -->
+                <HBox styleClass="action-buttons">
+                    <Button text="Edit Profile" styleClass="edit-btn" onAction="#handleEditProfile">
+                        <graphic>
+                            <ImageView fitHeight="16" fitWidth="16">
+                                <image>
+                                    <Image url="@/Images/icons/edit.gif" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button text="Change Password" styleClass="change-password-btn" onAction="#handleChangePassword" />
+                </HBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

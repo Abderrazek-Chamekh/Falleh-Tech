@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Controllers.ouvrier.CandidatureHistoryController"
+            fitToWidth="true" fitToHeight="true">
+    <content>
+        <VBox fx:id="historyContainer" spacing="15">
+            <padding>
+                <Insets top="20" bottom="20" left="20" right="20"/>
+            </padding>
+        </VBox>
+    </content>
+</ScrollPane>

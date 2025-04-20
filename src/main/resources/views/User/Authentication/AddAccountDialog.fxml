@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.Controllers.User.Authentication.AddAccountDialogController"
+      spacing="10" alignment="CENTER" stylesheets="@/views/User/Authentication/dialogstyle.css"
+      styleClass="dialog-container">
+
+    <Label text="Ajouter un compte" style="-fx-font-weight: bold; -fx-font-size: 16;" />
+
+    <TextField fx:id="nameField" promptText="Nom complet" />
+    <TextField fx:id="emailField" promptText="Email" />
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Annuler" onAction="#onCancel" />
+        <Button text="Ajouter" onAction="#onAdd" />
+    </HBox>
+</VBox>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Controllers.condidature.CandidatureController" stylesheets="@/styles/offre.css">
+   <VBox spacing="15" alignment="TOP_CENTER"
+         AnchorPane.topAnchor="0.0"
+         AnchorPane.bottomAnchor="0.0"
+         AnchorPane.leftAnchor="0.0"
+         AnchorPane.rightAnchor="0.0"
+         style="-fx-padding: 20;">
+
+      <Label text="📋 Liste des Candidatures"
+             style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+      <HBox spacing="10" alignment="CENTER_RIGHT">
+         <Button text="➕ Ajouter une Candidature"
+                 onAction="#onAddCandidature"
+                 style="-fx-font-size: 14px; -fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+      </HBox>
+
+      <TableView fx:id="tableCandidature" VBox.vgrow="ALWAYS">
+         <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colNom" text="Nom" prefWidth="150"/>
+            <TableColumn fx:id="colEmail" text="Email" prefWidth="150"/>
+            <TableColumn fx:id="colOffre" text="Offre" prefWidth="150"/>
+            <TableColumn fx:id="colDate" text="Date" prefWidth="120"/>
+            <TableColumn fx:id="colStatut" text="Statut" prefWidth="120"/>
+            <TableColumn fx:id="colActions" text="Actions" prefWidth="200"/>
+         </columns>
+      </TableView>
+
+   </VBox>
+</AnchorPane>
+

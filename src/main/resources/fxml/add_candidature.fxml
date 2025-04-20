@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.Controllers.condidature.AjoutCandidatureController">
+    <VBox spacing="10" alignment="CENTER" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" style="-fx-padding: 20;">
+
+        <Label text="Ajouter une candidature" style="-fx-font-size: 18px;" />
+
+        <VBox>
+            <ComboBox fx:id="comboOffre" promptText="Choisir une offre" />
+            <Label fx:id="offreError" text="" style="-fx-text-fill: red;" />
+        </VBox>
+
+        <VBox>
+            <ComboBox fx:id="comboTravailleur" promptText="Choisir un travailleur" />
+            <Label fx:id="travailleurError" text="" style="-fx-text-fill: red;" />
+        </VBox>
+
+        <VBox>
+            <ComboBox fx:id="comboStatut" promptText="Statut" />
+            <Label fx:id="statutError" text="" style="-fx-text-fill: red;" />
+        </VBox>
+
+        <VBox>
+            <TextArea fx:id="noteField" promptText="Notes facultatives..." prefRowCount="4" />
+        </VBox>
+
+        <Button fx:id="btnAjouter" text="Ajouter" />
+    </VBox>
+</AnchorPane>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Controllers.produitfront.AjouterProduitController"
+            prefWidth="600" prefHeight="600"
+            stylesheets="@/styles/agri-stylesa.css">
+
+    <ScrollPane fitToWidth="true" fitToHeight="true"
+                AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
+                AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+
+        <VBox spacing="10" alignment="TOP_CENTER">
+            <padding>
+                <Insets top="20" bottom="20" left="30" right="30"/>
+            </padding>
+
+            <Label text="➕ Nouveau Produit" styleClass="form-title"/>
+
+            <Label text="Nom du produit" alignment="CENTER_LEFT" maxWidth="Infinity"
+                   style="-fx-text-fill: black;"/>
+            <TextField fx:id="nomField" promptText="Nom"/>
+            <Label fx:id="nomError" textFill="red" visible="false"/>
+
+            <Label text="Prix (DT)" alignment="CENTER_LEFT" maxWidth="Infinity"
+                   style="-fx-text-fill: black;"/>
+            <TextField fx:id="prixField" promptText="Prix"/>
+            <Label fx:id="prixError" textFill="red" visible="false"/>
+
+            <Label text="Quantité en Stock" alignment="CENTER_LEFT" maxWidth="Infinity"
+                   style="-fx-text-fill: black;"/>
+            <TextField fx:id="stockField" promptText="Stock"/>
+            <Label fx:id="stockError" textFill="red" visible="false"/>
+
+            <Label text="Description" alignment="CENTER_LEFT" maxWidth="Infinity"
+                   style="-fx-text-fill: black;"/>
+            <TextField fx:id="descriptionField" promptText="Description"/>
+            <Label fx:id="descriptionError" textFill="red" visible="false"/>
+
+            <Label text="Catégorie" alignment="CENTER_LEFT" maxWidth="Infinity"
+                   style="-fx-text-fill: black;"/>
+            <ComboBox fx:id="categorieComboBox" promptText="Catégorie" prefWidth="250"/>
+            <Label fx:id="categorieError" textFill="red" visible="false"/>
+
+            <Label text="Sous-Catégorie" alignment="CENTER_LEFT" maxWidth="Infinity"
+                   style="-fx-text-fill: black;"/>
+            <ComboBox fx:id="sousCategorieComboBox" promptText="Sous-Catégorie" prefWidth="250"/>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Choisir Image" onAction="#choisirImage"/>
+                <Button text="Prendre Photo" onAction="#prendrePhoto"/>
+            </HBox>
+            <Label fx:id="imageError" textFill="red" visible="false"/>
+
+            <ImageView fx:id="imagePreview" fitWidth="180" fitHeight="120" preserveRatio="true"
+                       style="-fx-border-color: gray;"/>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="ajouterBtn" text="Ajouter" onAction="#ajouterProduit" styleClass="add-button"/>
+                <Button text="Annuler" onAction="#fermerFenetre" styleClass="cancel-button"/>
+            </HBox>
+        </VBox>
+    </ScrollPane>
+</AnchorPane>

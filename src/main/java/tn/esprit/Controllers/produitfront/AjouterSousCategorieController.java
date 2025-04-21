@@ -83,7 +83,18 @@ public class AjouterSousCategorieController {
             categorieComboBox.requestFocus();
             return;
         }
+// 🛑 Vérif doublon sous-catégorie dans la même catégorie
+        boolean existe = sousCategorieService.getAll().stream()
+                .anyMatch(sc -> sc.getNom().equalsIgnoreCase(nom)
+                        && sc.getCategorie().getId().equals(selectedCategorie.getId())
+                        && (sousCategorieEnCoursEdition == null || !sc.getId().equals(sousCategorieEnCoursEdition.getId())));
 
+        if (existe) {
+            nomError.setText("⚠ Ce nom est déjà utilisé dans cette catégorie.");
+            nomError.setVisible(true);
+            nomField.requestFocus();
+            return;
+        }
         // 🟥 3. Valider image
         if (selectedImageFilename == null || selectedImageFilename.isBlank()) {
             imageError.setText("⚠ Veuillez sélectionner une image.");

@@ -21,7 +21,6 @@
         <columns>
             <TableColumn fx:id="colNom" text="Nom" prefWidth="200"/>
             <TableColumn fx:id="colPrix" text="Prix (DT)" prefWidth="100"/>
-            <TableColumn fx:id="colStock" text="Stock" prefWidth="100"/>
             <TableColumn fx:id="colImage" text="Image" prefWidth="150"/>
             <TableColumn fx:id="colActions" text="Actions" prefWidth="150"/>
         </columns>

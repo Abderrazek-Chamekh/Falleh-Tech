@@ -26,7 +26,7 @@ public class FavorisController implements Initializable {
     @FXML private TableColumn<Favoris, ImageView> colImage;
     @FXML private TableColumn<Favoris, String> colNom;
     @FXML private TableColumn<Favoris, String> colPrix;
-    @FXML private TableColumn<Favoris, Integer> colStock;
+
     @FXML private TableColumn<Favoris, Void> colActions;
 
     private final FavorisService favorisService = new FavorisService();
@@ -54,7 +54,7 @@ public class FavorisController implements Initializable {
 
         colNom.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProduit().getNom()));
         colPrix.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProduit().getPrix() + " DT"));
-        colStock.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getProduit().getStock()));
+
 
         colActions.setCellFactory(param -> new TableCell<>() {
             private final Button btnAddCart = new Button();
@@ -84,17 +84,36 @@ public class FavorisController implements Initializable {
                 btnDelete.getStyleClass().add("delete-button");
                 btnDelete.setPrefSize(30, 30);
 
-                // ✅ Action: Ajouter au panier
                 btnAddCart.setOnAction(event -> {
                     Favoris favoris = getTableView().getItems().get(getIndex());
                     Produit produit = favoris.getProduit();
-                    panierService.ajouterProduit(produit, 1);
+
+                    int stock = produit.getStock();
+
+                    if (stock == 0) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText("Rupture de stock");
+                        alert.setContentText("Ce produit est actuellement en rupture de stock.");
+                        alert.showAndWait();
+                        return;
+                    }
+
+                    if (stock <= 5) {
+                        Alert warning = new Alert(Alert.AlertType.WARNING);
+                        warning.setHeaderText("Stock faible");
+                        warning.setContentText("⚠ Il ne reste que " + stock + " unités en stock !");
+                        warning.showAndWait();
+                    }
+
+                    panierService.ajouterProduit(produit, 1); // ajoute 1 unité
 
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setHeaderText(null);
                     alert.setContentText(produit.getNom() + " a été ajouté au panier !");
                     alert.showAndWait();
                 });
+
+
 
                 // ✅ Action: Supprimer
                 btnDelete.setOnAction(event -> {

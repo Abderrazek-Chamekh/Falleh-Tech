@@ -84,15 +84,14 @@ public class AjouterProduitController {
 
     @FXML
     public void ajouterProduit() {
-        // Réinitialiser erreurs
-        resetError(nomField, nomError);
-        resetError(prixField, prixError);
-        resetError(stockField, stockError);
-        resetError(descriptionField, descriptionError);
-        resetError(categorieComboBox, categorieError);
-        resetError(imageError);
+        // Réinitialisation des messages d’erreur
+        nomError.setVisible(false);
+        prixError.setVisible(false);
+        stockError.setVisible(false);
+        descriptionError.setVisible(false);
+        categorieError.setVisible(false);
+        imageError.setVisible(false);
 
-        boolean valid = true;
         BigDecimal prix = BigDecimal.ZERO;
         int stock = 0;
 
@@ -103,63 +102,91 @@ public class AjouterProduitController {
         Categorie cat = categorieComboBox.getValue();
         SousCategorie sousCat = sousCategorieComboBox.getValue();
 
-        // Nom
+        // Validation du nom
         if (nom.isEmpty() || nom.length() < 3) {
-            showError(nomField, nomError, "⚠ Le nom est requis et doit contenir au moins 3 lettres.");
+            nomError.setText("⚠ Le nom est requis et doit contenir au moins 3 lettres.");
+            nomError.setVisible(true);
+            nomField.requestFocus();
             return;
         }
 
-        // Prix
+        // Validation du prix
         try {
             prix = new BigDecimal(prixStr);
-            if (prix.compareTo(new BigDecimal("3")) < 0) throw new NumberFormatException();
+            if (prix.compareTo(new BigDecimal("3")) < 0) {
+                throw new NumberFormatException();
+            }
         } catch (NumberFormatException e) {
-            showError(prixField, prixError, "⚠ Prix invalide (minimum 3 DT).");
+            prixError.setText("⚠ Prix invalide (minimum 3 DT).");
+            prixError.setVisible(true);
+            prixField.requestFocus();
             return;
         }
 
-        // Stock
+        // Validation du stock
         try {
             stock = Integer.parseInt(stockStr);
             if (stock < 0) throw new NumberFormatException();
         } catch (NumberFormatException e) {
-            showError(stockField, stockError, "⚠ Stock invalide.");
+            stockError.setText("⚠ Stock invalide.");
+            stockError.setVisible(true);
+            stockField.requestFocus();
             return;
         }
 
-        // Description
+        // Validation de la description
         if (desc.length() < 7) {
-            showError(descriptionField, descriptionError, "⚠ La description doit contenir au moins 7 caractères.");
+            descriptionError.setText("⚠ La description doit contenir au moins 7 caractères.");
+            descriptionError.setVisible(true);
+            descriptionField.requestFocus();
             return;
         }
 
-        // Catégorie
+        // Validation de la catégorie et sous-catégorie
         if (cat == null || sousCat == null) {
-            showError(categorieComboBox, categorieError, "⚠ Catégorie et sous-catégorie requises.");
+            categorieError.setText("⚠ Catégorie et sous-catégorie requises.");
+            categorieError.setVisible(true);
+            categorieComboBox.requestFocus();
             return;
         }
 
-        // Image
+        // Validation image
         if (selectedImage == null || selectedImage.isBlank()) {
-            showError(imageError, "⚠ Veuillez choisir une image.");
+            imageError.setText("⚠ Veuillez choisir une image.");
+            imageError.setVisible(true);
             return;
         }
 
-        // Ajouter ou modifier
+        // ✅ Ajout ou mise à jour
         if (produitEnEdition == null) {
-            Produit produit = new Produit();
-            produit.setNom(nom);
-            produit.setDescription(desc);
-            produit.setPrix(prix);
-            produit.setStock(stock);
-            produit.setImage(selectedImage);
-            produit.setCategorie(cat);
-            produit.setSousCategorie(sousCat);
-            produit.setUpdatedAt(java.time.LocalDateTime.now());
+            // Vérifier s’il existe déjà un produit avec même nom et même sous-catégorie
+            Produit existant = produitService.getAll().stream()
+                    .filter(p -> p.getNom().equalsIgnoreCase(nom)
+                            && p.getSousCategorie().getId().equals(sousCat.getId()))
+                    .findFirst()
+                    .orElse(null);
 
-            produit.setUpdatedAt(java.time.LocalDateTime.now());
-            produitService.ajouter(produit);
+            if (existant != null) {
+                // ➕ Incrémentation du stock
+                existant.setStock(existant.getStock() + stock);
+                existant.setUpdatedAt(java.time.LocalDateTime.now());
+                produitService.modifier(existant);
+            } else {
+                // 🆕 Création d’un nouveau produit
+                Produit nouveau = new Produit();
+                nouveau.setNom(nom);
+                nouveau.setDescription(desc);
+                nouveau.setPrix(prix);
+                nouveau.setStock(stock);
+                nouveau.setImage(selectedImage);
+                nouveau.setCategorie(cat);
+                nouveau.setSousCategorie(sousCat);
+                nouveau.setUpdatedAt(java.time.LocalDateTime.now());
+                produitService.ajouter(nouveau);
+            }
+
         } else {
+            // 🔄 Mise à jour du produit en cours d’édition
             produitEnEdition.setNom(nom);
             produitEnEdition.setDescription(desc);
             produitEnEdition.setPrix(prix);
@@ -171,7 +198,7 @@ public class AjouterProduitController {
             produitService.modifier(produitEnEdition);
         }
 
-        // Fermer après 1s
+        // ✅ Fermer le popup après 1s
         new Thread(() -> {
             try {
                 Thread.sleep(1000);
@@ -181,6 +208,8 @@ public class AjouterProduitController {
             }
         }).start();
     }
+
+
 
     private void showError(Control field, Label errorLabel, String message) {
         field.getStyleClass().add("error-field");

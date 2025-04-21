@@ -60,6 +60,17 @@ public class AjouterCategorieController {
             nomField.requestFocus();
             return;
         }
+// ⚠ Vérifie unicité du nom
+        boolean nomExiste = categorieService.getAll().stream()
+                .anyMatch(c -> c.getNom().equalsIgnoreCase(nom) &&
+                        (categorieEnCoursEdition == null || !c.getId().equals(categorieEnCoursEdition.getId())));
+
+        if (nomExiste) {
+            nomError.setText("⚠ Une catégorie avec ce nom existe déjà !");
+            nomError.setVisible(true);
+            nomField.requestFocus();
+            return;
+        }
 
         // Validation de l'image
         if (selectedImageFilename == null || selectedImageFilename.isBlank()) {

@@ -108,6 +108,18 @@ public class ProduitFrontViewController implements Initializable {
             Label prix = new Label("Prix : " + (p.getPrix() != null ? p.getPrix() : BigDecimal.ZERO) + " DT");
             prix.getStyleClass().add("product-price");
 
+            // === Stock label ===
+            Label stock = new Label("Stock : " + p.getStock() + " unités");
+            stock.getStyleClass().add("product-stock");
+
+            if (p.getStock() == 0) {
+                stock.setStyle("-fx-text-fill: red;");
+            } else if (p.getStock() <= 5) {
+                stock.setStyle("-fx-text-fill: orange;");
+            } else {
+                stock.setStyle("-fx-text-fill: green;");
+            }
+
             // === Quantité ===
             Label quantityLabel = new Label("1");
             quantityLabel.getStyleClass().add("quantity-label");
@@ -132,7 +144,11 @@ public class ProduitFrontViewController implements Initializable {
             Button ajouter = new Button("Ajouter au panier");
             ajouter.getStyleClass().add("add-to-cart-btn");
 
-// ✅ Configurer l'action APRES avoir créé le bouton
+            if (p.getStock() == 0) {
+                ajouter.setDisable(true);
+                ajouter.setText("Rupture de stock");
+            }
+
             ajouter.setOnAction(e -> {
                 if (panierService.contient(p)) {
                     showNotification("⚠️ Produit déjà dans le panier !", true);
@@ -143,9 +159,7 @@ public class ProduitFrontViewController implements Initializable {
                 }
             });
 
-
-
-            // === Bouton Favoris ===
+            // === Favoris ===
             ToggleButton coeur = new ToggleButton("♡");
             coeur.setSelected(favorisService.existeDansFavoris(p.getId(), 1));
             coeur.getStyleClass().add("heart-button");
@@ -167,11 +181,13 @@ public class ProduitFrontViewController implements Initializable {
             StackPane.setMargin(coeur, new Insets(10, 10, 0, 0));
 
             // === Ajout final ===
-            card.getChildren().addAll(img, name, desc, prix, quantityBox, ajouter);
+            card.getChildren().addAll(img, name, desc, prix, stock, quantityBox, ajouter);
             cardPane.getChildren().addAll(card, coeur);
             categorieFlowPane.getChildren().add(cardPane);
         }
     }
+
+
 
     private void updateHeartIcon(ToggleButton coeur) {
         if (coeur.isSelected()) {

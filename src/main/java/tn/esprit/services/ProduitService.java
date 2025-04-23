@@ -33,10 +33,11 @@ public class ProduitService {
 
     public void ajouter(Produit p) {
         String sql = """
-            INSERT INTO produit 
-            (nom, prix, description, categorie_id, sous_categorie_id, image, stock, is_favorite, updated_at) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """;
+        INSERT INTO produit 
+        (nom, prix, description, categorie_id, sous_categorie_id, image, stock, is_favorite, updated_at, user_id) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """;
+
         try (PreparedStatement ps = cnx.prepareStatement(sql)) {
             ps.setString(1, p.getNom());
             ps.setBigDecimal(2, p.getPrix());
@@ -44,18 +45,23 @@ public class ProduitService {
             ps.setLong(4, p.getCategorie().getId());
             ps.setLong(5, p.getSousCategorie().getId());
 
-            // 🔐 Stocker uniquement le nom de fichier
+            // Juste le nom du fichier
             String imageName = (p.getImage() != null) ? new File(p.getImage()).getName() : null;
             ps.setString(6, imageName);
 
             ps.setInt(7, p.getStock());
             ps.setBoolean(8, p.isFavorite());
             ps.setTimestamp(9, Timestamp.valueOf(p.getUpdatedAt()));
+
+            // 🔥 Associer user_id
+            ps.setInt(10, p.getUser().getId());
+
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     public void modifier(Produit p) {
         String sql = """
@@ -196,5 +202,31 @@ public class ProduitService {
 
         return null;
     }
+    public List<Produit> getProduitsParUser(int userId) {
+        List<Produit> list = new ArrayList<>();
+        String sql = """
+        SELECT p.*, 
+               c.id AS cat_id, c.nom AS cat_nom, 
+               sc.id AS sc_id, sc.nom AS sc_nom
+        FROM produit p
+        JOIN categorie c ON p.categorie_id = c.id
+        JOIN sous_categorie sc ON p.sous_categorie_id = sc.id
+        WHERE p.user_id = ?
+    """;
+
+        try (PreparedStatement ps = cnx.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(mapProduit(rs));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
 
 }

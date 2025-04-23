@@ -21,11 +21,13 @@ import tn.esprit.services.FavorisService;
 import tn.esprit.services.PanierService;
 import tn.esprit.services.ProduitService;
 import tn.esprit.utils.ImageUtils;
-
+import tn.esprit.tools.SessionManager;
+import tn.esprit.entities.User;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.scene.control.Tooltip;
 
 public class ProduitFrontViewController implements Initializable {
 
@@ -159,23 +161,31 @@ public class ProduitFrontViewController implements Initializable {
                 }
             });
 
-            // === Favoris ===
+            // === Favoris avec user connecté ===
             ToggleButton coeur = new ToggleButton("♡");
-            coeur.setSelected(favorisService.existeDansFavoris(p.getId(), 1));
             coeur.getStyleClass().add("heart-button");
-            updateHeartIcon(coeur);
 
-            coeur.setOnAction(event -> {
-                int userId = 1;
-                if (coeur.isSelected()) {
-                    favorisService.ajouterFavoris(p.getId(), userId);
-                    showNotification("❤️ Produit ajouté aux favoris !", false);
-                } else {
-                    favorisService.supprimerParProduitEtUser(p.getId(), userId);
-                    showNotification("🗑️ Produit retiré des favoris !", true);
-                }
+            User currentUser = SessionManager.getInstance().getCurrentUser();
+
+            if (currentUser != null) {
+                int userId = currentUser.getId();
+                coeur.setSelected(favorisService.existeDansFavoris(p.getId(), userId));
                 updateHeartIcon(coeur);
-            });
+
+                coeur.setOnAction(event -> {
+                    if (coeur.isSelected()) {
+                        favorisService.ajouterFavoris(p.getId(), userId);
+                        showNotification("❤️ Produit ajouté aux favoris !", false);
+                    } else {
+                        favorisService.supprimerParProduitEtUser(p.getId(), userId);
+                        showNotification("🗑️ Produit retiré des favoris !", true);
+                    }
+                    updateHeartIcon(coeur);
+                });
+            } else {
+                coeur.setDisable(true);
+                coeur.setTooltip(new Tooltip("🔒 Connectez-vous pour ajouter aux favoris"));
+            }
 
             StackPane.setAlignment(coeur, Pos.TOP_RIGHT);
             StackPane.setMargin(coeur, new Insets(10, 10, 0, 0));

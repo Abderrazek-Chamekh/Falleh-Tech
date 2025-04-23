@@ -137,3 +137,68 @@
 }
 
 
+
+.add-fav-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.add-fav-button:hover {
+    -fx-background-color: #c0392b;
+}
+/* Style général pour chaque carte suggestion */
+.suggestion-card {
+    -fx-background-color: #fff;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-pref-width: 150;
+    -fx-max-width: 150;
+    -fx-min-width: 150;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0.0, 0, 2);
+    -fx-spacing: 8;
+}
+
+/* Image uniforme dans les cartes */
+.suggestion-card .image-view {
+    -fx-fit-width: 100;
+    -fx-fit-height: 100;
+    -fx-preserve-ratio: true;
+}
+
+/* Titre du produit */
+.suggestion-card .nom-label {
+    -fx-font-size: 14;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+}
+
+/* Prix */
+.suggestion-card .prix-label {
+    -fx-font-size: 12;
+    -fx-text-fill: #666;
+}
+
+/* Bouton Favoris */
+.suggestion-card .add-fav-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-padding: 5 10 5 10;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+}
+
+/* Hover sur carte */
+.suggestion-card:hover {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #2ecc71;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+    -fx-transition: all 0.3s ease;
+}

@@ -9,7 +9,9 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import tn.esprit.entities.Produit;
+import tn.esprit.entities.User;
 import tn.esprit.services.ProduitService;
+import tn.esprit.tools.SessionManager;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,55 +23,24 @@ public class AgriculteurController implements Initializable {
     @FXML
     private FlowPane productContainer;
 
-
-
     private final ProduitService produitService = new ProduitService();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // ✅ Assure que le CSS est chargé
-
-
-        List<Produit> produits = produitService.getAll();
-
-        for (Produit produit : produits) {
-            try {
-                URL fxmlUrl = getClass().getResource("/front/produit/ProduitCard.fxml");
-                if (fxmlUrl == null) {
-                    System.err.println("❌ Fichier FXML introuvable : /front/Produit/ProduitCard.fxml");
-                    continue;
-                }
-
-                FXMLLoader loader = new FXMLLoader(fxmlUrl);
-                Pane produitCard = loader.load();
-
-                ProduitCardController controller = loader.getController();
-                controller.setProduit(produit);
-
-                productContainer.getChildren().add(produitCard);
-
-            } catch (IOException e) {
-                System.err.println("❌ Erreur lors du chargement d’une carte produit : " + e.getMessage());
-                e.printStackTrace();
-            }
-        }
+        rafraichirProduits();
     }
+
     @FXML
     private void ajouterProduitPopup() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/produit/AjouterProduit.fxml"));
             Parent root = loader.load();
 
-            AjouterProduitController controller = loader.getController();
-
             Stage stage = new Stage();
             stage.setTitle("Ajouter un Produit");
             stage.setScene(new Scene(root));
             stage.setResizable(false);
-
-            // 🔄 Lors de la fermeture, on rafraîchit les cartes
             stage.setOnHidden(event -> rafraichirProduits());
-
             stage.show();
 
         } catch (IOException e) {
@@ -79,20 +50,20 @@ public class AgriculteurController implements Initializable {
 
     public void rafraichirProduits() {
         productContainer.getChildren().clear();
-        List<Produit> produits = produitService.getAll();
+        User user = SessionManager.getInstance().getCurrentUser();
+        List<Produit> produits = produitService.getProduitsParUser(user.getId());
+
         for (Produit produit : produits) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/produit/ProduitCard.fxml"));
                 Pane produitCard = loader.load();
                 ProduitCardController controller = loader.getController();
                 controller.setProduit(produit);
+                controller.setParentController(this); // pour pouvoir rafraîchir depuis carte
                 productContainer.getChildren().add(produitCard);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
-
-
 }

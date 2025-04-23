@@ -13,6 +13,8 @@ import tn.esprit.services.CategorieService;
 import tn.esprit.services.ProduitService;
 import tn.esprit.services.SousCategorieService;
 import tn.esprit.utils.ImageUtils;
+import tn.esprit.entities.User;
+import tn.esprit.tools.SessionManager;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -182,6 +184,11 @@ public class AjouterProduitController {
                 nouveau.setCategorie(cat);
                 nouveau.setSousCategorie(sousCat);
                 nouveau.setUpdatedAt(java.time.LocalDateTime.now());
+
+                // ✅ Associer l'utilisateur connecté
+                User userConnecte = SessionManager.getInstance().getCurrentUser();
+                nouveau.setUser(userConnecte);
+
                 produitService.ajouter(nouveau);
             }
 

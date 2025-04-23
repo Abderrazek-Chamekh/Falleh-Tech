@@ -2,7 +2,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.FlowPane?>
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
@@ -11,14 +11,15 @@
       styleClass="main-pane"
       spacing="20" alignment="TOP_CENTER">
 
-    <!-- ✅ Titre avec même style -->
+    <!-- ✅ Titre -->
     <HBox alignment="CENTER_LEFT" spacing="10" styleClass="top-bar">
         <Label text="❤ Wishlist" styleClass="section-title" />
     </HBox>
 
-    <!-- ✅ Table styled identique au panier -->
-    <TableView fx:id="tableFavoris" prefWidth="1000">
-        <columns>
+    <!-- ✅ Table -->
+    <TableView fx:id="tableFavoris" prefWidth="1100" prefHeight="200" VBox.vgrow="ALWAYS">
+
+    <columns>
             <TableColumn fx:id="colNom" text="Nom" prefWidth="200"/>
             <TableColumn fx:id="colPrix" text="Prix (DT)" prefWidth="100"/>
             <TableColumn fx:id="colImage" text="Image" prefWidth="150"/>
@@ -26,4 +27,9 @@
         </columns>
     </TableView>
 
+    <Label fx:id="labelSuggestions" text="Suggestions pour vous" styleClass="section-title" visible="false"/>
+
+    <!-- ✅ FlowPane avec wrap automatique -->
+    <FlowPane fx:id="boxSuggestions" hgap="12" vgap="12" prefWrapLength="900"
+              alignment="TOP_LEFT" visible="false"/>
 </VBox>

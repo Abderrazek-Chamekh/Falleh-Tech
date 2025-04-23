@@ -26,6 +26,8 @@ public class PanierController implements Initializable {
     @FXML private TableColumn<PanierItem, Double> colTotal;
     @FXML private TableColumn<PanierItem, Void> colAction;
     @FXML private Label totalLabel;
+    @FXML
+    private Button qrCodeBtn;
 
     private final PanierService panierService = PanierService.getInstance();
 
@@ -127,6 +129,28 @@ public class PanierController implements Initializable {
                         .collect(Collectors.toList())
         );
         updateTotal();
+    }
+    @FXML
+    private void handleQRCodeButton() {
+        try {
+            String content = "QUIZ_AGRI"; // ce que tu veux, par ex. lien vers quiz ou mot-clé
+            String filePath = "qr-code.png";
+            tn.esprit.utils.QRCodeGenerator.generateQRCode(content, filePath, 250, 250);
+
+            ImageView qrImage = new ImageView("file:" + filePath);
+            qrImage.setFitWidth(250);
+            qrImage.setFitHeight(250);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Quiz Agricole 🎉");
+            alert.setHeaderText("Scannez ce QR code avec votre téléphone");
+            alert.getDialogPane().setContent(qrImage);
+            alert.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Erreur lors de la génération du QR code").show();
+        }
     }
 
     private void updateTotal() {

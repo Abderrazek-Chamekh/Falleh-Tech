@@ -23,6 +23,9 @@ public class Produit {
     @ManyToOne
     @JoinColumn(name = "sous_categorie_id")
     private SousCategorie sousCategorie;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     private String image;
     private Integer stock;
@@ -46,6 +49,13 @@ public class Produit {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public BigDecimal getPrix() {

@@ -16,14 +16,12 @@
 
         <!-- ✅ Titre -->
         <Label text="🌿 Mes Produits" styleClass="label" />
-        <!-- ✅ Ligne titre + bouton Ajouter -->
 
-            <Button fx:id="ajouterButton"
-                    text="➕ Ajouter un produit"
-                    onAction="#ajouterProduitPopup"
-                    styleClass="ajouter-produit-btn"/>
-
-
+        <!-- ✅ Bouton Ajouter -->
+        <Button fx:id="ajouterButton"
+                text="➕ Ajouter un produit"
+                onAction="#ajouterProduitPopup"
+                styleClass="ajouter-produit-btn"/>
 
         <!-- ✅ Scrollable FlowPane -->
         <ScrollPane fitToWidth="true" vbarPolicy="ALWAYS" hbarPolicy="NEVER">
@@ -35,5 +33,17 @@
                 </FlowPane>
             </content>
         </ScrollPane>
+
+        <!-- ✅ Pagination Controls -->
+        <HBox spacing="20" alignment="CENTER">
+            <Button fx:id="btnPrecedent"
+                    text="◀ Précédent"
+                    onAction="#pagePrecedente"/>
+            <Label fx:id="pageLabel" text="Page 1"/>
+            <Button fx:id="btnSuivant"
+                    text="Suivant ▶"
+                    onAction="#pageSuivante"/>
+        </HBox>
+
     </VBox>
 </AnchorPane>

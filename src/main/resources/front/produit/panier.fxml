@@ -10,10 +10,8 @@
       spacing="20"
       alignment="TOP_CENTER">
 
-
     <children>
         <HBox alignment="CENTER_LEFT" spacing="10" styleClass="top-bar">
-
             <Label text="🛒 Mon Panier" styleClass="section-title" />
         </HBox>
 
@@ -27,18 +25,34 @@
                 <TableColumn fx:id="colAction" text="Action" prefWidth="100"/>
             </columns>
         </TableView>
-        <Button fx:id="qrCodeBtn" text="🎯 Quiz Remise" onAction="#handleQRCodeButton"/>
+        <Label fx:id="hintLabel"
+               text="🎯 Atteignez 150 DT pour débloquer un quiz et une remise !"
+               styleClass="hint-label"
+               visible="false"/>
+        <!-- ✅ Bouton pour lancer le QR code -->
+        <Button fx:id="qrCodeBtn"
+                text="🎁 Gagnez -15% avec un quiz"
+                styleClass="quiz-button" />
 
+        <!-- ✅ Message de succès de la remise -->
+        <Label fx:id="remiseLabel"
+               visible="false"
+               styleClass="remise-message"
+               text="🎉 Félicitations ! Vous avez obtenu une remise de 15% sur votre panier !" />
 
-
+        <!-- ✅ Affichage du total avec et sans remise -->
         <HBox alignment="CENTER_RIGHT" spacing="10">
+            <Label fx:id="oldTotalLabel"
+                   styleClass="old-total-label"
+                   visible="false"
+                   text=""/>
             <Label text="Total :" />
             <Label fx:id="totalLabel" styleClass="total-label" />
         </HBox>
+
         <HBox alignment="CENTER_RIGHT" spacing="10">
             <Button fx:id="commanderButton" text="Commander" styleClass="commander-button"/>
         </HBox>
-
     </children>
 
 </VBox>

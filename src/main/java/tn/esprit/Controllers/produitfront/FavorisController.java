@@ -169,7 +169,7 @@ public class FavorisController implements Initializable {
         Label prix = new Label("Prix: " + produit.getPrix() + " DT");
         prix.getStyleClass().add("prix-label");
 
-        Button btnFavoris = new Button("❤️ Favoris");
+        Button btnFavoris = new Button("❤ Favoris");
         btnFavoris.getStyleClass().add("add-fav-button");
 
         btnFavoris.setOnAction(e -> {

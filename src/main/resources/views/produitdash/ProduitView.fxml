@@ -21,7 +21,7 @@
 
         <HBox spacing="10" alignment="TOP_RIGHT">
             <Button text="➕ Ajouter Produit" onAction="#ouvrirPopupAjout" styleClass="add-button"/>
-            <Button text="📊 Voir Statistiques" onAction="#ouvrirPopupStatistiques" styleClass="add-button"/>
+
             <Button fx:id="btnFavoris" text="Voir Favoris" onAction="#ouvrirPopupFavoris"/>
 
 

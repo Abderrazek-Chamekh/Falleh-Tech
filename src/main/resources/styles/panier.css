@@ -202,3 +202,20 @@
     -fx-scale-y: 1.03;
     -fx-transition: all 0.3s ease;
 }
+.old-total-label {
+    -fx-text-fill: #888;
+    -fx-font-size: 14px;
+    -fx-strikethrough: true;
+}
+
+.remise-message {
+    -fx-text-fill: #28a745;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+.hint-label {
+    -fx-text-fill: #6b1d1d;
+    -fx-font-size: 13px;
+    -fx-padding: 0 0 10 0;
+    -fx-font-style: italic;
+}

@@ -279,10 +279,7 @@ public class ProduitController implements Initializable {
         openPopup("/front/produit/ajouterproduit.fxml", null);
     }
 
-    @FXML
-    public void ouvrirPopupStatistiques() {
-        openPopup("/views/produitdash/stat.fxml", null);
-    }
+
 
     private void openPopup(String fxmlPath, Produit produit) {
         try {

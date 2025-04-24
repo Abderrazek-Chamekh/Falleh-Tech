@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.controllers.VerifyAccountController"
+      alignment="CENTER" spacing="20"
+      style="-fx-padding: 40; -fx-background-color: #f4f8f5;">
+
+    <Label text="🔐 Vérification d'identité"
+           style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+
+    <ImageView fx:id="idPreview"
+               fitWidth="250"
+               fitHeight="160"
+               preserveRatio="true"
+               style="-fx-border-color: #ccc; -fx-border-radius: 5px;" />
+
+    <Button text="📷 Choisir une photo (CIN ou Passeport)"
+            onAction="#onChooseImage"
+            style="-fx-background-color: #2e7d32; -fx-text-fill: white; -fx-font-weight: bold;" />
+
+    <Button text="🧠 Extraire le texte"
+            onAction="#onVerify"
+            style="-fx-background-color: #1565c0; -fx-text-fill: white; -fx-font-weight: bold;" />
+
+    <Label fx:id="statusLabel"
+           text=""
+           style="-fx-text-fill: #444; -fx-font-size: 14px;" />
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="🆔 CIN extrait:"
+               style="-fx-font-weight: bold; -fx-font-size: 14px;" />
+        <Label fx:id="extractedCinLabel"
+               text="—"
+               style="-fx-font-size: 14px; -fx-text-fill: #333;" />
+    </HBox>
+
+    <TextArea fx:id="ocrOutput"
+              prefWidth="500" prefHeight="200"
+              wrapText="true" editable="false"
+              style="-fx-font-family: 'Consolas'; -fx-font-size: 14px; -fx-border-color: #ccc; -fx-background-color: #fff;" />
+
+</VBox>

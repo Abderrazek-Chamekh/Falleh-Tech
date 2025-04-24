@@ -25,6 +25,10 @@ public class AjoutCandidatureController {
     @FXML private TextArea noteField;
     @FXML private Button btnAjouter;
 
+    @FXML private Label offreError;
+    @FXML private Label travailleurError;
+    @FXML private Label statutError;
+
     private final ServiceCandidature serviceCandidature = new ServiceCandidature();
     private final ServiceOffreEmploi serviceOffre = new ServiceOffreEmploi();
     private final ServiceUser serviceUser = new ServiceUser();
@@ -62,23 +66,53 @@ public class AjoutCandidatureController {
 
     @FXML
     public void ajouterCandidature() {
+        // Clear error labels
+        offreError.setText("");
+        travailleurError.setText("");
+        statutError.setText("");
+
         String offreLabel = comboOffre.getValue();
         String travailleurLabel = comboTravailleur.getValue();
         StatutCandidature statut = comboStatut.getValue();
 
-        if (offreLabel == null || travailleurLabel == null || statut == null) {
-            showAlert("❌ Veuillez remplir tous les champs !");
-            return;
+        boolean hasError = false;
+
+        if (offreLabel == null || !offreMap.containsKey(offreLabel)) {
+            offreError.setText("Veuillez choisir une offre.");
+            hasError = true;
         }
+
+        if (travailleurLabel == null || !travailleurMap.containsKey(travailleurLabel)) {
+            travailleurError.setText("Veuillez choisir un travailleur.");
+            hasError = true;
+        }
+
+        if (statut == null) {
+            statutError.setText("Veuillez choisir un statut.");
+            hasError = true;
+        }
+
+        if (hasError) return;
 
         int offreId = offreMap.get(offreLabel);
         int travailleurId = travailleurMap.get(travailleurLabel);
 
+        // ✅ Load the full OffreEmploi object to get the date range
+        OffreEmploi offre = serviceCandidature.getOffreById(offreId);
+        if (offre == null) {
+            showAlert("❌ Offre introuvable.");
+            return;
+        }
+
+        LocalDateTime offerStart = offre.getStartDate().atStartOfDay();
+        LocalDateTime offerEnd = offre.getDateExpiration().atTime(23, 59);
+
+        // ✅ Create and insert
         Candidature c = new Candidature();
         c.setStatut(statut);
         c.setDateApplied(LocalDateTime.now());
 
-        serviceCandidature.ajouter(c, offreId, travailleurId);
+        serviceCandidature.ajouter(c, offreId, travailleurId, offerStart, offerEnd);
 
         showAlert("✅ Candidature ajoutée avec succès !");
         Stage stage = (Stage) btnAjouter.getScene().getWindow();

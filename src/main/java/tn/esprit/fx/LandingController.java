@@ -33,28 +33,23 @@ public class LandingController {
         roleBox.setManaged(!isVisible);
     }
 
-    @FXML
-    private void goToFrontOffice() {
+    @FXML private void goToFrontOffice() {
         loadFrontOfficeWithRole("ouvrier");
     }
 
-    @FXML
-    private void goToBackOffice() {
+    @FXML private void goToBackOffice() {
         loadSceneWithFade("/fxml/main_layout.fxml", btnBackOffice);
     }
 
-    @FXML
-    private void goToClient() {
+    @FXML private void goToClient() {
         loadFrontOfficeWithRole("client");
     }
 
-    @FXML
-    private void goToAgriculteur() {
+    @FXML private void goToAgriculteur() {
         loadFrontOfficeWithRole("agriculteur");
     }
 
-    @FXML
-    private void goToOuvrier() {
+    @FXML private void goToOuvrier() {
         loadFrontOfficeWithRole("ouvrier");
     }
 
@@ -69,7 +64,8 @@ public class LandingController {
                     getClass().getResource("/styles/dashboard.css").toExternalForm(),
                     getClass().getResource("/styles/offre.css").toExternalForm(),
                     getClass().getResource("/styles/popup.css").toExternalForm(),
-                    getClass().getResource("/styles/sidebar.css").toExternalForm()
+                    getClass().getResource("/styles/sidebar.css").toExternalForm(),
+                    getClass().getResource("/styles/job-cards.css").toExternalForm() // ✅ added here too
             );
 
             Stage stage = (Stage) sourceButton.getScene().getWindow();
@@ -93,7 +89,6 @@ public class LandingController {
             User user = new User();
             user.setRole(role);
 
-            // Assign static ID based on role
             switch (role) {
                 case "agriculteur" -> user.setId(16);
                 case "ouvrier"     -> user.setId(21);
@@ -105,6 +100,22 @@ public class LandingController {
             controller.setCurrentUser(user);
 
             Scene scene = new Scene(root);
+            scene.getStylesheets().addAll(
+                    getClass().getResource("/styles/main.css").toExternalForm(),
+                    getClass().getResource("/styles/dashboard.css").toExternalForm(),
+                    getClass().getResource("/styles/offre.css").toExternalForm(),
+                    getClass().getResource("/styles/popup.css").toExternalForm(),
+                    getClass().getResource("/styles/sidebar.css").toExternalForm(),
+                    getClass().getResource("/styles/job-cards.css").toExternalForm(),
+                            getClass().getResource("/styles/offre_card.css").toExternalForm()
+
+                                    ,
+                    getClass().getResource("/styles/candidatures.css").toExternalForm()
+                    , getClass().getResource("/styles/add_offre_dialog.css").toExternalForm()
+                    , getClass().getResource("/styles/edit_offre_dialog.css").toExternalForm()
+                    // ✅ crucial for offer card styling
+            );
+
             Stage stage = (Stage) btnFrontOffice.getScene().getWindow();
             stage.setScene(scene);
 

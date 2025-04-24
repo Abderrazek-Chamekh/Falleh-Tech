@@ -1,0 +1,55 @@
+.card-container {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 6, 0.3, 0, 2);
+    -fx-pref-width: 280;
+}
+
+.label-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e3a59;
+}
+
+.label-description {
+    -fx-font-size: 13px;
+    -fx-text-fill: #555;
+}
+
+.offre-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #666;
+    -fx-font-weight: bold;
+}
+
+.offre-value {
+    -fx-font-size: 13px;
+    -fx-text-fill: #444;
+}
+
+/* Buttons */
+.button-edit, .button-delete, .button-candidature {
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 8 12;
+}
+
+.button-edit {
+    -fx-background-color: #81c784;
+    -fx-text-fill: white;
+}
+
+.button-delete {
+    -fx-background-color: #e57373;
+    -fx-text-fill: white;
+}
+
+.button-candidature {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: white;
+}

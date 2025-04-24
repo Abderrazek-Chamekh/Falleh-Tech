@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="tn.esprit.controllers.farmer.CandidaturesController"
             stylesheets="@/styles/mesoffres.css">
-    <VBox spacing="20" style="-fx-padding: 30;" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
+
+    <VBox spacing="20" style="-fx-padding: 30;"
+          AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
           AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
-        <Label text="📄 Liste des Candidatures" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
-        <ScrollPane fitToWidth="true">
-            <VBox fx:id="candidaturesContainer" spacing="15" />
+
+        <!-- 🟢 Retour button -->
+        <Button fx:id="btnRetour" text="⬅ Retour aux Offres"
+                style="-fx-background-color: #eeeeee; -fx-font-size: 14px; -fx-padding: 8 15; -fx-cursor: hand; -fx-background-radius: 6;"
+                onAction="#handleRetourAction" />
+
+        <!-- 🗂️ Title -->
+        <Label text="📄 Liste des Candidatures"
+               style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+        <!-- 🔁 Dynamic content -->
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+            <VBox fx:id="candidaturesContainer" spacing="15" style="-fx-padding: 10;" />
+
         </ScrollPane>
     </VBox>
 </AnchorPane>

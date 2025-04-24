@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
@@ -18,9 +17,9 @@
 
             <!-- ✅ NAVBAR EN HAUT -->
             <top>
-                <HBox spacing="10" alignment="CENTER_RIGHT" styleClass="navbar">
+                <HBox spacing="10" alignment="CENTER" styleClass="navbar" prefHeight="60">
                     <padding>
-                        <Insets top="10" bottom="10" left="20" right="20"/>
+                        <Insets top="5" bottom="5" left="15" right="15"/>
                     </padding>
 
                     <!-- 👇 Le titre de la page active -->
@@ -28,25 +27,28 @@
 
                     <Region fx:id="navbarSpacer" HBox.hgrow="ALWAYS"/>
 
-                    <!-- 👇 NEW: Role Label -->
-                    <Label fx:id="roleLabel" style="-fx-font-size: 13px; -fx-text-fill: #888;" />
+                    <!-- 👇 Role Label -->
+                    <Label fx:id="roleLabel" style="-fx-font-size: 12px; -fx-text-fill: #666;" />
 
                     <!-- ✅ Menu Profil déroulant -->
                     <MenuButton fx:id="profileMenu" popupSide="BOTTOM" styleClass="profile-menu-button">
                         <graphic>
-                            <HBox spacing="8" alignment="CENTER">
-                                <ImageView fx:id="menuAvatar" fitWidth="24" fitHeight="24" preserveRatio="true"/>
-                                <Label fx:id="profileNameLabel" text="Sarah" styleClass="profile-name-label"/>
+                            <HBox spacing="6" alignment="CENTER">
+                                <ImageView fx:id="menuAvatar" fitWidth="22" fitHeight="22" preserveRatio="true"/>
+                                <Label fx:id="profileNameLabel" text="Abbassi Fares" styleClass="profile-name-label"/>
                             </HBox>
                         </graphic>
                         <items>
+
+                            <MenuItem text="️Carte" styleClass="profile-item" onAction="#goToMap"/>
+                            <MenuItem text="️HeatMap" styleClass="profile-item" onAction="#goToHeatmap"/>
                             <MenuItem text="👤 Profile" styleClass="profile-item" onAction="#openProfile"/>
+                            <MenuItem text="✔️ Vérifier le compte" styleClass="profile-item" onAction="#verifyAccount"/>
                             <MenuItem text="🚪 Déconnexion" styleClass="logout-item" onAction="#logout"/>
                         </items>
                     </MenuButton>
                 </HBox>
             </top>
-
 
             <!-- ✅ SIDEBAR À GAUCHE -->
             <left>
@@ -55,10 +57,12 @@
                         <Insets top="20" bottom="20" left="20" right="10"/>
                     </padding>
 
+                    <!-- 🔰 Logo -->
                     <VBox alignment="CENTER" spacing="8" styleClass="logo-section">
                         <ImageView fx:id="logoImage" fitWidth="140" preserveRatio="true"/>
                     </VBox>
 
+                    <!-- 🧭 Navigation -->
                     <Button fx:id="accueilButton" text="Page d'accueil" onAction="#goToAccueil" styleClass="sidebar-button"/>
                     <Button fx:id="produitsButton" text="Produits" onAction="#goToProduits" styleClass="sidebar-button"/>
 
@@ -70,9 +74,16 @@
                     <Button fx:id="panierButton" text="Panier" onAction="#goToPanier" styleClass="sidebar-button"/>
                     <Button fx:id="commandesButton" text="Commandes" onAction="#goToCommandes" styleClass="sidebar-button"/>
                     <Button fx:id="offresButton" text="Offres de travail" onAction="#goToOffres" styleClass="sidebar-button"/>
+                    <Button fx:id="candidatures" text="Mes Candidatures" onAction="#goToCandidatureHistory" styleClass="sidebar-button"/>
                     <Button fx:id="blogButton" text="Blog" onAction="#goToBlog" styleClass="sidebar-button"/>
+                    <Button fx:id="btnCalendrier" text="🗓️ Mon Calendrier" onAction="#openCalendrierView" styleClass="sidebar-button"/>
+                    <Button fx:id="addMapButton"
+                            text="🗺️ Ma Parcelle"
+                            onAction="#openLandDrawPage"
+                            styleClass="sidebar-button"/>
 
-                    <!-- ❌ Retiré le bouton Déconnexion ici (déjà dans la navbar) -->
+                    <!-- ✅ New Messages Button -->
+                    <Button fx:id="btnMessages" text="💬 Messages" onAction="#openMessagingPage" styleClass="sidebar-button"/>
                 </VBox>
             </left>
 

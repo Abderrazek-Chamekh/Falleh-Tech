@@ -10,6 +10,7 @@ import java.util.List;
 public class ServiceUser implements services<User> {
 
     private final Connection con;
+
     public ServiceUser() {
         this.con = my_db.getInstance().getConnection();
     }
@@ -32,8 +33,8 @@ public class ServiceUser implements services<User> {
                 user.setRole(rs.getString("role"));
                 user.setCarteIdentite(rs.getString("carte_identite"));
                 user.setPhoneNumber(rs.getString("phone_number"));
-                user.setDisponibility(rs.getTimestamp("disponibility") != null
-                        ? rs.getTimestamp("disponibility").toLocalDateTime() : null);
+                Timestamp dispo = rs.getTimestamp("disponibility");
+                user.setDisponibility(dispo != null ? dispo.toLocalDateTime() : null);
                 user.setLocation(rs.getString("location"));
                 user.setExperience(rs.getString("experience"));
                 user.setActive(rs.getBoolean("active"));
@@ -42,11 +43,12 @@ public class ServiceUser implements services<User> {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("❌ Erreur getAll(): " + e.getMessage());
         }
 
         return users;
     }
+
     public List<User> getAllOuvriers() {
         List<User> list = new ArrayList<>();
         String sql = "SELECT * FROM user WHERE role = 'ouvrier'";
@@ -66,6 +68,7 @@ public class ServiceUser implements services<User> {
 
         return list;
     }
+
     public User findById(int id) {
         String sql = "SELECT * FROM user WHERE id = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -76,8 +79,16 @@ public class ServiceUser implements services<User> {
                 u.setId(rs.getInt("id"));
                 u.setName(rs.getString("name"));
                 u.setLastName(rs.getString("last_name"));
-                u.setRole(rs.getString("role"));
                 u.setEmail(rs.getString("email"));
+                u.setRole(rs.getString("role"));
+                u.setPassword(rs.getString("password"));
+                u.setCarteIdentite(rs.getString("carte_identite"));
+                u.setPhoneNumber(rs.getString("phone_number"));
+                Timestamp dispo = rs.getTimestamp("disponibility");
+                u.setDisponibility(dispo != null ? dispo.toLocalDateTime() : null);
+                u.setLocation(rs.getString("location"));
+                u.setExperience(rs.getString("experience"));
+                u.setActive(rs.getBoolean("active"));
                 return u;
             }
         } catch (SQLException e) {
@@ -86,7 +97,7 @@ public class ServiceUser implements services<User> {
         return null;
     }
 
-    // Other methods from the interface not implemented for now
+    // Not implemented yet
     @Override public void ajouter(User user) {}
     @Override public void modifier(User user) {}
     @Override public void supprimer(User user) {}

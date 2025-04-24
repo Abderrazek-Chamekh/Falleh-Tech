@@ -3,17 +3,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10" prefWidth="250" xmlns="http://javafx.com/javafx"
+<VBox spacing="10" prefWidth="300"
+      xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="tn.esprit.controllers.farmer.OffreCardController"
-      style="-fx-background-color: #f8f8f8; -fx-padding: 15; -fx-border-color: #ccc; -fx-border-radius: 8; -fx-background-radius: 8;">
+      styleClass="card">
 
-    <Label fx:id="lblTitre" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
-    <Label fx:id="lblDescription" wrapText="true" />
+    <Label fx:id="lblTitre" wrapText="true" styleClass="card-title"/>
+    <Label fx:id="lblDescription" wrapText="true" styleClass="card-description"/>
 
-    <Label text="Salaire:" />
-    <Label fx:id="lblSalaire" />
+    <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label text="💰 Salaire:" styleClass="text-muted"/>
+        <Label fx:id="lblSalaire" styleClass="card-salaire"/>
+    </HBox>
 
-    <Label text="Lieu:" />
-    <Label fx:id="lblLocation" />
+    <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label text="📍 Lieu:" styleClass="text-muted"/>
+        <Label fx:id="lblLocation" styleClass="card-lieu"/>
+    </HBox>
 </VBox>

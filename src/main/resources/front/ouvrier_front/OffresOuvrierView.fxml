@@ -4,14 +4,27 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="tn.esprit.controllers.ouvrier.OffresOuvrierController"
+      spacing="20"
+      style="-fx-padding: 30; -fx-background-color: #f8f9fa;"
+      stylesheets="@/styles/offres-ouvrier.css">
 
-      spacing="20" style="-fx-padding: 30;">
+    <Label text="📋 Available Job Offers"
+           style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
 
-    <Label text="🛠️ Offres de Travail" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+    <!-- Search + Filters -->
+    <HBox spacing="20">
+        <TextField fx:id="searchField" promptText="🔍 Search Title..." />
+        <ComboBox fx:id="statusFilter" promptText="Status" />
+    </HBox>
 
-    <ScrollPane fitToWidth="true">
-        <FlowPane fx:id="offersGrid" hgap="20" vgap="20" style="-fx-padding: 10;" />
+    <!-- Dynamic Offer Cards -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+        <FlowPane fx:id="cardContainer"
+                  prefWrapLength="800"
+                  hgap="20" vgap="20"
+                  style="-fx-padding: 20;"
+                  alignment="CENTER">
+            <!-- Cards are dynamically injected here -->
+        </FlowPane>
     </ScrollPane>
-    <Label text="✅ THIS IS THE OUVRIER PAGE" style="-fx-text-fill: green; -fx-font-size: 18px;" />
-
 </VBox>

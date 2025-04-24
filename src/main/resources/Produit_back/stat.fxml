@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.fx.StatistiquesProduitController"
+            prefWidth="600" prefHeight="400"
+            stylesheets="@../styles/agri-style.css">
+
+    <VBox spacing="15" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10"
+          AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10">
+
+        <Label text="📊 Statistiques Produits" styleClass="form-title"/>
+
+        <HBox spacing="10">
+            <ComboBox fx:id="statistiqueComboBox" promptText="Choisir statistique" prefWidth="300"/>
+            <Button text="Afficher" onAction="#afficherStatistiques" styleClass="add-button"/>
+            <Button text="Fermer" onAction="#fermerFenetre" styleClass="cancel-button"/>
+        </HBox>
+
+        <!-- Un seul conteneur pour afficher soit le BarChart soit le PieChart -->
+        <StackPane prefHeight="300" alignment="CENTER">
+            <BarChart fx:id="statistiqueChart" animated="true" visible="true">
+                <xAxis>
+                    <CategoryAxis fx:id="xAxis" label="Catégories / Produits"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="yAxis" label="Valeur"/>
+                </yAxis>
+            </BarChart>
+
+            <PieChart fx:id="pieChart" visible="false"/>
+        </StackPane>
+    </VBox>
+</AnchorPane>

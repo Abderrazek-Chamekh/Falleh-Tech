@@ -296,3 +296,19 @@
     -fx-font-size: 12px;
     -fx-text-fill: #777;
 }
+.chart-title {
+    -fx-font-size: 18px;
+    -fx-text-fill: #2e7d32;
+    -fx-font-weight: bold;
+}
+
+.stats-linechart .default-color0.chart-series-line {
+    -fx-stroke: #43a047; /* Actual data */
+    -fx-stroke-width: 3px;
+}
+
+.stats-linechart .default-color1.chart-series-line {
+    -fx-stroke: #ff9800; /* Prediction */
+    -fx-stroke-dash-array: 10 5;
+    -fx-stroke-width: 3px;
+}

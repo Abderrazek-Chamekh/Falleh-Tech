@@ -8,18 +8,37 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="tn.esprit.controllers.AjoutOffreController"
       spacing="12" alignment="CENTER"
-      styleClass="popup-container">
+      styleClass="popup-container"
+      stylesheets="@/styles/popup.css">
 
-    <!-- ✅ Dynamic Title -->
+
     <Label fx:id="popupTitle" text="Ajouter une Offre" styleClass="popup-title"/>
 
-    <TextField fx:id="titreField" promptText="Titre" styleClass="popup-field"/>
-    <TextField fx:id="lieuField" promptText="Lieu" styleClass="popup-field"/>
-    <TextField fx:id="salaireField" promptText="Salaire" styleClass="popup-field"/>
-    <DatePicker fx:id="dateExpirationPicker" promptText="Date d'expiration" styleClass="popup-field"/>
-    <TextArea fx:id="descriptionArea" promptText="Description" prefRowCount="3" styleClass="popup-area"/>
+    <VBox>
+        <TextField fx:id="titreField" promptText="Titre" styleClass="popup-field"/>
+        <Label fx:id="titreError" text="" style="-fx-text-fill: red;"/>
+    </VBox>
 
-    <!-- ✅ Dynamic Buttons -->
+    <VBox>
+        <TextField fx:id="lieuField" promptText="Lieu" styleClass="popup-field"/>
+        <Label fx:id="lieuError" text="" style="-fx-text-fill: red;"/>
+    </VBox>
+
+    <VBox>
+        <TextField fx:id="salaireField" promptText="Salaire" styleClass="popup-field"/>
+        <Label fx:id="salaireError" text="" style="-fx-text-fill: red;"/>
+    </VBox>
+
+    <VBox>
+        <DatePicker fx:id="dateExpirationPicker" promptText="Date d'expiration" styleClass="popup-field"/>
+        <Label fx:id="dateError" text="" style="-fx-text-fill: red;"/>
+    </VBox>
+
+    <VBox>
+        <TextArea fx:id="descriptionArea" promptText="Description" prefRowCount="3" styleClass="popup-area"/>
+        <Label fx:id="descriptionError" text="" style="-fx-text-fill: red;"/>
+    </VBox>
+
     <HBox spacing="10" alignment="CENTER">
         <Button fx:id="submitButton" text="Ajouter" onAction="#handleAjouter" styleClass="btn-green"/>
         <Button text="Annuler" onAction="#handleClose" styleClass="btn-red"/>

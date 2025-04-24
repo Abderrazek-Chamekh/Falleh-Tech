@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="tn.esprit.controllers.MessagingController"
+           stylesheets="/styles/messaging.css">
+
+    <!-- 🌟 Main Rounded Container -->
+    <BorderPane fx:id="mainContainer"
+                styleClass="main-container"
+                maxWidth="950" maxHeight="500">
+
+        <!-- 🔍 Sidebar: User List -->
+        <left>
+            <VBox spacing="10" styleClass="sidebar">
+                <TextField fx:id="searchField" promptText="🔍 Rechercher un utilisateur..." styleClass="search-input"/>
+                <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="user-scroll">
+                    <VBox fx:id="userListContainer" spacing="10" />
+                </ScrollPane>
+            </VBox>
+        </left>
+
+        <!-- 💬 Chat Interface -->
+        <center>
+            <VBox spacing="10" styleClass="chat-container">
+                <Label text="💬 Conversation" styleClass="chat-title"/>
+
+                <ScrollPane fx:id="chatScroll" fitToWidth="true" fitToHeight="true" prefHeight="450" styleClass="chat-scroll">
+                    <VBox fx:id="chatArea" spacing="8" styleClass="chat-area"/>
+                </ScrollPane>
+
+                <HBox spacing="10" alignment="CENTER" styleClass="message-box">
+                    <TextField fx:id="messageInput" promptText="Écrivez un message..." HBox.hgrow="ALWAYS" styleClass="message-input"/>
+                    <Button text="Envoyer" onAction="#sendMessage" styleClass="send-button"/>
+                </HBox>
+            </VBox>
+        </center>
+
+    </BorderPane>
+</StackPane>

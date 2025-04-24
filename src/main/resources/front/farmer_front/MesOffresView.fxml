@@ -1,64 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/21.0.1"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="tn.esprit.controllers.farmer.MesOffresController"
-            stylesheets="@/styles/mesoffres.css">
+<StackPane xmlns="http://javafx.com/javafx/21.0.1"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:id="contentPaneRef"
+           fx:controller="tn.esprit.controllers.farmer.MesOffresController"
+           stylesheets="/styles/mesoffres.css">
 
-    <VBox spacing="20" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
-          AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0"
-          style="-fx-padding: 30;">
+    <AnchorPane>
+        <VBox spacing="20"
+              AnchorPane.topAnchor="0"
+              AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0"
+              AnchorPane.bottomAnchor="0"
+              styleClass="main-background">
 
-        <!-- Title -->
-        <Label text="📋 Latest Job Offers"
-               style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1e3a5f;" />
+            <!-- 🔵 Page Title -->
+            <Label text="📋 Mes Offres d'Emploi" styleClass="page-title" />
 
-        <!-- Toolbar -->
-        <HBox spacing="10">
-            <Button text="➕ Add New Offer" fx:id="btnAddOffer" styleClass="btn-success" />
-            <Region HBox.hgrow="ALWAYS" />
-            <ToggleButton text="🌐 All Offers" fx:id="btnAllOffers" selected="true" />
-            <ToggleButton text="👤 Only My Offers" fx:id="btnMyOffers" />
-        </HBox>
+            <!-- 🔘 Top Action Row -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button fx:id="btnAddOffer"
+                        text="➕ Ajouter une offre"
+                        styleClass="primary-btn" />
+                <Region HBox.hgrow="ALWAYS"/>
+                <ToggleButton fx:id="btnAllOffers"
+                              text="🌐 Toutes les offres"
+                              selected="true"
+                              styleClass="toggle-btn"/>
+                <ToggleButton fx:id="btnMyOffers"
+                              text="👤 Mes offres"
+                              styleClass="toggle-btn"/>
+            </HBox>
 
-        <!-- Scrollable Grid inside StackPane -->
-        <StackPane fx:id="contentPaneRef">
-            <ScrollPane fitToWidth="true" fx:id="scrollPane" styleClass="card-scroll-pane">
+            <!-- 🔍 Filter + Sort Row -->
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <HBox spacing="10" HBox.hgrow="ALWAYS">
+                    <TextField fx:id="searchField"
+                               promptText="🔍 Rechercher..."
+                               styleClass="search-bar"
+                               HBox.hgrow="ALWAYS"/>
+                    <ComboBox fx:id="locationFilter"
+                              promptText="📍 Lieu"
+                              styleClass="filter-combo"
+                              HBox.hgrow="ALWAYS"/>
+                </HBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <ToggleButton fx:id="sortDateToggle"
+                              text="📅 Trier par date"
+                              styleClass="toggle-pill"/>
+            </HBox>
+
+            <!-- 🧱 Offer Cards Grid -->
+            <ScrollPane fx:id="scrollPane"
+                        fitToWidth="true"
+                        styleClass="transparent-scroll">
                 <FlowPane fx:id="offersGrid"
-                          hgap="20" vgap="20"
-                          style="-fx-padding: 20;">
-
-                    <!-- Card 1 -->
-                    <VBox spacing="10" style="-fx-background-color: #f8f8f8; -fx-padding: 15; -fx-border-color: #ccc; -fx-border-radius: 8; -fx-background-radius: 8;" prefWidth="200">
-                        <Label text="Récolte d’olives" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
-                        <Label text="📍 Saida" />
-                        <Label text="📅 12 Avril - 15 Avril" />
-                        <Button text="Voir détails" />
-                    </VBox>
-
-                    <!-- Card 2 -->
-                    <VBox spacing="10" style="-fx-background-color: #f8f8f8; -fx-padding: 15; -fx-border-color: #ccc; -fx-border-radius: 8; -fx-background-radius: 8;" prefWidth="200">
-                        <Label text="Tractoriste" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
-                        <Label text="📍 Kairouan" />
-                        <Label text="📅 20 Avril - 22 Avril" />
-                        <Button text="Voir détails" />
-                    </VBox>
-
-                    <!-- Card 3 -->
-                    <VBox spacing="10" style="-fx-background-color: #f8f8f8; -fx-padding: 15; -fx-border-color: #ccc; -fx-border-radius: 8; -fx-background-radius: 8;" prefWidth="200">
-                        <Label text="Plantation de tomates" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
-                        <Label text="📍 Gafsa" />
-                        <Label text="📅 5 Mai - 10 Mai" />
-                        <Button text="Voir détails" />
-                    </VBox>
-
+                          alignment="CENTER"
+                          hgap="30"
+                          vgap="30"
+                          prefWrapLength="960"
+                          styleClass="offers-grid">
+                    <!-- Offer cards loaded dynamically -->
                 </FlowPane>
             </ScrollPane>
-        </StackPane>
-    </VBox>
-</AnchorPane>
+        </VBox>
+    </AnchorPane>
+</StackPane>

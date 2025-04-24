@@ -4,24 +4,34 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="15" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+<VBox spacing="15"
+      xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml"
       fx:controller="tn.esprit.controllers.EditCandidatureController"
-      alignment="CENTER_LEFT" style="-fx-padding: 20;">
+      alignment="CENTER_LEFT"
+      styleClass="popup-container"
+>
 
-    <Label text="📝 Modifier la Candidature" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+    <!-- Title -->
+    <Label text="📝 Modifier la Candidature"
+           styleClass="popup-title" />
 
-    <HBox spacing="10">
+    <!-- Statut -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="Statut:" />
-        <ComboBox fx:id="statutCombo" prefWidth="200"/>
+        <ComboBox fx:id="statutCombo" prefWidth="200" />
     </HBox>
 
-    <HBox spacing="10">
+    <!-- Note -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="Note (facultatif):" />
-        <TextField fx:id="ratingField" promptText="Entrez une note"/>
+        <TextField fx:id="ratingField" promptText="Entrez une note" />
     </HBox>
 
-    <HBox spacing="15">
-        <Button text="✅ Enregistrer" onAction="#onSave"/>
-        <Button text="❌ Annuler" onAction="#onCancel"/>
+    <!-- Buttons -->
+    <HBox spacing="15" alignment="CENTER_RIGHT">
+        <Button text="✅ Enregistrer" onAction="#onSave" styleClass="btn-green" />
+        <Button text="❌ Annuler" onAction="#onCancel" styleClass="btn-red" />
     </HBox>
+
 </VBox>

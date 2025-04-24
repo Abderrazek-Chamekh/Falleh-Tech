@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:controller="tn.esprit.fx.ProduitCardController"
+      xmlns:fx="http://javafx.com/fxml"
+      spacing="8"
+      alignment="TOP_LEFT"
+      styleClass="card-produit">
+
+    <!-- ✅ Image du produit -->
+    <ImageView fx:id="imageProduit" fitHeight="120" fitWidth="220" preserveRatio="true" />
+
+    <!-- ✅ Informations produit -->
+    <Label fx:id="nomProduit" styleClass="label nom" />
+
+    <Label fx:id="descriptionProduit" wrapText="true" styleClass="label" />
+    <Label fx:id="prixProduit" styleClass="label" />
+    <Label fx:id="categorieProduit" styleClass="label" />
+    <Label fx:id="sousCategorieProduit" styleClass="label" />
+
+    <!-- ✅ Stock dynamique -->
+    <Label fx:id="stockProduit" styleClass="label stock" />
+
+    <!-- ✅ Boutons d’action -->
+    <HBox spacing="10" alignment="CENTER" styleClass="hbox-buttons">
+        <Button fx:id="modifierButton"
+                text="✏Modifier"
+                onAction="#onModifierClicked"
+                styleClass="btn-modifier" />
+
+        <Button fx:id="supprimerButton"
+                text="🗑 Supprimer"
+                onAction="#onSupprimerClicked"
+                styleClass="btn-supprimer" />
+    </HBox>
+
+
+</VBox>

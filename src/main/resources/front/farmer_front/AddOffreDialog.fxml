@@ -1,26 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/21.0.1"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="tn.esprit.controllers.farmer.AddOffreDialogController"
-      spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 20;">
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.farmer.AddOffreDialogController"
+            fitToWidth="true"
+            hbarPolicy="NEVER"
+            vbarPolicy="AS_NEEDED"
+            prefWidth="520" prefHeight="550"
+            styleClass="transparent-scroll"
+            stylesheets="/styles/add_offre_dialog.css">
 
-    <Label text="➕ Ajouter une offre"
-           style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+    <content>
+        <VBox alignment="CENTER" styleClass="dialog-body">
 
-    <TextField fx:id="txtTitre" promptText="Titre de l'offre" />
-    <TextArea fx:id="txtDescription" promptText="Description" prefRowCount="3" />
-    <TextField fx:id="txtSalaire" promptText="Salaire" />
-    <TextField fx:id="txtLieu" promptText="Lieu" />
-    <DatePicker fx:id="dpStartDate" promptText="Date de début" />
-    <DatePicker fx:id="dpEndDate" promptText="Date d'expiration" />
+            <VBox spacing="20" maxWidth="500" alignment="CENTER">
 
-    <HBox spacing="10" alignment="CENTER_RIGHT">
-        <Button text="Annuler" onAction="#handleCancel" />
-        <Button text="Ajouter" onAction="#handleAjouter" styleClass="btn-success" />
-    </HBox>
-</VBox>
+                <!-- 🧩 Draggable Header Bar -->
+                <HBox fx:id="headerBar" spacing="10" alignment="CENTER_LEFT" styleClass="dialog-header">
+                    <Label text="📋" styleClass="header-icon"/>
+                    <Label text="Nouvelle Offre" styleClass="header-title"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="btnClose" text="❌" styleClass="header-close"/>
+                </HBox>
+
+                <!-- 📦 Form Section -->
+                <VBox spacing="16" styleClass="form-section">
+
+                    <VBox spacing="4">
+                        <Label text="Titre de l'offre" styleClass="input-label"/>
+                        <TextField fx:id="txtTitre" styleClass="input-field"/>
+                        <Label fx:id="errorTitre" styleClass="error-label"/>
+                    </VBox>
+
+                    <VBox spacing="4">
+                        <Label text="Lieu" styleClass="input-label"/>
+                        <ComboBox fx:id="comboLieu" promptText="📍 Sélectionnez un gouvernorat" styleClass="input-field"/>
+                        <Label fx:id="errorLieu" styleClass="error-label"/>
+                    </VBox>
+
+                    <VBox spacing="4">
+                        <Label text="Date début" styleClass="input-label"/>
+                        <DatePicker fx:id="dpStartDate" styleClass="input-field"/>
+                        <Label fx:id="errorStart" styleClass="error-label"/>
+                    </VBox>
+
+                    <VBox spacing="4">
+                        <Label text="Date fin" styleClass="input-label"/>
+                        <DatePicker fx:id="dpEndDate" styleClass="input-field"/>
+                        <Label fx:id="errorEnd" styleClass="error-label"/>
+                    </VBox>
+
+                    <VBox spacing="4">
+                        <Label text="Description" styleClass="input-label"/>
+                        <TextArea fx:id="txtDescription" styleClass="text-area"/>
+                        <Label fx:id="errorDesc" styleClass="error-label"/>
+                    </VBox>
+
+                    <VBox spacing="4">
+                        <Label text="Salaire (TND)" styleClass="input-label"/>
+                        <TextField fx:id="txtSalaire" styleClass="input-field"/>
+                        <Label fx:id="errorSalaire" styleClass="error-label"/>
+                    </VBox>
+
+                </VBox>
+            </VBox>
+        </VBox>
+    </content>
+</ScrollPane>

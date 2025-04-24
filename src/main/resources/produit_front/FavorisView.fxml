@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.fx.FavorisController"
+      stylesheets="@../styles/agri-style.css"
+      spacing="20" style="-fx-padding: 30; -fx-background-color: #f9f9f9;">
+
+    <Label text="❤ Wishlist" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: green;" alignment="CENTER"/>
+
+    <TableView fx:id="tableFavoris">
+        <columns>
+            <TableColumn fx:id="colNom" text="Nom"/>
+            <TableColumn fx:id="colPrix" text="Prix (DT)"/>
+            <TableColumn fx:id="colStock" text="Stock"/>
+            <TableColumn fx:id="colImage" text="Image"/>
+            <TableColumn fx:id="colActions" text="Actions"/>
+        </columns>
+    </TableView>
+
+</VBox>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.fx.AjouterProduitController"
+            prefWidth="500" prefHeight="520"
+            stylesheets="@../styles/agri-style.css">
+
+    <VBox spacing="10" alignment="TOP_CENTER"
+          AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10"
+          AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10">
+
+        <Label text="➕ Nouveau Produit" styleClass="form-title"/>
+
+        <TextField fx:id="nomField" promptText="Nom"/>
+        <Label fx:id="nomError" textFill="red" visible="false"/>
+
+        <TextField fx:id="prixField" promptText="Prix"/>
+        <Label fx:id="prixError" textFill="red" visible="false"/>
+
+        <TextField fx:id="stockField" promptText="Stock"/>
+        <Label fx:id="stockError" textFill="red" visible="false"/>
+
+        <TextField fx:id="descriptionField" promptText="Description" />
+
+
+        <Label fx:id="descriptionError" textFill="red" visible="false"/>
+
+        <ComboBox fx:id="categorieComboBox" promptText="Catégorie" prefWidth="200"/>
+        <ComboBox fx:id="sousCategorieComboBox" promptText="Sous-Catégorie" prefWidth="200"/>
+        <Label fx:id="categorieError" textFill="red" visible="false"/>
+
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Choisir Image" onAction="#choisirImage"/>
+            <Button text="Prendre Photo" onAction="#prendrePhoto"/>
+        </HBox>
+        <Label fx:id="imageError" textFill="red" visible="false"/>
+
+        <ImageView fx:id="imagePreview" fitWidth="180" fitHeight="120" preserveRatio="true"
+                   style="-fx-border-color: gray;"/>
+
+        <HBox spacing="10" alignment="CENTER">
+            <Button fx:id="ajouterBtn" text="Ajouter" onAction="#ajouterProduit" styleClass="add-button"/>
+            <Button text="Annuler" onAction="#fermerFenetre" styleClass="cancel-button"/>
+        </HBox>
+    </VBox>
+</AnchorPane>

@@ -1,6 +1,8 @@
 package tn.esprit.entities;
 
 import jakarta.persistence.*;
+import tn.esprit.converters.StatutCandidatureConverter;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -12,7 +14,7 @@ public class Candidature {
     private Integer id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id") // Travailleur
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(optional = false)
@@ -22,8 +24,9 @@ public class Candidature {
     @OneToOne(mappedBy = "candidature", cascade = CascadeType.ALL)
     private OuvrierCalendrier calendar;
 
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = StatutCandidatureConverter.class)
     @Column(nullable = false)
+
     private StatutCandidature statut;
 
     @Column(nullable = false)
@@ -94,7 +97,8 @@ public class Candidature {
         this.rating = rating;
     }
 
-    // Convenience accessors (for UI)
+    // === Convenience Accessors ===
+
     public String getNom() {
         return user != null ? user.getNom() : "Inconnu";
     }
@@ -105,5 +109,9 @@ public class Candidature {
 
     public LocalDate getDateCandidature() {
         return dateApplied != null ? dateApplied.toLocalDate() : null;
+    }
+
+    public void setDateCandidature(LocalDate date) {
+        this.dateApplied = date.atStartOfDay();
     }
 }

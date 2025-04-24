@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.controllers.StatistiquesPredictionsController"
+      stylesheets="@/styles/agri-style-stat.css"
+      spacing="20" style="-fx-padding: 20;">
+
+    <Label text="📊 Évolution des Offres d'Emploi"
+           styleClass="chart-title" />
+
+    <LineChart fx:id="lineChart" title="Offres d'emploi"
+               prefWidth="900" prefHeight="500">
+        <xAxis>
+            <CategoryAxis label="Mois"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis label="Nombre d'offres"/>
+        </yAxis>
+    </LineChart>
+</VBox>

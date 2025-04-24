@@ -1,32 +1,44 @@
 package tn.esprit.controllers.farmer;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import tn.esprit.entities.Candidature;
 import tn.esprit.entities.OffreEmploi;
 import tn.esprit.entities.StatutCandidature;
 import tn.esprit.entities.User;
-import tn.esprit.controllers.farmer.CandidaturesController;
-import javafx.scene.layout.GridPane;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.geometry.Insets;
+import tn.esprit.services.ServiceCandidature;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.ButtonType;
 
 public class CandidaturesController {
 
     @FXML
     private VBox candidaturesContainer;
 
+    @FXML
+    private Button btnRetour;
+
     private StackPane contentPaneRef;
     private OffreEmploi selectedOffre;
     private List<Candidature> candidatures; // store across refreshes
+    private final ServiceCandidature serviceCandidature = new ServiceCandidature();
 
     private void initializeDummyData() {
         User ahmed = new User();
@@ -45,7 +57,7 @@ public class CandidaturesController {
         Candidature c2 = new Candidature();
         c2.setUser(yasmine);
         c2.setDateApplied(LocalDateTime.now().minusDays(2));
-        c2.setStatut(StatutCandidature.ACCEPTE);
+        c2.setStatut(StatutCandidature.ACCEPTEE);
 
         candidatures = new ArrayList<>(List.of(c1, c2));
     }
@@ -54,49 +66,72 @@ public class CandidaturesController {
         this.contentPaneRef = contentPaneRef;
         loadCandidatures();
     }
+
+    public void setOffre(OffreEmploi offre) {
+        this.selectedOffre = offre;
+        System.out.println("🔍 Loaded Candidatures for Offre ID: " + offre.getId());
+        loadCandidatures();
+    }
+
+    public void setOffre(OffreEmploi offre, StackPane pane) {
+        this.selectedOffre = offre;
+        this.contentPaneRef = pane;
+        loadCandidatures();
+    }
+
     private void loadCandidatures() {
         candidaturesContainer.getChildren().clear();
 
-        // 🧪 Sample users
-        User ahmed = new User();
-        ahmed.setName("Ahmed");
-        ahmed.setEmail("ahmed@example.com");
+        if (selectedOffre == null) {
+            System.out.println("❌ No offer selected.");
+            return;
+        }
 
-        Candidature c1 = new Candidature();
-        c1.setUser(ahmed);
-        c1.setDateApplied(LocalDateTime.now().minusDays(1));
-        c1.setStatut(StatutCandidature.EN_ATTENTE);
-
-        List<Candidature> list = List.of(c1);
+        List<Candidature> list = serviceCandidature.getByOffreId(selectedOffre.getId());
 
         for (Candidature c : list) {
-            // Inner grid (content)
             GridPane row = new GridPane();
             row.setHgap(20);
             row.setVgap(5);
             row.setPadding(new Insets(10));
 
             Label name = new Label("👤 " + c.getNom());
+            name.getStyleClass().add("label-name");
+            name.setOnMouseClicked(e -> showWorkerPopup(c.getUser()));
+
             Label email = new Label("✉ " + c.getEmail());
-            Label date = new Label("📅 " + c.getDateApplied().toLocalDate().toString());
+            email.getStyleClass().add("label-email");
+
+            Label date = new Label("📅 " + c.getDateApplied().toLocalDate());
+            date.getStyleClass().add("label-date");
+
             Label statut = new Label("⏳ Statut: " + c.getStatut());
+            statut.getStyleClass().add("label-statut");
+
+            Label experience = new Label("💼 Expérience: " + c.getUser().getExperience());
+            experience.getStyleClass().add("label-exp");
 
             Button acceptBtn = new Button("Accepter");
             Button rejectBtn = new Button("Refuser");
-            acceptBtn.setPrefWidth(90);
-            rejectBtn.setPrefWidth(90);
+
+            acceptBtn.getStyleClass().add("btn-accept");
+            rejectBtn.getStyleClass().add("btn-reject");
+
+            if (c.getStatut() == StatutCandidature.ACCEPTEE) {
+                acceptBtn.getStyleClass().add("btn-active");
+            } else if (c.getStatut() == StatutCandidature.REFUSEE) {
+                rejectBtn.getStyleClass().add("btn-active");
+            }
 
             acceptBtn.setOnAction(e -> {
-                c.setStatut(StatutCandidature.ACCEPTE);
-                System.out.println("✅ Status changed to ACCEPTE");
-                c1.setStatut(StatutCandidature.ACCEPTE); // ✅ Should turn light green
-
+                c.setStatut(StatutCandidature.ACCEPTEE);
+                serviceCandidature.updateStatut(c.getId(), StatutCandidature.ACCEPTEE);
                 loadCandidatures();
             });
 
             rejectBtn.setOnAction(e -> {
-                c.setStatut(StatutCandidature.REJETE);
-                System.out.println("❌ Status changed to REJETE");
+                c.setStatut(StatutCandidature.REFUSEE);
+                serviceCandidature.updateStatut(c.getId(), StatutCandidature.REFUSEE);
                 loadCandidatures();
             });
 
@@ -106,34 +141,65 @@ public class CandidaturesController {
             row.add(statut, 3, 0);
             row.add(acceptBtn, 4, 0);
             row.add(rejectBtn, 5, 0);
+            row.add(experience, 0, 1); // next line
 
-            // 🎨 Background based on status
-            String bgColor;
-            switch (c.getStatut()) {
-                case ACCEPTE -> bgColor = "#e1f5e1"; // light green
-                case REJETE -> bgColor = "#fdecea"; // light red
-                default -> bgColor = "#ffffff";     // neutral
-            }
-
-            System.out.println("➡ Candidature Status: " + c.getStatut());
-            System.out.println("🎨 Applying background-color: " + bgColor);
-
-            // Outer VBox wrapper with color applied
             VBox wrapper = new VBox(row);
-            wrapper.setPadding(new Insets(5));
-            wrapper.setStyle("-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc; -fx-background-color: " + bgColor + ";");
+            wrapper.getStyleClass().add("candidature-card");
 
-            System.out.println("📦 Final row style: " + wrapper.getStyle());
+            switch (c.getStatut()) {
+                case ACCEPTEE -> wrapper.getStyleClass().add("accepted");
+                case REFUSEE -> wrapper.getStyleClass().add("rejected");
+            }
 
             candidaturesContainer.getChildren().add(wrapper);
         }
     }
 
 
-    public void setOffre(OffreEmploi offre, StackPane pane) {
-        this.selectedOffre = offre;
-        this.contentPaneRef = pane;
-        loadCandidatures(); // or any method you use to display data
+    @FXML
+    private void handleRetourAction() {
+        System.out.println("🔙 [handleRetourAction] Clicked: Retour aux offres");
+
+        if (contentPaneRef == null) {
+            System.out.println("⚠️ [handleRetourAction] contentPaneRef is null. Make sure setContentPaneRef() is called before showing this view.");
+            return;
+        }
+
+        try {
+            String fxmlPath = "/front/farmer_front/MesOffresView.fxml";
+            System.out.println("📂 [handleRetourAction] Attempting to load: " + fxmlPath);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent offresView = loader.load();
+
+            contentPaneRef.getChildren().setAll(offresView);
+            System.out.println("🔁 [handleRetourAction] View switched to MesOffresView.");
+        } catch (IOException e) {
+            System.out.println("💥 [handleRetourAction] IOException occurred while loading the FXML:");
+            e.printStackTrace();
+        } catch (Exception ex) {
+            System.out.println("💥 [handleRetourAction] Unexpected exception occurred:");
+            ex.printStackTrace();
+        }
     }
 
+    // ✅ POPUP: User profile modal
+    private void showWorkerPopup(User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/ouvrier_front/UserProfilePopup.fxml"));
+            Parent root = loader.load();
+
+            tn.esprit.controllers.ouvrier.UserProfilePopupController controller = loader.getController();
+            controller.setUser(user);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Profil de " + user.getName());
+            popupStage.setScene(new Scene(root));
+            popupStage.showAndWait();
+        } catch (IOException e) {
+            System.out.println("❌ Erreur lors de l'ouverture du profil:");
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,0 +1,97 @@
+/* 🔲 Card Container */
+.offre-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
+    -fx-padding: 20;
+    -fx-spacing: 16;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 6, 0.2, 0, 2);
+}
+
+/* 🪄 Expand effect */
+.expanded {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 20, 0.4, 0, 6);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* 📌 Titles & Descriptions */
+.offre-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.offre-description {
+    -fx-font-size: 13px;
+    -fx-text-fill: #666666;
+}
+
+.offre-label {
+    -fx-text-fill: #888888;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+.offre-value {
+    -fx-text-fill: #333333;
+    -fx-font-size: 12px;
+}
+
+/* 🟡 Status Badge */
+#lblStatus {
+    -fx-padding: 6 12;
+    -fx-background-radius: 6;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+}
+
+
+/* Base button style */
+/* Update for better long text support in buttons */
+.button {
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-wrap-text: true; /* enables multi-line if needed */
+    -fx-alignment: center;
+    -fx-content-display: center;
+    -fx-pref-width: 200px;  /* wider by default */
+    -fx-max-width: Infinity;
+    -fx-min-height: 42px;
+    -fx-padding: 10 14;
+    -fx-font-size: 13px;
+
+}
+
+/* 🌱 Consistent FallehTech color palette */
+#btnApply {
+    -fx-background-color: #28a745; /* Green like \"Add Offer\" or \"All Offers\" */
+}
+
+#btnContact {
+    -fx-background-color: #007bff; /* Bootstrap-style blue */
+}
+
+#btnWithdraw {
+    -fx-background-color: #dc3545; /* Bootstrap-style red */
+}
+
+.btn-disabled {
+    -fx-background-color: #adb5bd; /* Muted gray */
+    -fx-opacity: 0.6;
+    -fx-cursor: default;
+}
+
+#btnApply:hover {
+    -fx-background-color: #218838;
+}
+#btnContact:hover {
+    -fx-background-color: #0069d9;
+}
+#btnWithdraw:hover {
+    -fx-background-color: #c82333;
+}

@@ -12,11 +12,14 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import tn.esprit.controllers.MessagingController;
 import tn.esprit.controllers.farmer.MesOffresController;
+import tn.esprit.controllers.ouvrier.CandidatureHistoryController;
 import tn.esprit.controllers.ouvrier.OffresOuvrierController;
 import tn.esprit.entities.User;
 import tn.esprit.services.ServiceUser;
 
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -24,33 +27,54 @@ import java.util.ResourceBundle;
 
 public class FrontViewController implements Initializable {
 
-    @FXML private ImageView logoImage;
-    @FXML private ImageView menuAvatar;
-    @FXML private Label profileNameLabel;
+    @FXML
+    private ImageView logoImage;
+    @FXML
+    private ImageView menuAvatar;
+    @FXML
+    private Label profileNameLabel;
+    @FXML
+    private StackPane contentPane;
+    @FXML
+    private Label activePageLabel;
 
-    @FXML private StackPane contentPane;
-    @FXML private Label activePageLabel;
+    @FXML
+    private Button accueilButton;
+    @FXML
+    private Button produitsButton;
+    @FXML
+    private Button panierButton;
+    @FXML
+    private Button commandesButton;
+    @FXML
+    private Button offresButton;
+    @FXML
+    private Button candidatures;
+    @FXML
+    private Button blogButton;
+    @FXML
+    private Button btnCalendrier;
+    @FXML
+    private VBox categorieTreeContainer;
+    @FXML
+    private TreeView<String> categorieTree;
 
-    @FXML private Button accueilButton;
-    @FXML private Button produitsButton;
-    @FXML private Button panierButton;
-    @FXML private Button commandesButton;
-    @FXML private Button offresButton;
-    @FXML private Button blogButton;
-    @FXML private Button logoutButton;
-
-    @FXML private VBox categorieTreeContainer;
-    @FXML private TreeView<String> categorieTree;
+    @FXML
+    private MenuButton profileMenu;
+    @FXML
+    private Label roleLabel;
+    @FXML
+    private VBox offresBox;
+    @FXML
+    private VBox statistiquesBox;
+    @FXML
+    private VBox blogBox;
+    @FXML
+    private VBox produitsBox;
+    @FXML
+    private Button addMapButton;
 
     private Button currentActiveButton;
-
-    @FXML private MenuButton profileMenu;
-    @FXML private Label roleLabel;
-    @FXML private VBox offresBox;
-    @FXML private VBox statistiquesBox;
-    @FXML private VBox blogBox;
-    @FXML private VBox produitsBox;
-
     private final ServiceUser serviceUser = new ServiceUser();
     private User currentUser;
 
@@ -60,38 +84,59 @@ public class FrontViewController implements Initializable {
         menuAvatar.setImage(loadImage("photos/avatar.jpg"));
         setupClip(menuAvatar);
         hideCategorieTree();
-        // don't load any default view until user is assigned
     }
+
     public void setCurrentUser(User user) {
         this.currentUser = serviceUser.findById(user.getId());
+        if (this.currentUser == null) this.currentUser = user;
+        if (this.currentUser.getRole() == null) this.currentUser.setRole(user.getRole());
 
-        // ⛔ Fix in case findById returns null or has missing role
-        if (this.currentUser == null) {
-            this.currentUser = user;
-        } else if (this.currentUser.getRole() == null) {
-            this.currentUser.setRole(user.getRole());
+        // 👤 UI Update
+        profileNameLabel.setText(currentUser.getName() + " " + currentUser.getLastName());
+        roleLabel.setText("Connecté en tant que: " + currentUser.getRole());
+
+        // 🧭 Init common UI (if you have it)
+        initializeViewForRole(currentUser.getRole());
+
+        // ✅ Hide sidebar buttons based on role
+        String role = currentUser.getRole();
+        if ("agriculteur".equalsIgnoreCase(role)) {
+            if (candidatures != null) {
+                candidatures.setVisible(false);
+                candidatures.setManaged(false);
+            }
+            if (btnCalendrier != null) {
+                btnCalendrier.setVisible(false);
+                btnCalendrier.setManaged(false);
+            }
+            if (addMapButton != null) {
+                addMapButton.setVisible(true);
+                addMapButton.setManaged(true);
+            }
+        }
+        if ("ouvrier".equalsIgnoreCase(role)) {
+            if (candidatures != null) {
+                candidatures.setVisible(false);
+                candidatures.setManaged(false);
+            }
+            if (btnCalendrier != null) {
+                btnCalendrier.setVisible(true);
+                btnCalendrier.setManaged(true);
+            }
+            if (addMapButton != null) {
+                addMapButton.setVisible(false);
+                addMapButton.setManaged(false);
+            }
         }
 
-        if (currentUser != null) {
-            profileNameLabel.setText(currentUser.getName() + " " + currentUser.getLastName());
-            roleLabel.setText("Connecté en tant que: " + currentUser.getRole());
-
-            initializeViewForRole(currentUser.getRole());
-
-            switch (currentUser.getRole()) {
-                case "ouvrier" -> goToOffres();
-                case "agriculteur" -> goToMesOffres();
-                case "client" -> goToAccueil();
-                default -> goToAccueil();
-            }
-
-        } else {
-            profileNameLabel.setText("Utilisateur inconnu");
-            roleLabel.setText("Rôle inconnu");
+        // 🚀 Auto redirect based on role
+        switch (role) {
+            case "ouvrier" -> goToOffres();
+            case "agriculteur" -> goToMesOffres();
+            case "client" -> goToAccueil();
+            default -> goToAccueil();
         }
     }
-
-
 
 
     public User getCurrentUser() {
@@ -102,14 +147,10 @@ public class FrontViewController implements Initializable {
         try {
             String fullPath = fxmlPath.startsWith("/") ? fxmlPath : "/front/" + fxmlPath;
             URL resource = getClass().getResource(fullPath);
-            if (resource == null) {
-                System.err.println("❌ FXML not found: " + fullPath);
-                return;
-            }
+            if (resource == null) return;
             Parent view = FXMLLoader.load(resource);
             contentPane.getChildren().setAll(view);
         } catch (IOException e) {
-            System.err.println("❌ Failed to load: " + fxmlPath);
             e.printStackTrace();
         }
     }
@@ -139,19 +180,11 @@ public class FrontViewController implements Initializable {
     }
 
     private void hideCategorieTree() {
-        if (categorieTreeContainer != null) {
-            categorieTreeContainer.setVisible(false);
-            categorieTreeContainer.setManaged(false);
-        }
+        categorieTreeContainer.setVisible(false);
+        categorieTreeContainer.setManaged(false);
     }
 
     public void initializeViewForRole(String role) {
-        System.out.println("🔍 Initializing UI for role: " + role);
-
-        if (roleLabel != null) {
-            roleLabel.setText("Connecté en tant que: " + role);
-        }
-
         switch (role) {
             case "client", "agriculteur" -> {
                 panierButton.setVisible(true);
@@ -163,8 +196,6 @@ public class FrontViewController implements Initializable {
             }
         }
     }
-
-    // Navigation Methods
 
     @FXML
     private void goToAccueil() {
@@ -196,78 +227,67 @@ public class FrontViewController implements Initializable {
         hideCategorieTree();
         loadView("CommandesView.fxml");
     }
+
     @FXML
     private void goToOffres() {
         setActiveButton(offresButton);
         activePageLabel.setText("Offres de travail");
         hideCategorieTree();
 
-        if (currentUser == null) {
-            System.err.println("❌ No user connected in goToOffres()");
-            return;
-        }
-
-        String role = currentUser.getRole();
-        int id = currentUser.getId();
-        System.out.println("🔁 [goToOffres] Called. CurrentUser ID: " + id + ", Role: " + role);
-
-        switch (role) {
+        switch (currentUser.getRole()) {
             case "ouvrier" -> {
-                System.out.println("📦 Loading OffresOuvrierView.fxml...");
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/ouvrier_front/OffresOuvrierView.fxml"));
                     Parent view = loader.load();
-
-                    OffresOuvrierController controller = loader.getController();
-                    controller.setCurrentUser(currentUser); // ✅ Ensure user is passed correctly
-
+                    loader.<OffresOuvrierController>getController().setCurrentUser(currentUser);
                     contentPane.getChildren().setAll(view);
-                    System.out.println("✅ Ouvrier view loaded");
                 } catch (IOException e) {
-                    System.err.println("❌ Failed to load OffresOuvrierView.fxml");
                     e.printStackTrace();
                 }
             }
-
             case "agriculteur" -> {
-                System.out.println("📦 Loading MesOffresView.fxml for agriculteur...");
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/farmer_front/MesOffresView.fxml"));
-                    Parent mesOffresView = loader.load();
-
+                    Parent view = loader.load();
                     MesOffresController.setContentPaneRef(contentPane);
-                    MesOffresController mesController = loader.getController();
-                    mesController.setCurrentUserId(currentUser.getId());
-
-                    contentPane.getChildren().setAll(mesOffresView);
-                    System.out.println("✅ Agricultur view loaded");
+                    loader.<MesOffresController>getController().setCurrentUserId(currentUser.getId());
+                    contentPane.getChildren().setAll(view);
                 } catch (IOException e) {
-                    System.err.println("❌ Failed to load MesOffresView.fxml");
                     e.printStackTrace();
                 }
             }
-
-            default -> {
-                System.out.println("⚠️ Unknown role, loading fallback OffresView.fxml...");
-                loadView("OffresView.fxml");
-            }
+            default -> loadView("OffresView.fxml");
         }
     }
-
-
-
 
     @FXML
     private void goToMesOffres() {
         setActiveButton(offresButton);
         activePageLabel.setText("Mes Offres");
         hideCategorieTree();
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/farmer_front/MesOffresView.fxml"));
-            Parent mesOffresView = loader.load();
+            Parent view = loader.load();
             MesOffresController.setContentPaneRef(contentPane);
-            contentPane.getChildren().setAll(mesOffresView);
+
+            // ✅ FIX: Inject the current user's ID so it filters only their offers
+            loader.<MesOffresController>getController().setCurrentUserId(currentUser.getId());
+
+            contentPane.getChildren().setAll(view);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void goToCandidatureHistory() {
+        activePageLabel.setText("Mes Candidatures");
+        setActiveButton(candidatures);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/ouvrier_front/CandidatureHistoryView.fxml"));
+            Parent view = loader.load();
+            loader.<CandidatureHistoryController>getController().setCurrentUser(currentUser);
+            contentPane.getChildren().setAll(view);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -289,14 +309,100 @@ public class FrontViewController implements Initializable {
     @FXML
     private void logout() {
         try {
-            Parent landingRoot = FXMLLoader.load(getClass().getResource("/fxml/landing.fxml"));
-            Scene landingScene = new Scene(landingRoot);
-            landingScene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
-            landingScene.getStylesheets().add(getClass().getResource("/styles/sidebar_front.css").toExternalForm());
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/landing.fxml"));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/styles/sidebar_front.css").toExternalForm());
             Stage stage = (Stage) contentPane.getScene().getWindow();
-            stage.setScene(landingScene);
+            stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void openCalendrierView() {
+        setActiveButton(btnCalendrier);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/CalendrierOuvrier.fxml"));
+            Parent root = loader.load();
+            contentPane.getChildren().setAll(root);  // Make sure contentPane is defined with @FXML
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private Button btnMessages;
+
+    @FXML
+    private void openMessagingPage() {
+        setActiveButton(btnMessages);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/MessagingView.fxml"));
+            Parent messagingRoot = loader.load();
+
+            MessagingController controller = loader.getController();
+            controller.setCurrentUser(currentUser); // Pass current logged-in user
+
+            contentPane.getChildren().setAll(messagingRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void verifyAccount() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/verifyaccount.fxml"));
+            Parent verifyView = loader.load();
+            contentPane.getChildren().setAll(verifyView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void openLandDrawPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/land/LandDrawView.fxml"));
+            Parent landView = loader.load();
+            contentPane.getChildren().setAll(landView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private StackPane contentArea;
+
+
+    @FXML
+    private void goToMap() {
+
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/ouvrier_front/TunisiaMapView.fxml"));
+            Parent verifyView = loader.load();
+            contentPane.getChildren().setAll(verifyView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void goToHeatmap() {
+
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/heatmap.fxml"));
+            Parent verifyView = loader.load();
+            contentPane.getChildren().setAll(verifyView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 }

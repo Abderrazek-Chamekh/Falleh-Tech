@@ -1,118 +1,116 @@
 package tn.esprit.fx;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-
-import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.prefs.Preferences;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javafx.fxml.FXML;
-import javafx.scene.image.ImageView;
-
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class AccueilController implements Initializable {
 
-    private final Preferences prefs = Preferences.userNodeForPackage(getClass());
+    @FXML private GridPane widgetGrid;
+    @FXML private Button btnAddWidget;
 
-    @FXML private ImageView carottesImage;
-    @FXML private ImageView laitueImage;
-    @FXML private ImageView tomatesImage;
-    @FXML private ImageView pommesImage;
-    @FXML private ImageView stockImage;
-
-    @FXML private Pane statsPane;
-    @FXML private Pane blogPane;
-    @FXML private Pane offresPane;
-    @FXML private Pane productsPane;
+    private GridManager gridManager;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadImages();
-        setupDraggableWidgets();
+        System.out.println("✅ AccueilController initialized");
+
+        gridManager = new GridManager(widgetGrid);
+
+        setupDropTargets();
+        btnAddWidget.setOnAction(e -> openAddWidgetPopup());
+
+        loadStatsPredictionsWidget();
     }
 
-    private void loadImages() {
-        carottesImage.setImage(loadImage("photos/carottes.jpg"));
-        laitueImage.setImage(loadImage("photos/laitue.jpg"));
-        tomatesImage.setImage(loadImage("photos/tomates.jpg"));
-        pommesImage.setImage(loadImage("photos/pommes.jpg"));
-        stockImage.setImage(loadImage("photos/stock_pie.png"));
-    }
+    private void setupDropTargets() {
+        for (int row = 0; row < 2; row++) {
+            final int finalRow = row;
+            for (int col = 0; col < 3; col++) {
+                final int finalCol = col;
 
-    private void setupDraggableWidgets() {
-        setupWidget(offresPane, "offresPane", 50, 250);
-        setupWidget(blogPane, "blogPane", 500, 250);
-        setupWidget(statsPane, "statsPane", 275, 450);
-        setupWidget(productsPane, "productsPane", 50, 50);
-    }
+                StackPane cell = new StackPane();
+                cell.setMinSize(300, 300);
+                cell.setStyle("-fx-background-color: transparent; -fx-border-color: #ddd;");
+                cell.setOnDragOver(event -> {
+                    if (event.getGestureSource() != cell && event.getDragboard().hasString()) {
+                        event.acceptTransferModes(TransferMode.MOVE);
+                    }
+                    event.consume();
+                });
+                cell.setOnDragDropped(event -> {
+                    gridManager.onCellClicked(finalRow, finalCol);
+                    event.setDropCompleted(true);
+                    event.consume();
+                });
 
-    private void setupWidget(Pane pane, String key, double defaultX, double defaultY) {
-        if (pane != null) {
-            restoreWidgetPosition(pane, key, defaultX, defaultY);
-            makeDraggable(pane, key);
+                GridPane.setRowIndex(cell, finalRow);
+                GridPane.setColumnIndex(cell, finalCol);
+                widgetGrid.getChildren().add(cell);
+                cell.toBack();
+            }
         }
     }
 
-    private Image loadImage(String path) {
-        File file = new File(path);
-        return file.exists() ? new Image(file.toURI().toString()) : null;
-    }
-
-    private void makeDraggable(Node node, String key) {
-        final double[] offsetX = new double[1];
-        final double[] offsetY = new double[1];
-
-        node.setOnMousePressed(event -> {
-            offsetX[0] = event.getSceneX() - node.getLayoutX();
-            offsetY[0] = event.getSceneY() - node.getLayoutY();
-        });
-
-        node.setOnMouseDragged(event -> {
-            node.setLayoutX(event.getSceneX() - offsetX[0]);
-            node.setLayoutY(event.getSceneY() - offsetY[0]);
-            saveWidgetPosition(node, key);
-        });
-    }
-
-    private void saveWidgetPosition(Node node, String key) {
-        prefs.putDouble(key + "X", node.getLayoutX());
-        prefs.putDouble(key + "Y", node.getLayoutY());
-    }
-
-    private void restoreWidgetPosition(Node node, String key, double defaultX, double defaultY) {
-        double x = prefs.getDouble(key + "X", defaultX);
-        double y = prefs.getDouble(key + "Y", defaultY);
-        node.setLayoutX(x);
-        node.setLayoutY(y);
-    }
-
-    @FXML private void goToOffres() {}
-    @FXML private void goToBlog() {}
-    @FXML
-    private void goToMesOffres() {
+    private void openAddWidgetPopup() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/farmer_front/MesOffresView.fxml"));
-            Parent view = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/AddWidgetDialog.fxml"));
+            Parent root = loader.load();
 
-            // Replace current scene
-            Stage stage = (Stage) carottesImage.getScene().getWindow(); // Any node in the scene will work
-            Scene scene = new Scene(view);
-            scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
-            stage.setScene(scene);
+            AddWidgetDialogController controller = loader.getController();
+            controller.setAccueilController(this);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Ajouter un Widget");
+            popupStage.setScene(new Scene(root));
+            popupStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    private void loadStatsPredictionsWidget() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/StatistiquesPredictions.fxml"));
+            VBox chartWidget = loader.load();
+            chartWidget.setId("statsPredictionsWidget");
+
+            chartWidget.setOnDragDetected((MouseEvent event) -> {
+                Dragboard db = chartWidget.startDragAndDrop(TransferMode.MOVE);
+                ClipboardContent content = new ClipboardContent();
+                content.putString("dragging");
+                db.setContent(content);
+                gridManager.activateMoveMode(chartWidget);
+                event.consume();
+            });
+
+            GridPane.setRowIndex(chartWidget, 0);
+            GridPane.setColumnIndex(chartWidget, 0);
+            GridPane.setColumnSpan(chartWidget, 3);
+            widgetGrid.getChildren().add(chartWidget);
+
+            System.out.println("📈 Chart widget loaded and spans 3 columns");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("❌ Error loading StatistiquesPredictions.fxml");
+        }
+    }
 }

@@ -55,15 +55,17 @@ public class OffreEmploi {
         this.dateExpiration = LocalDate.now().plusMonths(1);
     }
 
-    public OffreEmploi(String titre, String lieu, String dateDebut, String dateFin, String description) {
+    // Preferred Constructor
+    public OffreEmploi(String titre, String lieu, String dateDebut, String dateFin, String description, User employeur) {
         this.titre = titre;
         this.lieu = lieu;
         this.startDate = LocalDate.parse(dateDebut);
         this.dateExpiration = LocalDate.parse(dateFin);
         this.description = description;
         this.salaire = 100f;
-        this.idEmployeur = new User(); // dummy employeur
+        this.idEmployeur = employeur;
     }
+
 
     public Integer getId() {
         return id;
@@ -158,5 +160,7 @@ public class OffreEmploi {
         this.salaire = salaire;
         this.lieu = lieu;
     }
+
+
 
 }

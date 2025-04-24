@@ -3,22 +3,35 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10" prefWidth="250" xmlns="http://javafx.com/javafx"
+<VBox spacing="10" prefWidth="300"
+      xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="tn.esprit.controllers.farmer.OffreCardController"
-      style="-fx-background-color: #e8f5e9; -fx-padding: 15; -fx-border-color: #a5d6a7; -fx-border-radius: 8; -fx-background-radius: 8;">
+      styleClass="card">
 
-    <Label fx:id="lblTitre" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
-    <Label fx:id="lblDescription" wrapText="true" />
+    <!-- 🔵 Title -->
+    <Label fx:id="lblTitre" wrapText="true" styleClass="card-title"/>
 
-    <Label text="Salaire:" />
-    <Label fx:id="lblSalaire" />
+    <!-- 📝 Description -->
+    <Label fx:id="lblDescription" wrapText="true" styleClass="card-description"/>
 
-    <Label text="Lieu:" />
-    <Label fx:id="lblLocation" />
-
-    <HBox spacing="10">
-        <Button fx:id="btnEdit" text="✏️ Modifier" />
-        <Button fx:id="btnDelete" text="🗑️ Supprimer" style="-fx-background-color: #e57373; -fx-text-fill: white;" />
+    <!-- 💰 Salaire -->
+    <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label text="💰 Salaire:" styleClass="text-muted"/>
+        <Label fx:id="lblSalaire" styleClass="card-salaire"/>
     </HBox>
+
+    <!-- 📍 Lieu -->
+    <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label text="📍 Lieu:" styleClass="text-muted"/>
+        <Label fx:id="lblLocation" styleClass="card-lieu"/>
+    </HBox>
+
+    <!-- 🔘 Action Buttons -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button fx:id="btnCandidatures" text="👥 Candidatures" styleClass="secondary-btn"/>
+        <Button fx:id="btnEdit" text="✏️ Modifier" styleClass="primary-btn"/>
+        <Button fx:id="btnDelete" text="🗑 Supprimer" styleClass="danger-btn"/>
+    </HBox>
+
 </VBox>

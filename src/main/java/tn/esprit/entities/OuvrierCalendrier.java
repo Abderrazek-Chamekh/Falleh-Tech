@@ -39,6 +39,9 @@ public class OuvrierCalendrier {
     // Constructors
     public OuvrierCalendrier() {}
 
+    public OuvrierCalendrier(String récolteDesOlives, LocalDate localDate, LocalDate localDate1) {
+    }
+
     // Getters and Setters
     public Integer getId() {
         return id;

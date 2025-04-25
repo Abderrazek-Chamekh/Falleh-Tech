@@ -14,10 +14,16 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.control.Hyperlink;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -54,6 +60,8 @@ public class AccueilController implements Initializable {
         setupDraggable(blogWidget);
         setupDraggable(statsWidget);
         setupDropTargets();
+
+        btnAddWidget.setOnAction(e -> ajouterWidgetDetectionPlante());
     }
 
     private void loadImages() {
@@ -125,6 +133,56 @@ public class AccueilController implements Initializable {
         }
     }
 
+    private void ajouterWidgetDetectionPlante() {
+        VBox detectionWidget = new VBox();
+        detectionWidget.setSpacing(10);
+        detectionWidget.setStyle("-fx-background-color: #f1f8e9; -fx-padding: 15; -fx-border-color: #8bc34a; -fx-border-width: 2px; -fx-border-radius: 5px;");
+
+        Label titre = new Label("🌿 Détection de Plantes avec IA");
+        titre.setStyle("-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #33691e;");
+
+        Button openHtml = new Button("🔍 Ouvrir la page de détection");
+        openHtml.setStyle("-fx-background-color: #aed581; -fx-text-fill: white;");
+        openHtml.setOnAction(e -> {
+            try {
+                Desktop.getDesktop().browse(new URI("http://localhost/plant-detect.html"));
+            } catch (IOException | URISyntaxException ex) {
+                System.err.println("❌ Erreur lors de l'ouverture de la page HTML : " + ex.getMessage());
+            }
+        });
+
+        Button closeBtn = new Button("❌ Fermer");
+        closeBtn.setStyle("-fx-background-color: #e57373; -fx-text-fill: white;");
+        closeBtn.setOnAction(e -> widgetGrid.getChildren().remove(detectionWidget));
+
+        detectionWidget.getChildren().addAll(titre, openHtml, closeBtn);
+
+        GridPane.setRowIndex(detectionWidget, 2);
+        GridPane.setColumnIndex(detectionWidget, 0);
+        detectionWidget.setId("widgetDetectionPlante");
+
+        setupDraggable(detectionWidget);
+        widgetGrid.getChildren().add(detectionWidget);
+    }
+    @FXML
+    private void ouvrirDetectionPlante() {
+        Stage webStage = new Stage();
+        webStage.setTitle("Détection de Plante 🌿");
+
+        javafx.scene.web.WebView webView = new javafx.scene.web.WebView();
+        javafx.scene.web.WebEngine webEngine = webView.getEngine();
+
+        // 🔽 Remplace ce chemin par le bon emplacement local de ton fichier HTML
+        File htmlFile = new File("C:/xampp/htdocs/plant-detect.html");
+        webEngine.load(htmlFile.toURI().toString());
+
+        Scene scene = new Scene(webView, 800, 600);
+        webStage.setScene(scene);
+        webStage.show();
+    }
+
+
+
     @FXML private void onRemoveProduits() {
         widgetGrid.getChildren().remove(produitsWidget);
     }
@@ -157,4 +215,15 @@ public class AccueilController implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void ouvrirJeuRecette() {
+        Stage stage = new Stage();
+        WebView webView = new WebView();
+        webView.getEngine().load("http://localhost/jeu-recettes.html");
+        Scene scene = new Scene(webView, 750, 600);
+        stage.setTitle("Jeu des Recettes 🍲");
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }

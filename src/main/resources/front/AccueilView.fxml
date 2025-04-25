@@ -124,6 +124,26 @@
                             </VBox>
                         </HBox>
                     </VBox>
+
+                    <!-- 🌿 Détection de Plantes Widget -->
+                    <VBox fx:id="plantDetectWidget" GridPane.rowIndex="2" GridPane.columnIndex="0" spacing="10" styleClass="section-card">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="🌿 Identifier une Plante" styleClass="section-title"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="Ouvrir" onAction="#ouvrirDetectionPlante"/>
+                        </HBox>
+                        <Label text="Téléversez une image pour identifier la plante automatiquement."/>
+                        <Label text="Basé sur l'API plant.id avec IA 🌱" styleClass="stat-label"/>
+                    </VBox>
+                    <VBox fx:id="miniJeuWidget" GridPane.rowIndex="2" GridPane.columnIndex="1" spacing="10" styleClass="section-card">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="🎮 Mini-Jeu Agricole" styleClass="section-title"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="Jouer" onAction="#ouvrirJeuRecette"/>
+                        </HBox>
+                        <Label text="Testez vos connaissances agricoles avec un petit jeu interactif."/>
+                    </VBox>
+
                 </GridPane>
             </content>
         </ScrollPane>

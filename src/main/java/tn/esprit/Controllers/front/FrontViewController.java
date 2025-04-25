@@ -1,4 +1,5 @@
 package tn.esprit.Controllers.front;
+import tn.esprit.utils.LocalFlammeServer;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,9 @@ import tn.esprit.Controllers.ouvrier.OffresOuvrierController;
 import tn.esprit.entities.User;
 import tn.esprit.services.UserService;
 import javafx.event.ActionEvent;
+import tn.esprit.entities.Flamme;
+import tn.esprit.services.FlammeService;
+import java.util.List;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,12 +35,15 @@ public class FrontViewController implements Initializable {
     @FXML private StackPane contentPane;
     @FXML private VBox categorieTreeContainer;
     @FXML private Button btnPanier;
+    @FXML private Label flammeCountLabel;
 
     @FXML private Button accueilButton, produitsButton, panierButton, commandesButton,
             offresButton, candidatures, blogButton, btnFavoris, prodagriculteur;
 
     @FXML private TreeView<String> categorieTree;
     @FXML private MenuButton profileMenu;
+    private static FrontViewController instance;
+    public static FrontViewController getInstance() { return instance; }
 
     private Button currentActiveButton;
     private final UserService serviceUser = new UserService();
@@ -48,7 +55,20 @@ public class FrontViewController implements Initializable {
         menuAvatar.setImage(loadImage("photos/avatar.jpg"));
         setupClip(menuAvatar);
         hideCategorieTree();
+        instance = this;
+        // 🔽 Appelle ici la méthode avec conversion :
+        if (currentUser != null) {
+            updateFlammeCount(Long.valueOf(currentUser.getId()));
+        }
     }
+    public void updateFlammeCount(Long userId) {
+        List<Flamme> flammes = FlammeService.getInstance().getFlammesByUser(userId);
+        int total = flammes.stream().mapToInt(Flamme::getCount).sum();
+        flammeCountLabel.setText(String.valueOf(total));
+    }
+
+
+
 
     public void setCurrentUser(User user) {
         this.currentUser = serviceUser.findById(user.getId());
@@ -58,6 +78,10 @@ public class FrontViewController implements Initializable {
         profileNameLabel.setText(currentUser.getName() + " " + currentUser.getLastName());
         roleLabel.setText("Connecté en tant que: " + currentUser.getRole());
         initializeViewForRole(currentUser.getRole());
+        LocalFlammeServer.startServer(Long.valueOf(currentUser.getId()));
+
+        // ✅ Ajoute ceci pour mettre à jour les flammes
+        updateFlammeCount(Long.valueOf(currentUser.getId()));
 
         switch (currentUser.getRole()) {
             case "Ouvrier" -> goToOffres();
@@ -66,6 +90,8 @@ public class FrontViewController implements Initializable {
             default -> goToAccueil();
         }
     }
+
+
 
     private void loadView(String fxmlPath) {
         try {

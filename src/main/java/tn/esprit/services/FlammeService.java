@@ -4,6 +4,7 @@ import tn.esprit.entities.Flamme;
 import tn.esprit.tools.Database;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,4 +71,26 @@ public class FlammeService {
             System.err.println("❌ Erreur suppression flamme : " + e.getMessage());
         }
     }
+    // 🔥 Vérifier si on peut encore ajouter une flamme (max 3 en 24h)
+    public boolean peutAjouterFlammes(Long userId) {
+        String sql = "SELECT COUNT(*) FROM flamme WHERE user_id = ? AND created_at >= ?";
+        try (PreparedStatement ps = cnx.prepareStatement(sql)) {
+            LocalDateTime ilYA24h = LocalDateTime.now().minusHours(24);
+            Timestamp ilYA24hSQL = Timestamp.valueOf(ilYA24h);
+
+            ps.setLong(1, userId);
+            ps.setTimestamp(2, ilYA24hSQL);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int nbFlammes = rs.getInt(1);
+                System.out.println("🔥 Flammes gagnées dans les dernières 24h : " + nbFlammes);
+                return nbFlammes < 3;
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ Erreur vérification flammes : " + e.getMessage());
+        }
+        return false;
+    }
+
 }

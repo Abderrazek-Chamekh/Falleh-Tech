@@ -34,11 +34,11 @@
 
                     <!-- 👇 Role Label -->
                     <Label fx:id="roleLabel" style="-fx-font-size: 12px; -fx-text-fill: #666;" />
-                    <!-- 🔥 Compteur de Flammes -->
-                    <HBox fx:id="flammeBox" spacing="4" alignment="CENTER">
-                        <Label text="🔥" style="-fx-font-size: 18px;"/>
-                        <Label fx:id="flammeCountLabel" text="0" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <HBox fx:id="flammeBox" spacing="4" alignment="CENTER" onMouseClicked="#ouvrirRewards">
+                        <Label text="🔥" style="-fx-font-size: 18px;" />
+                        <Label fx:id="flammeCountLabel" text="0" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
                     </HBox>
+
 
                     <!-- ✅ Menu Profil déroulant (shrunk avatar/spacing) -->
                     <MenuButton fx:id="profileMenu" popupSide="BOTTOM" styleClass="profile-menu-button">

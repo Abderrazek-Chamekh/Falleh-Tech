@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,6 +19,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.Hyperlink;
+import tn.esprit.services.FlammeService;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -42,6 +44,7 @@ public class AccueilController implements Initializable {
     @FXML private VBox offresWidget;
     @FXML private VBox blogWidget;
     @FXML private VBox statsWidget;
+    private Long currentUserId;
 
     private VBox draggedWidget = null;
 
@@ -132,6 +135,9 @@ public class AccueilController implements Initializable {
             }
         }
     }
+    public void setUserId(Long userId) {
+        this.currentUserId = userId;
+    }
 
     private void ajouterWidgetDetectionPlante() {
         VBox detectionWidget = new VBox();
@@ -217,13 +223,32 @@ public class AccueilController implements Initializable {
     }
     @FXML
     private void ouvrirJeuRecette() {
-        Stage stage = new Stage();
-        WebView webView = new WebView();
-        webView.getEngine().load("http://localhost/jeu-recettes.html");
-        Scene scene = new Scene(webView, 750, 600);
-        stage.setTitle("Jeu des Recettes 🍲");
-        stage.setScene(scene);
-        stage.show();
+        FlammeService flammeService = FlammeService.getInstance();
+        Long userId = currentUserId; // ou récupère ton ID utilisateur ici
+
+        if (flammeService.peutAjouterFlammes(userId)) {
+            // ✅ Joueur autorisé à jouer → ouvrir le jeu
+            Stage stage = new Stage();
+            WebView webView = new WebView();
+            webView.getEngine().load("http://localhost/jeu-recettes.html");
+            Scene scene = new Scene(webView, 750, 600);
+            stage.setTitle("Jeu des Recettes 🍲");
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            // 🚫 Joueur a atteint 3 flammes → message d'alerte
+            showAlert("⛔ Limite atteinte", "Vous avez déjà gagné 3 flammes aujourd'hui. Revenez demain !");
+        }
     }
+
+    // Petite fonction utilitaire pour l'alerte
+    private void showAlert(String titre, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titre);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
 }

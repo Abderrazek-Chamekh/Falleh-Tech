@@ -1,4 +1,6 @@
 package tn.esprit.Controllers.front;
+import tn.esprit.Controllers.produitfront.RewardViewController;
+import tn.esprit.services.RewardService;
 import tn.esprit.utils.LocalFlammeServer;
 
 import javafx.fxml.FXML;
@@ -65,6 +67,10 @@ public class FrontViewController implements Initializable {
         List<Flamme> flammes = FlammeService.getInstance().getFlammesByUser(userId);
         int total = flammes.stream().mapToInt(Flamme::getCount).sum();
         flammeCountLabel.setText(String.valueOf(total));
+
+        // ✅ Vérifie les récompenses après mise à jour du score
+        RewardService rewardService = new RewardService();
+        rewardService.attribuerSiEligible(userId, total);
     }
 
 
@@ -184,11 +190,25 @@ public class FrontViewController implements Initializable {
 
     // ------------------- NAVIGATION -------------------
 
-    @FXML private void goToAccueil() {
+    @FXML
+    private void goToAccueil() {
         setActiveButton(accueilButton);
         activePageLabel.setText("Accueil");
         hideCategorieTree();
-        loadView("AccueilView.fxml");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/AccueilView.fxml"));
+            Parent view = loader.load();
+
+            // ✅ Récupérer le controller
+            AccueilController accueilController = loader.getController();
+            accueilController.setUserId(Long.valueOf(currentUser.getId())); // ✅ Passer l'ID de l'utilisateur connecté
+
+            contentPane.getChildren().setAll(view); // ✅ Afficher dans ton contentPane
+        } catch (IOException e) {
+            e.printStackTrace();
+            showError("Erreur lors du chargement de l'accueil.");
+        }
     }
 
     @FXML public void goToFavoris() {
@@ -224,6 +244,24 @@ public class FrontViewController implements Initializable {
             loadView("/front/produit/Agriculteur.fxml");
         } else {
             showError("Rôle non pris en charge : " + role);
+        }
+    }
+
+    @FXML
+    private void ouvrirRewards() {
+        setActiveButton(null); // Pas de bouton actif dans la sidebar
+        activePageLabel.setText("🎁 Mes Récompenses");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/produit/RewardView.fxml"));
+            Parent view = loader.load();
+
+            RewardViewController controller = loader.getController();
+            controller.setUser(currentUser); // 👈 Passe bien le user
+
+            contentPane.getChildren().setAll(view);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Controllers.produitfront.RewardViewController"
+            prefWidth="1200" prefHeight="700"
+            stylesheets="@/styles/reward-style.css"
+            styleClass="background-pane">
+
+    <children>
+        <VBox spacing="30" alignment="TOP_CENTER">
+            <padding>
+                <Insets top="30" right="40" bottom="30" left="40"/>
+            </padding>
+
+            <Label text="🎁 Vos Récompenses"
+                   styleClass="title-label"/>
+
+            <ListView fx:id="rewardListView"
+                      prefHeight="550"
+                      prefWidth="900"
+                      styleClass="reward-listview"/>
+        </VBox>
+    </children>
+</AnchorPane>

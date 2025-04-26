@@ -43,6 +43,9 @@ public class PanierController implements Initializable {
     @FXML private Label remiseLabel;
     @FXML private Label oldTotalLabel;
     @FXML private Button qrCodeBtn;
+    @FXML private TextField codePromoField;
+    @FXML private Button appliquerCodeBtn;
+    private boolean codePromoApplique = false;
 
     private final PanierService panierService = PanierService.getInstance();
     private boolean remiseAppliquee = false;
@@ -56,6 +59,7 @@ public class PanierController implements Initializable {
 
         remiseLabel.setVisible(false);
         oldTotalLabel.setVisible(false);
+        appliquerCodeBtn.setOnAction(e -> appliquerCodePromo());
 
         try {
             Files.writeString(Paths.get("C:/xampp/htdocs/quiz/quiz_success_flag.txt"), "0");
@@ -224,4 +228,22 @@ public class PanierController implements Initializable {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
     }
+    private void appliquerCodePromo() {
+        String codeSaisi = codePromoField.getText().trim();
+
+        if (codePromoApplique) {
+            new Alert(Alert.AlertType.INFORMATION, "✅ Le code promo a déjà été appliqué !").show();
+            return;
+        }
+
+        if ("AGRI5".equalsIgnoreCase(codeSaisi)) { // code valide
+            panierService.appliquerRemise(0.05); // appliquer -5%
+            codePromoApplique = true;
+            updateTotal();
+            new Alert(Alert.AlertType.INFORMATION, "🎉 Code promo appliqué avec succès ! -5%").show();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "⛔ Code promo invalide !").show();
+        }
+    }
+
 }

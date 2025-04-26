@@ -219,3 +219,20 @@
     -fx-padding: 0 0 10 0;
     -fx-font-style: italic;
 }
+.code-promo-bar {
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+}
+
+.promo-question {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.text-field {
+    -fx-pref-width: 200px;
+    -fx-font-size: 14px;
+}
+
+

@@ -17,6 +17,15 @@ import tn.esprit.entities.OffreEmploi;
 import tn.esprit.entities.StatutCandidature;
 import tn.esprit.entities.User;
 import tn.esprit.services.ServiceCandidature;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.stage.Modality;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -111,36 +120,66 @@ public class CandidaturesController {
             Label experience = new Label("💼 Expérience: " + c.getUser().getExperience());
             experience.getStyleClass().add("label-exp");
 
-            Button acceptBtn = new Button("Accepter");
-            Button rejectBtn = new Button("Refuser");
+            // 🧠 Dynamic Buttons based on Statut
+            if (c.getStatut() == StatutCandidature.EN_ATTENTE) {
+                // Waiting ➔ show Accept and Reject
+                Button acceptBtn = new Button("Accepter");
+                Button rejectBtn = new Button("Refuser");
 
-            acceptBtn.getStyleClass().add("btn-accept");
-            rejectBtn.getStyleClass().add("btn-reject");
+                acceptBtn.getStyleClass().add("btn-accept");
+                rejectBtn.getStyleClass().add("btn-reject");
 
-            if (c.getStatut() == StatutCandidature.ACCEPTEE) {
-                acceptBtn.getStyleClass().add("btn-active");
+                acceptBtn.setOnAction(e -> {
+                    c.setStatut(StatutCandidature.ACCEPTEE);
+                    serviceCandidature.updateStatut(c.getId(), StatutCandidature.ACCEPTEE);
+                    loadCandidatures();
+                });
+
+                rejectBtn.setOnAction(e -> {
+                    c.setStatut(StatutCandidature.REFUSEE);
+                    serviceCandidature.updateStatut(c.getId(), StatutCandidature.REFUSEE);
+                    loadCandidatures();
+                });
+
+                row.add(acceptBtn, 4, 0);
+                row.add(rejectBtn, 5, 0);
+
+            } else if (c.getStatut() == StatutCandidature.ACCEPTEE) {
+                // Accepted ➔ show nothing (waiting for worker to finish)
+                Label waitingLabel = new Label("En cours...");
+                waitingLabel.getStyleClass().add("label-waiting");
+                row.add(waitingLabel, 4, 0);
+
             } else if (c.getStatut() == StatutCandidature.REFUSEE) {
-                rejectBtn.getStyleClass().add("btn-active");
+                // Refused ➔ show only Accept button
+                Button acceptBtn = new Button("Accepter");
+                acceptBtn.getStyleClass().addAll("btn-accept", "btn-active");
+
+                acceptBtn.setOnAction(e -> {
+                    c.setStatut(StatutCandidature.ACCEPTEE);
+                    serviceCandidature.updateStatut(c.getId(), StatutCandidature.ACCEPTEE);
+                    loadCandidatures();
+                });
+
+                row.add(acceptBtn, 4, 0);
+
+            }else if (c.getStatut() == StatutCandidature.TERMINEE) {
+                // Worker finished ➔ show "Confirmer" button
+                Button confirmerBtn = new Button("Confirmer");
+                confirmerBtn.getStyleClass().add("btn-confirm");
+
+                confirmerBtn.setOnAction(e -> {
+                    showRatingPopup(c.getUser().getNom());  // 🔥 open the rating popup
+                    confirmerBtn.setDisable(true);
+                });
+
+                row.add(confirmerBtn, 4, 0);
             }
-
-            acceptBtn.setOnAction(e -> {
-                c.setStatut(StatutCandidature.ACCEPTEE);
-                serviceCandidature.updateStatut(c.getId(), StatutCandidature.ACCEPTEE);
-                loadCandidatures();
-            });
-
-            rejectBtn.setOnAction(e -> {
-                c.setStatut(StatutCandidature.REFUSEE);
-                serviceCandidature.updateStatut(c.getId(), StatutCandidature.REFUSEE);
-                loadCandidatures();
-            });
 
             row.add(name, 0, 0);
             row.add(email, 1, 0);
             row.add(date, 2, 0);
             row.add(statut, 3, 0);
-            row.add(acceptBtn, 4, 0);
-            row.add(rejectBtn, 5, 0);
             row.add(experience, 0, 1); // next line
 
             VBox wrapper = new VBox(row);
@@ -149,10 +188,76 @@ public class CandidaturesController {
             switch (c.getStatut()) {
                 case ACCEPTEE -> wrapper.getStyleClass().add("accepted");
                 case REFUSEE -> wrapper.getStyleClass().add("rejected");
+                case TERMINEE -> wrapper.getStyleClass().add("terminee");
             }
 
             candidaturesContainer.getChildren().add(wrapper);
         }
+    }
+
+
+    private void showRatingPopup(String workerName) {
+        Stage popup = new Stage();
+        popup.initModality(Modality.APPLICATION_MODAL);
+        popup.setTitle("Évaluer le travail de " + workerName);
+
+        VBox layout = new VBox(20);
+        layout.setStyle("-fx-padding: 25; -fx-alignment: center; -fx-background-color: linear-gradient(to bottom, #ffffff, #f2f2f2); -fx-border-color: #dddddd; -fx-border-radius: 10; -fx-background-radius: 10;");
+
+        Label title = new Label("⭐ Notez le travail de " + workerName);
+        title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333333;");
+
+        HBox starsBox = new HBox(10);
+        starsBox.setStyle("-fx-alignment: center;");
+
+        List<Label> stars = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            Label star = new Label("☆"); // empty star
+            star.setStyle("-fx-font-size: 40px; -fx-text-fill: #cccccc; -fx-cursor: hand; -fx-transition: all 0.3s;");
+
+            int ratingValue = i;
+
+            // Mouse hover
+            star.setOnMouseEntered(e -> {
+                for (int j = 0; j < 5; j++) {
+                    stars.get(j).setStyle("-fx-font-size: 40px; -fx-cursor: hand; -fx-text-fill: " + (j < ratingValue ? "#ffd700" : "#cccccc") + ";");
+                }
+            });
+
+            // Mouse exit
+            star.setOnMouseExited(e -> {
+                int currentRating = (int) stars.stream().filter(s -> s.getText().equals("★")).count();
+                for (int j = 0; j < 5; j++) {
+                    stars.get(j).setStyle("-fx-font-size: 40px; -fx-cursor: hand; -fx-text-fill: " + (j < currentRating ? "#ffd700" : "#cccccc") + ";");
+                }
+            });
+
+            // Click
+            star.setOnMouseClicked(e -> {
+                for (int j = 0; j < 5; j++) {
+                    stars.get(j).setText(j < ratingValue ? "★" : "☆");
+                }
+            });
+
+            stars.add(star);
+            starsBox.getChildren().add(star);
+        }
+
+        Button submitBtn = new Button("Valider l'évaluation ✅");
+        submitBtn.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 10 20;");
+        submitBtn.setOnAction(e -> {
+            int finalRating = (int) stars.stream().filter(s -> s.getText().equals("★")).count();
+            System.out.println("⭐ Note attribuée à " + workerName + ": " + finalRating + " étoiles");
+            popup.close();
+
+            // You can add a nice success popup here if you want
+        });
+
+        layout.getChildren().addAll(title, starsBox, submitBtn);
+
+        Scene scene = new Scene(layout, 400, 280);
+        popup.setScene(scene);
+        popup.showAndWait();
     }
 
 
@@ -166,7 +271,7 @@ public class CandidaturesController {
         }
 
         try {
-            String fxmlPath = "/front/farmer_front/MesOffresView.fxml";
+            String fxmlPath = "/front/farmer_front/MyOffresSplitView.fxml";
             System.out.println("📂 [handleRetourAction] Attempting to load: " + fxmlPath);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));

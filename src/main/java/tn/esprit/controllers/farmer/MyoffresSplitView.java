@@ -10,12 +10,10 @@ import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import tn.esprit.entities.Candidature;
 import tn.esprit.entities.OffreEmploi;
-import tn.esprit.entities.StatutCandidature;
 import tn.esprit.entities.User;
-import tn.esprit.services.ServiceCandidature;
 import tn.esprit.services.ServiceOffreEmploi;
+import tn.esprit.services.ServiceCandidature;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,7 +30,7 @@ public class MyoffresSplitView {
 
     @FXML
     public void initialize() {
-        allOffers = service.getByEmployeurId(30); // Replace with real user ID
+        allOffers = service.getByEmployeurId(30); // Replace with real connected user ID
 
         offerListView.setCellFactory(list -> new ListCell<>() {
             @Override
@@ -83,11 +81,10 @@ public class MyoffresSplitView {
         content.setOpacity(0);
         content.setStyle("-fx-background-color: #ffffff; -fx-padding: 20; -fx-border-color: #e0e0e0; -fx-border-radius: 10; -fx-background-radius: 10;");
 
-        // 🧑‍💼 Employer info
         Label titleLabel = new Label("📌 " + offer.getTitre());
         titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
-        Label ownerLabel = new Label("🧑‍💼 Dirigé par: Voir Profil");
+        Label ownerLabel = new Label("Dirigé par: Voir Profil");
         ownerLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #3498db; -fx-underline: true;");
         ownerLabel.setOnMouseClicked(e -> {
             try {
@@ -103,97 +100,12 @@ public class MyoffresSplitView {
         Label locationLabel = new Label("📍 Lieu: " + offer.getLieu());
         locationLabel.setStyle("-fx-font-size: 14px;");
 
-        Label candLabel = new Label("🧑‍🌾 Liste des Candidats:");
-        candLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 10 0 5 0;");
-
-        VBox candList = new VBox(8);
-        candList.setStyle("-fx-padding: 10;");
-
-        try {
-            ServiceCandidature serviceCandidature = new ServiceCandidature();
-            List<Candidature> candidatures = serviceCandidature.getByOffreId(offer.getId());
-
-            if (candidatures.isEmpty()) {
-                Label empty = new Label("— Aucun candidat pour cette offre.");
-                empty.setStyle("-fx-font-style: italic; -fx-text-fill: #888;");
-                candList.getChildren().add(empty);
-            } else {
-                for (Candidature c : candidatures) {
-                    VBox card = new VBox(8);
-                    card.getStyleClass().add("candidate-card");
-
-                    HBox row1 = new HBox(15);
-                    row1.getStyleClass().add("candidate-info");
-
-                    Label name = new Label("👤 " + c.getNom());
-                    name.getStyleClass().add("label-bold");
-
-                    Label email = new Label("✉ " + c.getEmail());
-                    email.getStyleClass().add("label-subtle");
-
-                    Label date = new Label("📅 " + c.getDateApplied().toLocalDate());
-                    date.getStyleClass().add("label-subtle");
-
-                    Label statut = new Label("⏳ " + c.getStatut());
-                    statut.getStyleClass().add("status-badge");
-
-                    switch (c.getStatut()) {
-                        case ACCEPTEE -> statut.getStyleClass().add("status-accepted");
-                        case REFUSEE -> statut.getStyleClass().add("status-rejected");
-                        default -> statut.getStyleClass().add("status-waiting");
-                    }
-
-                    Region spacer = new Region();
-                    HBox.setHgrow(spacer, Priority.ALWAYS);
-
-                    Button acceptBtn = new Button("✓ Accepter");
-                    acceptBtn.getStyleClass().add("btn-accept");
-
-                    Button rejectBtn = new Button("✗ Refuser");
-                    rejectBtn.getStyleClass().add("btn-reject");
-
-                    if (c.getStatut().name().equals("ACCEPTE")) {
-                        acceptBtn.setDisable(true);
-                        acceptBtn.getStyleClass().add("btn-disabled");
-                    }
-                    if (c.getStatut().name().equals("REJETE")) {
-                        rejectBtn.setDisable(true);
-                        rejectBtn.getStyleClass().add("btn-disabled");
-                    }
-
-                    acceptBtn.setOnAction(ev -> {
-                        c.setStatut(StatutCandidature.ACCEPTEE);
-                        new ServiceCandidature().updateStatut(c.getId(), StatutCandidature.ACCEPTEE);
-                        showOfferDetails(offer);
-                    });
-
-                    rejectBtn.setOnAction(ev -> {
-                        c.setStatut(StatutCandidature.REFUSEE);
-                        new ServiceCandidature().updateStatut(c.getId(), StatutCandidature.REFUSEE);
-                        showOfferDetails(offer);
-                    });
-
-                    row1.getChildren().addAll(name, email, date, statut, spacer, acceptBtn, rejectBtn);
-
-                    Label experience = new Label("💼 Expérience: " + c.getUser().getExperience());
-                    experience.getStyleClass().add("label-subtle");
-
-                    card.getChildren().addAll(row1, experience);
-                    candList.getChildren().add(card);
-                }
-
-            }
-        } catch (Exception e) {
-            Label error = new Label("⚠️ Erreur lors du chargement des candidatures.");
-            error.setStyle("-fx-text-fill: red;");
-            candList.getChildren().add(error);
-        }
-
+        // 👉 Button to view candidatures
         Button voirBtn = new Button("📄 Gérer toutes les candidatures");
         voirBtn.setStyle("-fx-background-color: #1abc9c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8 18;");
         voirBtn.setOnAction(e -> openCandidaturesController(offer));
 
-        content.getChildren().addAll(titleLabel, ownerLabel, salaryLabel, locationLabel, candLabel, candList, voirBtn);
+        content.getChildren().addAll(titleLabel, ownerLabel, salaryLabel, locationLabel, voirBtn);
         detailsPane.getChildren().add(content);
 
         FadeTransition fade = new FadeTransition(Duration.millis(300), content);
@@ -201,6 +113,7 @@ public class MyoffresSplitView {
         fade.setToValue(1);
         fade.play();
     }
+
     private void showEmployerPopup(User employer) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/ouvrier_front/UserProfilePopup.fxml"));

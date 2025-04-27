@@ -12,12 +12,12 @@
           AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
 
         <!-- 🟢 Retour button -->
-        <Button fx:id="btnRetour" text="⬅ Retour aux Offres"
+        <Button fx:id="btnRetour" text="⬅ Retour aux ver nice Offres"
                 style="-fx-background-color: #eeeeee; -fx-font-size: 14px; -fx-padding: 8 15; -fx-cursor: hand; -fx-background-radius: 6;"
                 onAction="#handleRetourAction" />
 
         <!-- 🗂️ Title -->
-        <Label text="📄 Liste des Candidatures"
+        <Label text="Liste des Candidatures"
                style="-fx-font-size: 20px; -fx-font-weight: bold;" />
 
         <!-- 🔁 Dynamic content -->

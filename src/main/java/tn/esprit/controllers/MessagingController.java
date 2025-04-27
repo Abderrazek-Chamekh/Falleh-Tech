@@ -6,7 +6,10 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 import tn.esprit.entities.User;
@@ -14,6 +17,7 @@ import tn.esprit.entities.Conversation;
 import tn.esprit.entities.Message;
 import tn.esprit.services.ServiceConversation;
 import tn.esprit.services.ServiceMessage;
+import tn.esprit.services.ServiceGeneralNotification;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -22,13 +26,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MessagingController implements Initializable {
+
     @FXML private TextField searchField;
     @FXML private VBox userListContainer;
     @FXML private VBox chatArea;
     @FXML private TextField messageInput;
     @FXML private ScrollPane chatScroll;
 
-    private Button selectedUserButton;
+    private HBox selectedUserHBox;
     private User currentUser;
     private User chatPartner;
     private Conversation currentConversation;
@@ -38,6 +43,7 @@ public class MessagingController implements Initializable {
 
     private final ServiceConversation convService = new ServiceConversation();
     private final ServiceMessage msgService = new ServiceMessage();
+    private final ServiceGeneralNotification generalNotifService = new ServiceGeneralNotification();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -68,26 +74,39 @@ public class MessagingController implements Initializable {
         userListContainer.getChildren().clear();
 
         for (User user : users) {
-            Button btn = new Button(user.getName());
-            btn.getStyleClass().add("user-button");
-            btn.setMaxWidth(Double.MAX_VALUE);
+            HBox userItem = new HBox(10);
+            userItem.setAlignment(Pos.CENTER_LEFT);
+            userItem.getStyleClass().add("user-item");
+            userItem.setMaxWidth(Double.MAX_VALUE);
 
-            btn.setOnAction(e -> {
-                highlightSelectedUser(btn);
+            ImageView avatar = new ImageView();
+            String imagePath =  "/images/default_profile.png";
+            avatar.setImage(new Image(getClass().getResourceAsStream(imagePath)));
+            avatar.setFitWidth(32);
+            avatar.setFitHeight(32);
+            avatar.getStyleClass().add("user-avatar");
+
+            Label nameLabel = new Label(user.getName());
+            nameLabel.getStyleClass().add("user-name");
+
+            userItem.getChildren().addAll(avatar, nameLabel);
+
+            userItem.setOnMouseClicked(e -> {
+                highlightSelectedUser(userItem);
                 openConversationWith(user);
             });
 
-            userListContainer.getChildren().add(btn);
+            userListContainer.getChildren().add(userItem);
         }
     }
 
-    private void highlightSelectedUser(Button newSelectedBtn) {
-        if (selectedUserButton != null) {
-            selectedUserButton.getStyleClass().remove("selected-user");
+    private void highlightSelectedUser(HBox newSelectedHBox) {
+        if (selectedUserHBox != null) {
+            selectedUserHBox.getStyleClass().remove("selected-user");
         }
-        selectedUserButton = newSelectedBtn;
-        if (!selectedUserButton.getStyleClass().contains("selected-user")) {
-            selectedUserButton.getStyleClass().add("selected-user");
+        selectedUserHBox = newSelectedHBox;
+        if (!selectedUserHBox.getStyleClass().contains("selected-user")) {
+            selectedUserHBox.getStyleClass().add("selected-user");
         }
     }
 
@@ -129,6 +148,14 @@ public class MessagingController implements Initializable {
             msg.setId(generatedId);
             addMessageToUI(msg);
             lastLoadedMessageId = generatedId;
+
+            // ✅ Create general notification
+            try {
+                String notifMessage = "📩 Nouveau message de " + currentUser.getName() + ": " + content;
+                generalNotifService.add(chatPartner.getId(), notifMessage);
+            } catch (Exception e) {
+                System.err.println("❌ Failed to send notification: " + e.getMessage());
+            }
         }
 
         messageInput.clear();

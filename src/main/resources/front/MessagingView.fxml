@@ -2,6 +2,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <StackPane xmlns:fx="http://javafx.com/fxml"
            fx:controller="tn.esprit.controllers.MessagingController"
            stylesheets="/styles/messaging.css">
@@ -16,7 +18,18 @@
             <VBox spacing="10" styleClass="sidebar">
                 <TextField fx:id="searchField" promptText="🔍 Rechercher un utilisateur..." styleClass="search-input"/>
                 <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="user-scroll">
-                    <VBox fx:id="userListContainer" spacing="10" />
+                    <VBox fx:id="userListContainer" spacing="10">
+                        <!-- Example static user entry (you will add dynamically in controller) -->
+                        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="user-item">
+                            <ImageView fitHeight="32" fitWidth="32" styleClass="user-avatar">
+                                <image>
+                                    <Image url="/images/default_profile.png"/>
+                                </image>
+                            </ImageView>
+                            <Label text="Nom d'utilisateur" styleClass="user-name"/>
+                        </HBox>
+                    </VBox>
+
                 </ScrollPane>
             </VBox>
         </left>

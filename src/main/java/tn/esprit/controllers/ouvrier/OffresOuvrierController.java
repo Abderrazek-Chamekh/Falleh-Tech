@@ -1,6 +1,6 @@
 package tn.esprit.controllers.ouvrier;
-import javafx.collections.FXCollections;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,8 +11,10 @@ import tn.esprit.entities.Candidature;
 import tn.esprit.entities.OffreEmploi;
 import tn.esprit.entities.StatutCandidature;
 import tn.esprit.entities.User;
+import tn.esprit.entities.GeneralNotification;
 import tn.esprit.services.ServiceCandidature;
 import tn.esprit.services.ServiceOffreEmploi;
+import tn.esprit.services.ServiceGeneralNotification;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,6 +28,8 @@ public class OffresOuvrierController {
 
     private final ServiceOffreEmploi serviceOffre = new ServiceOffreEmploi();
     private final ServiceCandidature serviceCandidature = new ServiceCandidature();
+    private final ServiceGeneralNotification notificationService = new ServiceGeneralNotification();
+
     private User currentUser;
     private List<OffreEmploi> allOffers;
 
@@ -56,6 +60,7 @@ public class OffresOuvrierController {
             }
         }
     }
+
     private void setupSearchAndFilter() {
         statusFilter.setItems(FXCollections.observableArrayList("All", "Disponibles", "EN_ATTENTE", "ACCEPTEE", "REFUSEE", "TERMINEE"));
         statusFilter.setValue("All");
@@ -84,6 +89,11 @@ public class OffresOuvrierController {
         }).collect(Collectors.toList());
 
         displayOffers(filtered);
-    }
 
+        // ✅ Send a notification if new offers are found
+        if (!filtered.isEmpty()) {
+            GeneralNotification notif = new GeneralNotification(currentUser.getId(), "📢 Nouvelle(s) offre(s) disponible(s) !");
+            notificationService.add(notif);
+        }
+    }
 }

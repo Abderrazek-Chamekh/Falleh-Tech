@@ -136,3 +136,24 @@
     -fx-border-color: #2e7d32;
     -fx-border-width: 2;
 }
+.user-item {
+    -fx-padding: 8 10;
+    -fx-background-radius: 10;
+    -fx-background-color: #f2f2f2;
+    -fx-cursor: hand;
+}
+.user-item:hover {
+    -fx-background-color: #e0e0e0;
+}
+.selected-user {
+    -fx-background-color: #d0f0ff;
+}
+.user-avatar {
+    -fx-background-radius: 100%;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0.5, 0, 1);
+}
+.user-name {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}

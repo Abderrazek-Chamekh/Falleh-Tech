@@ -1,5 +1,6 @@
 package tn.esprit.fx;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,14 +17,25 @@ import tn.esprit.controllers.MessagingController;
 import tn.esprit.controllers.farmer.MesOffresController;
 import tn.esprit.controllers.ouvrier.CandidatureHistoryController;
 import tn.esprit.controllers.ouvrier.OffresOuvrierController;
+import tn.esprit.entities.Notification;
 import tn.esprit.entities.User;
+import tn.esprit.services.ServiceGeneralNotification;
 import tn.esprit.services.ServiceUser;
-
+import tn.esprit.services.ServiceNotification;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import tn.esprit.entities.GeneralNotification;
+import javafx.geometry.Insets;
+import java.time.Duration;
+import java.time.LocalDateTime;
+
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.stage.Popup; // 👈 important
 
 public class FrontViewController implements Initializable {
 
@@ -74,9 +86,20 @@ public class FrontViewController implements Initializable {
     @FXML
     private Button addMapButton;
 
+    @FXML private ImageView notificationIcon;
+
     private Button currentActiveButton;
     private final ServiceUser serviceUser = new ServiceUser();
     private User currentUser;
+    @FXML private MenuButton notificationMenu;
+    @FXML private Label notificationBadge;
+
+    private final ServiceGeneralNotification generalNotifService = new ServiceGeneralNotification();
+    private final int currentUserId = 16;
+
+
+
+    private Popup notificationsPopupWindow;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -84,7 +107,12 @@ public class FrontViewController implements Initializable {
         menuAvatar.setImage(loadImage("photos/avatar.jpg"));
         setupClip(menuAvatar);
         hideCategorieTree();
+        updateNotificationsUI();
     }
+    @FXML private Button notificationBell;
+    @FXML private StackPane notificationWrapper;
+    private VBox notificationsPopup;
+    private boolean popupOpen = false;
 
     public void setCurrentUser(User user) {
         this.currentUser = serviceUser.findById(user.getId());
@@ -404,5 +432,122 @@ public class FrontViewController implements Initializable {
 
 
     }
+
+    public void updateNotificationsUI() {
+        try {
+            List<GeneralNotification> notifications = generalNotifService.getUnread(currentUserId);
+
+            Platform.runLater(() -> {
+                if (notifications.isEmpty()) {
+                    notificationBadge.setVisible(false);
+                } else {
+                    notificationBadge.setText(String.valueOf(notifications.size()));
+                    notificationBadge.setVisible(true);
+                }
+            });
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void toggleNotificationsPopup() {
+        if (popupOpen) {
+            closeNotificationsPopup();
+        } else {
+            openNotificationsPopup();
+        }
+    }
+
+    private void openNotificationsPopup() {
+        if (notificationsPopupWindow == null) {
+            notificationsPopupWindow = new Popup();
+            notificationsPopupWindow.setAutoHide(true);
+        }
+
+        VBox popupContent = new VBox(10);
+        popupContent.setStyle("-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 8; "
+                + "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);");
+        popupContent.setPrefWidth(450); // ✅ bigger width
+        popupContent.setMaxHeight(400); // ✅ scroll later if needed
+
+        try {
+            List<GeneralNotification> notifications = generalNotifService.getUnread(currentUserId);
+
+            if (notifications.isEmpty()) {
+                Label empty = new Label("Pas de nouvelles notifications.");
+                empty.setStyle("-fx-text-fill: #666; -fx-font-size: 13px;");
+                popupContent.getChildren().add(empty);
+            } else {
+                for (GeneralNotification notif : notifications) {
+                    popupContent.getChildren().add(createNotificationCard(notif));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        notificationsPopupWindow.getContent().clear();
+        notificationsPopupWindow.getContent().add(popupContent);
+
+        // ✅ Position popup below bell
+        double x = notificationBell.localToScreen(notificationBell.getBoundsInLocal()).getMinX() - 180;
+        double y = notificationBell.localToScreen(notificationBell.getBoundsInLocal()).getMaxY();
+        notificationsPopupWindow.show(notificationBell.getScene().getWindow(), x, y);
+
+        popupOpen = true;
+
+        notificationsPopupWindow.setOnHidden(event -> popupOpen = false); // auto close
+    }
+
+    private void closeNotificationsPopup() {
+        if (notificationsPopupWindow != null && popupOpen) {
+            notificationsPopupWindow.hide();
+            popupOpen = false;
+        }
+    }
+
+
+    private VBox createNotificationCard(GeneralNotification notif) {
+        VBox card = new VBox(5);
+        card.setStyle("-fx-background-color: #f9f9f9; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;");
+        card.setPrefWidth(280);
+
+        Label title = new Label("📩 " + notif.getMessage());
+        title.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;");
+
+        Label timestamp = new Label(getTimeAgo(notif.getCreatedAt()));
+        timestamp.setStyle("-fx-font-size: 11px; -fx-text-fill: #777;");
+
+        card.getChildren().addAll(title, timestamp);
+
+        card.setOnMouseEntered(e -> card.setStyle("-fx-background-color: #f0f0f0; -fx-border-color: #bbb; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;"));
+        card.setOnMouseExited(e -> card.setStyle("-fx-background-color: #f9f9f9; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 10;"));
+
+        card.setOnMouseClicked(e -> {
+            try {
+                generalNotifService.markAsSeen(notif.getId());
+                updateNotificationsUI();
+                closeNotificationsPopup();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        return card;
+    }
+
+    private String getTimeAgo(LocalDateTime dateTime) {
+        Duration duration = Duration.between(dateTime, LocalDateTime.now());
+        long days = duration.toDays();
+        long hours = duration.toHours();
+        long minutes = duration.toMinutes();
+
+        if (days > 0) return days + "j";
+        if (hours > 0) return hours + "h";
+        if (minutes > 0) return minutes + "min";
+        return "maintenant";
+    }
+
 
 }

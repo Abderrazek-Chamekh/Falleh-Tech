@@ -230,3 +230,28 @@
     -fx-background-color: #ead3d3;  /* vieux rose pâle */
     -fx-text-fill: #3a1c1c;
 }
+.notification-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.notification-badge {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 50%;
+    -fx-padding: 2px 6px;
+    -fx-font-size: 11px;
+    -fx-translate-x: -8;
+    -fx-translate-y: 5;
+}
+.notification-bell-button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-padding: 5;
+}
+
+.notification-bell-button:hover {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 10;
+}

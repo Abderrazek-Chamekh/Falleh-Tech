@@ -29,6 +29,32 @@
 
                     <!-- 👇 Role Label -->
                     <Label fx:id="roleLabel" style="-fx-font-size: 12px; -fx-text-fill: #666;" />
+                    <!-- 🔔 Notification Button with Badge -->
+
+                    <StackPane fx:id="notificationWrapper" alignment="TOP_RIGHT" style="-fx-padding: 5;">
+                        <Button fx:id="notificationBell" onAction="#toggleNotificationsPopup" styleClass="notification-bell-button">
+                            <graphic>
+                                <HBox spacing="5" alignment="CENTER_LEFT">
+                                    <Label text="🔔" style="-fx-font-size: 20px;"/>
+                                    <Label text="Notifications" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                </HBox>
+                            </graphic>
+                        </Button>
+
+                        <Label fx:id="notificationBadge"
+                               text="0"
+                               visible="false"
+                               style="-fx-background-color: red;
+                  -fx-text-fill: white;
+                  -fx-font-size: 11px;
+                  -fx-padding: 2 6 2 6;
+                  -fx-background-radius: 50;
+                  -fx-translate-x: 12;
+                  -fx-translate-y: -8;
+                  -fx-font-weight: bold;"/>
+                    </StackPane>
+
+
 
                     <!-- ✅ Menu Profil déroulant -->
                     <MenuButton fx:id="profileMenu" popupSide="BOTTOM" styleClass="profile-menu-button">

@@ -36,3 +36,6 @@ build/
 
 ### Mac OS ###
 .DS_Storesrc/main/resources/yolo/yolov3.weights
+src/main/resources/yolo/yolov3.weights
+src/main/resources/yolo/yolov4.weights
+src/main/resources/yolo/yolov5.weights

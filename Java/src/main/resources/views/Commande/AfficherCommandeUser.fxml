@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:id="borderPane" prefHeight="683.0" prefWidth="967.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.E_Commerce.AfficherCommandeUserController">
+
+    <!-- Center Content (Commande List) -->
+    <center>
+        <VBox spacing="20" styleClass="content-container">
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" styleClass="header">
+                <Label styleClass="header-title" text="Mes Commandes" />
+            </HBox>
+
+            <!-- TableView displaying commandes -->
+            <TableView fx:id="commandeTableView">
+                <columns>
+                    <TableColumn fx:id="statutColumn" text="Statut" />
+                    <TableColumn fx:id="adresseLivraisonColumn" text="Adresse Livraison" />
+                    <TableColumn fx:id="dateCreationColumn" text="Date Creation" />
+                    <TableColumn fx:id="modePaiementColumn" text="Mode Paiement" />
+                    <TableColumn fx:id="datePaiementColumn" text="Date Paiement" />
+                    <TableColumn fx:id="statutPaiementColumn" text="Statut Paiement" />
+                    <TableColumn fx:id="totalColumn" text="Total" />
+                    <TableColumn fx:id="actionsColumn" text="Actions">
+                        <!-- Add buttons or actions here if needed -->
+                    </TableColumn>
+                </columns>
+            </TableView>
+
+        </VBox>
+    </center>
+
+    <!-- Bottom Actions -->
+
+
+</BorderPane>

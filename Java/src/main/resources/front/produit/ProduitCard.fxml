@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.Controllers.produitfront.ProduitCardController"
+           styleClass="card-produit" stylesheets="@/styles/produit_card.css">
+
+    <!-- Permet le coeur en haut de l'image -->
+    <VBox fx:id="cardVBox" alignment="TOP_CENTER" spacing="10">
+        <StackPane>
+            <ImageView fx:id="imageProduit" fitHeight="120" fitWidth="220" preserveRatio="true"/>
+            <ToggleButton fx:id="favorisButton" text="♡" styleClass="favoris-btn" StackPane.alignment="TOP_RIGHT"/>
+        </StackPane>
+
+        <Label fx:id="nomProduit" styleClass="nom-produit"/>
+        <Label fx:id="descriptionProduit" wrapText="true" styleClass="description-produit"/>
+        <Label fx:id="prixProduit" styleClass="prix-produit"/>
+        <Label fx:id="stockProduit" styleClass="stock-produit"/>
+
+        <HBox fx:id="quantiteContainer" alignment="CENTER" spacing="8">
+            <Button fx:id="minusBtn" text="-" />
+            <Label fx:id="quantityLabel" text="1"/>
+            <Button fx:id="plusBtn" text="+" />
+        </HBox>
+
+        <Button fx:id="ajouterPanierButton" text="+ panier" />
+    </VBox>
+
+</StackPane>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane fx:id="borderPane" stylesheets="@profile.css" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.User.Profile.ProfileController">
+
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+            <VBox style="-fx-background-color: #F5F5F5;">
+                <!-- Profile Header -->
+                <HBox style="-fx-background-color: #2E8B57; -fx-padding: 30px; -fx-alignment: CENTER_LEFT; -fx-spacing: 20px;">
+                    <VBox style="-fx-spacing: 8px;">
+                        <Label fx:id="fullNameLabel" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" />
+                        <Label fx:id="roleLabel" style="-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 5px 15px; -fx-background-color: rgba(255,255,255,0.2); -fx-background-radius: 15px;" />
+                    </VBox>
+                </HBox>
+
+                <!-- Profile Details -->
+                <VBox style="-fx-background-color: white; -fx-padding: 30px; -fx-spacing: 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+                    <Label text="Personal Information" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333333; -fx-padding: 0 0 15px 0;" />
+
+                    <GridPane style="-fx-vgap: 15px; -fx-hgap: 20px;">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="40" />
+                            <ColumnConstraints percentWidth="60" />
+                        </columnConstraints>
+
+                        <!-- Row 1 -->
+                        <Label text="First Name:" style="-fx-font-size: 14px; -fx-font-weight: 600; -fx-text-fill: #555555;" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <Label fx:id="firstNameLabel" style="-fx-font-size: 14px; -fx-text-fill: #333333; -fx-padding: 3px 0;" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <!-- Row 2 -->
+                        <Label text="Last Name:" style="-fx-font-size: 14px; -fx-font-weight: 600; -fx-text-fill: #555555;" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <Label fx:id="lastNameLabel" style="-fx-font-size: 14px; -fx-text-fill: #333333; -fx-padding: 3px 0;" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <!-- Row 3 -->
+                        <Label text="Email:" style="-fx-font-size: 14px; -fx-font-weight: 600; -fx-text-fill: #555555;" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <Label fx:id="emailLabel" style="-fx-font-size: 14px; -fx-text-fill: #333333; -fx-padding: 3px 0;" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                        <!-- Row 4 -->
+                        <Label text="Phone:" style="-fx-font-size: 14px; -fx-font-weight: 600; -fx-text-fill: #555555;" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <Label fx:id="phoneLabel" style="-fx-font-size: 14px; -fx-text-fill: #333333; -fx-padding: 3px 0;" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                        <!-- Row 5 -->
+                        <Label text="ID Card:" style="-fx-font-size: 14px; -fx-font-weight: 600; -fx-text-fill: #555555;" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                        <Label fx:id="cinLabel" style="-fx-font-size: 14px; -fx-text-fill: #333333; -fx-padding: 3px 0;" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                    </GridPane>
+                </VBox>
+
+                <!-- Additional Info Section (for Ouvrier) -->
+                <VBox fx:id="additionalInfoSection" visible="false" style="-fx-background-color: white; -fx-padding: 30px; -fx-spacing: 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+                    <Label text="Professional Information" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333333; -fx-padding: 0 0 15px 0;" />
+
+                    <GridPane style="-fx-vgap: 15px; -fx-hgap: 20px;">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="40" />
+                            <ColumnConstraints percentWidth="60" />
+                        </columnConstraints>
+
+                        <!-- Row 1 -->
+                        <Label text="Availability:" style="-fx-font-size: 14px; -fx-font-weight: 600; -fx-text-fill: #555555;" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <Label fx:id="availabilityLabel" style="-fx-font-size: 14px; -fx-text-fill: #333333; -fx-padding: 3px 0;" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <!-- Row 2 -->
+                        <Label text="Location:" style="-fx-font-size: 14px; -fx-font-weight: 600; -fx-text-fill: #555555;" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <Label fx:id="locationLabel" style="-fx-font-size: 14px; -fx-text-fill: #333333; -fx-padding: 3px 0;" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <!-- Row 3 -->
+                        <Label text="Experience:" style="-fx-font-size: 14px; -fx-font-weight: 600; -fx-text-fill: #555555;" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <Label fx:id="experienceLabel" style="-fx-font-size: 14px; -fx-text-fill: #333333; -fx-padding: 3px 0;" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    </GridPane>
+                </VBox>
+
+                <!-- Action Buttons -->
+                <HBox style="-fx-spacing: 15px; -fx-alignment: CENTER; -fx-padding: 20px; -fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+                    <Button text="Edit Profile" onAction="#handleEditProfile" style="-fx-background-color: #2196F3; -fx-text-fill: white;">
+                        <graphic>
+                            <ImageView fitHeight="16" fitWidth="16">
+                                <image>
+                                    <Image url="@/Images/icons/edit.gif" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button text="Change Password" onAction="#handleChangePassword" style="-fx-background-color: #2196F3; -fx-text-fill: white;" />
+                </HBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

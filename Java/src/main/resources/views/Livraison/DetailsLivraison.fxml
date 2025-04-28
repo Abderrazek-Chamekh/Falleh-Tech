@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+
+<GridPane fx:controller="tn.esprit.Controllers.E_Commerce.DetailsLivraisonController"
+          xmlns:fx="http://javafx.com/fxml/1"
+          stylesheets="@details_livraison.css"
+          styleClass="grid-pane"
+          hgap="10.0" vgap="10.0">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+
+    <Label text="Statut:" styleClass="field-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <Label fx:id="statutLabel" styleClass="status-label" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+    <Label text="Transporteur:" styleClass="field-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <Label fx:id="transporteurLabel" styleClass="value-label" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+    <Label text="Numéro Téléphone:" styleClass="field-label" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <Label fx:id="numTelTransporteurLabel" styleClass="value-label" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+    <Label text="Date Livraison:" styleClass="field-label" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <Label fx:id="dateLivraisonLabel" styleClass="value-label" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+
+    <Button text="Retour"
+            fx:id="retourButton"
+            onAction="#closeWindow"
+            styleClass="action-button"
+            GridPane.rowIndex="7"
+            GridPane.columnIndex="1"
+            GridPane.halignment="RIGHT"/>
+</GridPane>

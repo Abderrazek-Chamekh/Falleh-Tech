@@ -1,0 +1,76 @@
+/* Main GridPane styling */
+.grid-pane {
+    -fx-background-color: #f5f7fa;
+    -fx-hgap: 15px;
+    -fx-vgap: 15px;
+    -fx-padding: 25px 30px 25px 30px;
+}
+
+/* Title styling */
+.title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-padding: 0 0 10px 0;
+}
+
+/* Field labels styling */
+.field-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #34495e;
+}
+
+/* Value labels styling */
+.value-label {
+    -fx-text-fill: #2c3e50;
+}
+
+/* Special value labels */
+.total-label {
+    -fx-text-fill: #2c3e50;
+    -fx-font-weight: bold;
+}
+
+.status-label {
+    -fx-text-fill: #27ae60;
+    -fx-font-weight: bold;
+}
+
+.payment-status-label {
+    -fx-text-fill: #e74c3c;
+    -fx-font-weight: bold;
+}
+
+.address-label {
+    -fx-text-fill: #2c3e50;
+    -fx-wrap-text: true;
+}
+
+/* Button styling */
+.action-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 15px 8px 15px;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 8px;
+}
+
+.action-button:hover {
+    -fx-background-color: #2980b9;
+}
+
+.action-button:pressed {
+    -fx-background-color: #1a5276;
+}
+.error-field {
+    -fx-border-color: #ff0000;
+    -fx-border-width: 2px;
+    -fx-border-radius: 3px;
+}
+
+.error-label {
+    -fx-text-fill: #ff0000;
+    -fx-font-size: 12px;
+    -fx-padding: 5 0 0 0;
+}

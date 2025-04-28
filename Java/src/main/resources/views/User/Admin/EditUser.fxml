@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.collections.FXCollections?>
+
+<?import java.lang.String?>
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            stylesheets="@dashboard.css" fx:controller="tn.esprit.Controllers.User.Admin.EditUserController">
+
+    <center>
+        <VBox spacing="20" styleClass="content-container" alignment="TOP_CENTER">
+            <!-- Header -->
+            <HBox styleClass="header" alignment="CENTER_LEFT">
+                <Label styleClass="header-title" text="Edit User" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button styleClass="back-btn" text="Cancel" onAction="#handleCancel" />
+            </HBox>
+
+            <!-- User Form -->
+            <VBox styleClass="form-container" spacing="20" alignment="TOP_CENTER">
+                <GridPane hgap="15" vgap="15">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="NEVER" prefWidth="150"/>
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="300"/>
+                    </columnConstraints>
+
+                    <!-- Basic Information -->
+                    <Label text="Basic Information:" GridPane.columnSpan="2" styleClass="form-section-label"/>
+
+                    <Label text="First Name:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="firstNameField" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="form-field"/>
+
+                    <Label text="Last Name:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="lastNameField" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="form-field"/>
+
+                    <Label text="Email:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <TextField fx:id="emailField" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="form-field"/>
+
+                    <Label text="Phone Number:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <TextField fx:id="phoneField" GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="form-field"/>
+
+                    <Label text="CIN:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                    <TextField fx:id="cinField" GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="form-field"/>
+
+                    <Label text="Role:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="roleCombo" GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="form-field">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Agriculteur"/>
+                                <String fx:value="Client"/>
+                                <String fx:value="Ouvrier"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+
+                    <!-- Status Toggle -->
+                    <Label text="Status:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                    <CheckBox fx:id="activeCheckbox" text="Active" GridPane.rowIndex="7" GridPane.columnIndex="1" styleClass="form-field"/>
+
+                    <!-- Ouvrier Specific Fields -->
+                    <Label fx:id="ouvrierLabel" text="Ouvrier Information:" GridPane.rowIndex="8" GridPane.columnIndex="0" GridPane.columnSpan="2" styleClass="form-section-label" visible="false"/>
+
+                    <Label fx:id="disponibilityLabel" text="Disponibility:" GridPane.rowIndex="9" GridPane.columnIndex="0" visible="false"/>
+                    <DatePicker fx:id="disponibilityField" GridPane.rowIndex="9" GridPane.columnIndex="1" styleClass="form-field" visible="false"/>
+
+                    <Label fx:id="locationLabel" text="Location:" GridPane.rowIndex="10" GridPane.columnIndex="0" visible="false"/>
+                    <TextField fx:id="locationField" GridPane.rowIndex="10" GridPane.columnIndex="1" styleClass="form-field" visible="false"/>
+
+                    <Label fx:id="experienceLabel" text="Experience:" GridPane.rowIndex="11" GridPane.columnIndex="0" visible="false"/>
+                    <TextField fx:id="experienceField" GridPane.rowIndex="11" GridPane.columnIndex="1" styleClass="form-field" visible="false"/>
+                </GridPane>
+
+                <!-- Form Buttons -->
+                <HBox spacing="20" alignment="CENTER">
+                    <Button text="Save Changes" styleClass="save-btn" onAction="#handleSave" />
+                    <Button text="Reset" styleClass="reset-btn" onAction="#handleReset" />
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

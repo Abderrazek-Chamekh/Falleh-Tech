@@ -1,0 +1,121 @@
+/* Main styles */
+.root {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+}
+
+/* Header styles */
+.header {
+    -fx-padding: 20;
+    -fx-background-color: #ffffff;
+}
+
+.company-name {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e8b57; /* Sea Green */
+}
+
+.invoice-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.invoice-info {
+    -fx-padding: 20 0 0 0;
+}
+
+.info-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #555555;
+}
+
+.info-value {
+    -fx-text-fill: #333333;
+}
+
+/* Items table styles */
+.items-container {
+    -fx-padding: 0 20 20 20;
+}
+
+.items-table {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+}
+
+.table-column {
+    -fx-alignment: CENTER;
+    -fx-font-weight: bold;
+}
+
+.table-column:right {
+    -fx-alignment: CENTER-RIGHT;
+}
+
+/* Totals styles */
+.totals-grid {
+    -fx-padding: 20 0 0 0;
+    -fx-hgap: 10;
+    -fx-vgap: 8;
+}
+
+.total-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #555555;
+}
+
+.total-value {
+    -fx-text-fill: #333333;
+}
+
+.total-ttc-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e8b57; /* Sea Green */
+}
+
+.total-ttc-value {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e8b57; /* Sea Green */
+}
+
+/* Footer styles */
+.footer {
+    -fx-padding: 20;
+    -fx-background-color: #f9f9f9;
+    -fx-spacing: 15;
+}
+
+.pdf-button {
+    -fx-background-color: #3cb371; /* Medium Sea Green */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 15;
+}
+
+.pdf-button:hover {
+    -fx-background-color: #2e8b57; /* Sea Green */
+}
+
+.thank-you {
+    -fx-font-style: italic;
+    -fx-text-fill: #555555;
+    -fx-alignment: CENTER;
+}
+
+.company-info {
+    -fx-text-fill: #777777;
+    -fx-font-size: 12px;
+    -fx-alignment: CENTER;
+}
+
+/* Additional green accents */
+.separator .line {
+    -fx-border-color: #3cb371; /* Medium Sea Green */
+    -fx-border-width: 1;
+}

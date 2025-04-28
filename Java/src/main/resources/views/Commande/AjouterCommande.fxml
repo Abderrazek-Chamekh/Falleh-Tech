@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.collections.FXCollections?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<?import java.lang.String?>
+<BorderPane fx:id="borderPane" prefHeight="700.0" prefWidth="1000.0"
+            stylesheets="@style.css"
+            styleClass="border-pane"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.Controllers.E_Commerce.AjouterCommandeController">
+
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+            <VBox spacing="7" styleClass="content-container">
+                <!-- Header -->
+                <HBox alignment="CENTER_LEFT" styleClass="header">
+                    <Label styleClass="header-title" text="Ajouter une Commande" />
+                    <Region HBox.hgrow="ALWAYS" />
+                </HBox>
+                <Label fx:id="globalErrorLabel" styleClass="error-label" />
+                <VBox spacing="5" styleClass="vbox" prefWidth="950">
+                    <padding>
+                        <Insets bottom="15" left="15" right="15" top="15" />
+                    </padding>
+
+                    <TextField fx:id="heureCreationField" editable="false" opacity="0.0" styleClass="text-field" />
+
+                    <Label text="Sélectionnez un utilisateur" />
+                    <ComboBox fx:id="userCombo" styleClass="combo-box" prefWidth="300"/>
+                    <Label fx:id="userErrorLabel" styleClass="error-label" minHeight="20" />
+
+                    <Label text="Date de Commande" />
+                    <DatePicker fx:id="dateCreationPicker" styleClass="date-picker" prefWidth="300"/>
+                    <Label fx:id="dateErrorLabel" styleClass="error-label" minHeight="20" />
+
+                    <Label text="Total" />
+                    <TextField fx:id="totalField" styleClass="text-field" prefWidth="300"/>
+                    <Label fx:id="totalErrorLabel" styleClass="error-label" minHeight="20" />
+
+                    <Label text="Statut de Commande" />
+                    <ComboBox fx:id="statusCombo" styleClass="combo-box" prefWidth="300">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="En Attente" />
+                                <String fx:value="Confirmée" />
+                                <String fx:value="Annulée" />
+                                <String fx:value="Remboursée" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                    <Label fx:id="statusErrorLabel" styleClass="error-label" minHeight="20" />
+
+                    <Label text="Adresse de Livraison" />
+                    <TextField fx:id="adresseLivraisonField" styleClass="text-field" prefWidth="300"/>
+                    <Label fx:id="adresseErrorLabel" styleClass="error-label" minHeight="20" />
+
+                    <Label text="Mode de Paiement" />
+                    <ComboBox fx:id="modePaiementCombo" styleClass="combo-box" prefWidth="300">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Espèces" />
+                                <String fx:value="Carte_Bancaire" />
+                                <String fx:value="e_DINAR" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                    <Label fx:id="paiementErrorLabel" styleClass="error-label" minHeight="20" />
+
+                    <Label text="Statut de Paiement" />
+                    <ComboBox fx:id="statusPaiementCombo" styleClass="combo-box" prefWidth="300">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="En Attente" />
+                                <String fx:value="Payé" />
+                                <String fx:value="Échoué" />
+                                <String fx:value="Remboursé" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                    <Label fx:id="statusPaiementErrorLabel" styleClass="error-label" minHeight="20" />
+
+                    <!-- Add Button -->
+                    <VBox alignment="CENTER_RIGHT" spacing="10">
+                        <padding>
+                            <Insets bottom="15" left="15" right="15" top="15" />
+                        </padding>
+                        <HBox fx:id="adminControls" spacing="15">
+                            <Button fx:id="addCommandeButton"
+                                    onAction="#ajouterCommande"
+                                    styleClass="add-button"
+                                    text="Ajouter Commande"
+                                    prefWidth="200"
+                                    graphicTextGap="8">
+                                <graphic>
+                                    <FontIcon iconLiteral="fas-plus" iconSize="14" iconColor="white" />
+                                </graphic>
+                            </Button>
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

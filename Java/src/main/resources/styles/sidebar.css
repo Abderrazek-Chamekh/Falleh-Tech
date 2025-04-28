@@ -1,0 +1,280 @@
+.sidebar-button {
+    -fx-pref-width: 200px;
+    -fx-min-width: 200px;
+    -fx-max-width: 200px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10 20;
+    -fx-background-radius: 8px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #2e7d32;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-spacing: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.08), 3, 0.2, 0, 2);
+}
+
+.sidebar-button:hover {
+    -fx-background-color: #d0e8d1;
+    -fx-text-fill: #1b5e20;
+}
+
+.sidebar-button:focused {
+    -fx-background-color: #c8e6c9;
+    -fx-text-fill: #1b5e20;
+}
+
+.sidebar-button.active {
+    -fx-background-color: #81c784;
+    -fx-text-fill: white;
+}
+
+
+/* Optional: give slight shadow to icons for the blur look */
+.sidebar-button .text {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 1, 0.2, 0, 0.5);
+}
+/* Toggle Sidebar Button */
+.toggle-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #333;
+    -fx-font-size: 18px;
+    -fx-padding: 5 10;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+
+/* When sidebar is hidden */
+.sidebar-hidden {
+    -fx-pref-width: 0;
+    -fx-min-width: 0;
+    -fx-max-width: 0;
+    -fx-padding: 0;
+    -fx-opacity: 0;
+}
+.navbar {
+    -fx-background-color: #e8f5e9;
+    -fx-padding: 10;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #cfe3cd;
+    -fx-spacing: 8;
+    -fx-effect: dropshadow(gaussian, rgba(160, 200, 160, 0.1), 3, 0.2, 0, 2);
+}
+
+.navbar-username {
+    -fx-text-fill: #2e463e;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+}
+.navbar-title {
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e463e;
+    -fx-font-size: 14px;
+}
+.sidebar-sub-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2f4f4f;
+    -fx-padding: 4 20 4 30;
+    -fx-font-size: 13px;
+}
+.sidebar-sub-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
+/* GENERAL NAVBAR STYLE */
+.hbox {
+    -fx-background-color: #ffffff;
+    -fx-padding: 10 15;
+    -fx-spacing: 10;
+    -fx-alignment: center-left;
+}
+
+/* ☰ Toggle Sidebar Button */
+.toggle-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 20px;
+    -fx-text-fill: #333;
+    -fx-cursor: hand;
+    -fx-padding: 4 10;
+}
+
+.toggle-button:hover {
+    -fx-background-color: #e0e0e0;
+    -fx-background-radius: 6;
+}
+
+/* 🔔 Notification Button */
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 18px;
+    -fx-text-fill: #333;
+    -fx-padding: 5 10;
+    -fx-cursor: hand;
+}
+
+.icon-button:hover {
+    -fx-background-color: #e8f5e9;
+    -fx-background-radius: 6;
+    -fx-text-fill: #388e3c;
+}
+
+/* 👤 Profile Menu */
+.profile-menu {
+    -fx-background-color: #f5f5f5;
+    -fx-font-size: 13px;
+    -fx-text-fill: #333;
+    -fx-background-radius: 6;
+    -fx-padding: 5 15;
+    -fx-cursor: hand;
+}
+
+.profile-menu:hover {
+    -fx-background-color: #c8e6c9;
+}
+
+/* Profile menu items */
+.menu-item {
+    -fx-font-size: 13px;
+    -fx-padding: 6 12;
+}
+
+.menu-item:hover {
+    -fx-background-color: #e0f2f1;
+}
+
+.notification-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-size: 18px;
+    -fx-padding: 5 10 5 10;
+    -fx-cursor: hand;
+}
+
+.notification-button:hover {
+    -fx-background-color: #f0f0f0;
+    -fx-border-radius: 15px;
+}
+
+.notification-badge {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 2 5 2 5;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/* Notification Button Styles */
+.notification-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2c3e50;
+    -fx-font-size: 16px;
+    -fx-padding: 8px 12px;
+    -fx-cursor: hand;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
+.notification-btn:hover {
+    -fx-background-color: rgba(52, 152, 219, 0.1);
+}
+
+.notification-btn .badge {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 2px 5px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 2, 0.5, 0, 1);
+}
+
+/* Notification Dialog Styles */
+.notification-dialog {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.5, 0, 2);
+}
+
+.notification-dialog .header {
+    -fx-background-color: linear-gradient(to right, #3498db, #2c3e50);
+    -fx-background-radius: 10px 10px 0 0;
+    -fx-padding: 15px;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.notification-list {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.notification-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+    -fx-border-color: #ecf0f1;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.notification-list .list-cell:filled:hover {
+    -fx-background-color: #f8f9fa;
+}
+
+.notification-list .list-cell:filled:selected {
+    -fx-background-color: #e3f2fd;
+}
+
+.notification-item {
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 3, 0.3, 0, 1);
+}
+
+.notification-message {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.notification-details {
+    -fx-font-size: 12px;
+    -fx-text-fill: #7f8c8d;
+}
+
+.notification-time {
+    -fx-font-size: 11px;
+    -fx-text-fill: #bdc3c7;
+    -fx-font-style: italic;
+}
+
+/* Animation Classes */
+@keyframes pulse {
+    0% { -fx-scale-x: 1; -fx-scale-y: 1; }
+    50% { -fx-scale-x: 1.1; -fx-scale-y: 1.1; }
+    100% { -fx-scale-x: 1; -fx-scale-y: 1; }
+}
+
+.pulse-animation {
+    -fx-animation: pulse 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { -fx-translate-y: 0; }
+    50% { -fx-translate-y: -5px; }
+}
+
+.bounce-animation {
+    -fx-animation: bounce 0.5s infinite;
+}
+
+.new-notification {
+    -fx-background-color: #e3f2fd;
+    -fx-border-color: #bbdefb;
+    -fx-border-width: 0 0 0 3px;
+    -fx-border-style: solid;
+}

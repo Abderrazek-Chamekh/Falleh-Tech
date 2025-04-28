@@ -1,0 +1,238 @@
+/* ===== CONTENEUR PRINCIPAL ===== */
+.main-pane {
+    -fx-spacing: 20;
+    -fx-padding: 25;
+    -fx-background-color: #f9f9f9;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+}
+
+/* ===== TITRE ===== */
+.section-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2E7D32;
+}
+
+/* ===== TABLE ===== */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 10;
+    -fx-border-color: #19430c;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.06), 8, 0, 0, 2);
+}
+
+.table-row-cell:filled:selected, .table-row-cell:focused:selected {
+    -fx-background-color: #efd5d5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #c8e6c9; /* 🌿 Plus foncé que #e8f5e9 */
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent; /* important sinon il écrase .column-header-background */
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-text-fill: #1b5e20; /* ✅ Texte plus foncé */
+}
+
+
+.table-cell {
+    -fx-alignment: CENTER;
+}
+
+
+/* ===== TOTAL ===== */
+.total-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #388E3C;
+}
+
+/* ===== BOUTON COMMANDER ===== */
+.commander-button {
+    -fx-background-color: #43a047;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 18;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 5, 0.2, 0, 2);
+}
+
+.commander-button:hover {
+    -fx-background-color: #2e7d32;
+}
+
+
+.quantity-box {
+    -fx-alignment: center;
+    -fx-spacing: 6;
+}
+
+.quantity-btn {
+    -fx-background-color: #e0f2f1;
+    -fx-border-color: #26a69a;
+    -fx-text-fill: #00695c;
+    -fx-font-weight: bold;
+    -fx-padding: 3 8;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+}
+
+.quantity-btn:hover {
+    -fx-background-color: #b2dfdb;
+}
+
+.quantity-label {
+    -fx-font-weight: bold;
+    -fx-padding: 3 10;
+    -fx-font-size: 13px;
+}
+
+/* ===== SPINNER STYLE (quantité) ===== */
+.spinner {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cdecc3;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-pref-width: 70px;
+    -fx-alignment: center;
+}
+/* ===== ACTION BUTTONS STYLE (Favoris) ===== */
+.add-to-cart-button {
+    -fx-background-color: #f4b8b8; /* ✅ vert comme le style panier */
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 4, 0.3, 0, 1);
+}
+
+.add-to-cart-button:hover {
+    -fx-background-color: #f3bbbb;
+}
+
+.delete-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 5;
+}
+
+.delete-button:hover {
+    -fx-background-color: #c0392b;
+}
+
+
+
+.add-fav-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.add-fav-button:hover {
+    -fx-background-color: #c0392b;
+}
+/* Style général pour chaque carte suggestion */
+.suggestion-card {
+    -fx-background-color: #fff;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-pref-width: 150;
+    -fx-max-width: 150;
+    -fx-min-width: 150;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0.0, 0, 2);
+    -fx-spacing: 8;
+}
+
+/* Image uniforme dans les cartes */
+.suggestion-card .image-view {
+    -fx-fit-width: 100;
+    -fx-fit-height: 100;
+    -fx-preserve-ratio: true;
+}
+
+/* Titre du produit */
+.suggestion-card .nom-label {
+    -fx-font-size: 14;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+}
+
+/* Prix */
+.suggestion-card .prix-label {
+    -fx-font-size: 12;
+    -fx-text-fill: #666;
+}
+
+/* Bouton Favoris */
+.suggestion-card .add-fav-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-padding: 5 10 5 10;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+}
+
+/* Hover sur carte */
+.suggestion-card:hover {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #2ecc71;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+    -fx-transition: all 0.3s ease;
+}
+.old-total-label {
+    -fx-text-fill: #888;
+    -fx-font-size: 14px;
+    -fx-strikethrough: true;
+}
+
+.remise-message {
+    -fx-text-fill: #28a745;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+.hint-label {
+    -fx-text-fill: #6b1d1d;
+    -fx-font-size: 13px;
+    -fx-padding: 0 0 10 0;
+    -fx-font-style: italic;
+}
+.code-promo-bar {
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+}
+
+.promo-question {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.text-field {
+    -fx-pref-width: 200px;
+    -fx-font-size: 14px;
+}
+
+

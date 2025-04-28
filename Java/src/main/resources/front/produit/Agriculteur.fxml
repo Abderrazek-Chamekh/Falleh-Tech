@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Controllers.produitfront.AgriculteurController"
+            stylesheets="@/styles/agriculteur.css">
+
+    <VBox spacing="10"
+          AnchorPane.topAnchor="10.0"
+          AnchorPane.leftAnchor="10.0"
+          AnchorPane.rightAnchor="10.0"
+          AnchorPane.bottomAnchor="10.0">
+
+        <!-- ✅ Titre -->
+        <Label text="🌿 Mes Produits" styleClass="label" />
+
+        <!-- ✅ Bouton Ajouter -->
+        <Button fx:id="ajouterButton"
+                text="➕ Ajouter un produit"
+                onAction="#ajouterProduitPopup"
+                styleClass="ajouter-produit-btn"/>
+
+        <!-- ✅ Scrollable FlowPane -->
+        <ScrollPane fitToWidth="true" vbarPolicy="ALWAYS" hbarPolicy="NEVER">
+            <content>
+                <FlowPane fx:id="productContainer" hgap="15" vgap="15" prefWrapLength="900">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                </FlowPane>
+            </content>
+        </ScrollPane>
+
+        <!-- ✅ Pagination Controls -->
+        <HBox spacing="20" alignment="CENTER">
+            <Button fx:id="btnPrecedent"
+                    text="◀ Précédent"
+                    onAction="#pagePrecedente"/>
+            <Label fx:id="pageLabel" text="Page 1"/>
+            <Button fx:id="btnSuivant"
+                    text="Suivant ▶"
+                    onAction="#pageSuivante"/>
+        </HBox>
+
+    </VBox>
+</AnchorPane>

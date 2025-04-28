@@ -1,0 +1,120 @@
+/* Main BorderPane styling */
+.border-pane {
+    -fx-background-color: #f5f7fa;
+}
+
+/* Content container */
+.content-container {
+    -fx-padding: 20px;
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
+    -fx-max-width: 900px;
+    -fx-alignment: top-center;
+}
+
+/* Header styling */
+.header {
+    -fx-padding: 15px 20px;
+    -fx-background-color: linear-gradient(to right, #2ecc71, #27ae60);
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(46, 204, 113, 0.3), 5, 0, 0, 1);
+}
+
+.header-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* Form styling */
+.vbox {
+    -fx-spacing: 12px;
+    -fx-padding: 15px;
+}
+
+.label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #34495e;
+    -fx-font-size: 14px;
+}
+
+.text-field, .combo-box, .date-picker {
+    -fx-pref-width: 300px;
+    -fx-pref-height: 35px;
+    -fx-background-radius: 4px;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 4px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #95a5a6;
+}
+
+.text-field:focused, .combo-box:focused, .date-picker:focused {
+    -fx-border-color: #2ecc71;
+    -fx-effect: dropshadow(three-pass-box, rgba(46, 204, 113, 0.3), 5, 0, 0, 0);
+}
+
+/* Button styling */
+.add-button {
+    -fx-background-color: #2ecc71;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 25px;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 8px;
+}
+
+.add-button:hover {
+    -fx-background-color: #27ae60;
+}
+
+.add-button:pressed {
+    -fx-background-color: #219653;
+}
+
+/* ComboBox dropdown styling */
+.combo-box-popup .list-view {
+    -fx-pref-width: 300px;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+}
+
+.combo-box-popup .list-cell {
+    -fx-padding: 5px 10px;
+    -fx-background-color: white;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #e8f8f0;
+}
+
+/* DatePicker styling */
+.date-picker-popup {
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #2ecc71;
+}
+
+.date-picker-popup .month-year-pane .label {
+    -fx-text-fill: white;
+}
+.disabled-field {
+    -fx-opacity: 1.0;
+    -fx-background-color: derive(-fx-control-inner-background, -10%);
+}
+.error-field {
+    -fx-border-color: #ff0000;
+    -fx-border-width: 2px;
+    -fx-border-radius: 3px;
+}
+
+.error-label {
+    -fx-text-fill: #ff0000;
+    -fx-font-size: 12px;
+    -fx-padding: 5 0 0 0;
+}

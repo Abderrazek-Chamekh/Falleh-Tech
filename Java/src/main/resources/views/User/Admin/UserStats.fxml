@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="tn.esprit.Controllers.User.Admin.UserStatsController"
+      prefWidth="800" prefHeight="600"
+      alignment="CENTER" spacing="20">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Header Section with Gradient Background -->
+    <StackPane>
+        <Rectangle arcWidth="10" arcHeight="10" height="80"
+                   style="-fx-fill: linear-gradient(to right, #2E8B57, #1F6B4A); -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);"/>
+        <VBox alignment="CENTER">
+            <Label text="USER ANALYTICS DASHBOARD"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+            <Label text="Comprehensive User Statistics and Insights"
+                   style="-fx-font-size: 14px; -fx-text-fill: rgba(255,255,255,0.8);"/>
+        </VBox>
+    </StackPane>
+
+    <!-- Key Metrics Cards -->
+    <HBox alignment="CENTER" spacing="20" style="-fx-padding: 10px;">
+        <!-- Total Users Card -->
+        <VBox style="-fx-background-color: white; -fx-background-radius: 10px; -fx-padding: 15px; -fx-spacing: 10px; -fx-alignment: CENTER; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);"
+              fx:id="totalUsersCard">
+            <ImageView fitWidth="40" fitHeight="40">
+                <image>
+                    <Image url="@/Images/icons/profile.png"/>
+                </image>
+            </ImageView>
+            <Label text="TOTAL USERS" style="-fx-font-weight: bold; -fx-text-fill: #333333;"/>
+            <Label fx:id="totalUsersLabel" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2E8B57;"/>
+            <Label fx:id="totalUsersNote" style="-fx-font-size: 12px; -fx-text-fill: #666666;"/>
+        </VBox>
+
+        <!-- Active Users Card -->
+        <VBox style="-fx-background-color: white; -fx-background-radius: 10px; -fx-padding: 15px; -fx-spacing: 10px; -fx-alignment: CENTER; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);"
+              fx:id="activeUsersCard">
+            <ImageView fitWidth="40" fitHeight="40">
+                <image>
+                    <Image url="@/Images/icons/active.png"/>
+                </image>
+            </ImageView>
+            <Label text="ACTIVE USERS" style="-fx-font-weight: bold; -fx-text-fill: #333333;"/>
+            <Label fx:id="activeUsersLabel" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2E8B57;"/>
+            <Label fx:id="activeUsersNote" style="-fx-font-size: 12px; -fx-text-fill: #666666;"/>
+        </VBox>
+
+        <!-- Roles Distribution Card -->
+        <VBox style="-fx-background-color: white; -fx-background-radius: 10px; -fx-padding: 15px; -fx-spacing: 10px; -fx-alignment: CENTER; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);"
+              fx:id="rolesCard">
+            <ImageView fitWidth="40" fitHeight="40">
+                <image>
+                    <Image url="@/Images/icons/role.png"/>
+                </image>
+            </ImageView>
+            <Label text="ROLES DISTRIBUTION" style="-fx-font-weight: bold; -fx-text-fill: #333333;"/>
+            <Label fx:id="rolesCountLabel" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2E8B57;"/>
+            <Label fx:id="rolesNote" style="-fx-font-size: 12px; -fx-text-fill: #666666;"/>
+        </VBox>
+    </HBox>
+
+    <!-- Charts Section - Now only contains two charts in one row -->
+    <HBox alignment="CENTER" spacing="20" style="-fx-padding: 10px;">
+        <!-- Left - Roles Pie Chart -->
+        <VBox style="-fx-background-color: white; -fx-background-radius: 10px; -fx-padding: 15px; -fx-spacing: 10px; -fx-alignment: CENTER; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);"
+              prefWidth="350" prefHeight="300">
+            <Label text="USER ROLES DISTRIBUTION" style="-fx-font-weight: bold; -fx-text-fill: #333333;"/>
+            <PieChart fx:id="rolesPieChart" legendVisible="true"
+                      style="-fx-pref-width: 300px; -fx-pref-height: 250px;"/>
+            <Label fx:id="rolesChartNote" style="-fx-font-size: 12px; -fx-text-fill: #666666;"/>
+        </VBox>
+
+        <!-- Right - Status Donut Chart -->
+        <VBox style="-fx-background-color: white; -fx-background-radius: 10px; -fx-padding: 15px; -fx-spacing: 10px; -fx-alignment: CENTER; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);"
+              prefWidth="350" prefHeight="300">
+            <Label text="ACCOUNT STATUS" style="-fx-font-weight: bold; -fx-text-fill: #333333;"/>
+            <PieChart fx:id="statusPieChart" legendVisible="true"
+                      style="-fx-pref-width: 300px; -fx-pref-height: 250px;"/>
+            <Label fx:id="statusChartNote" style="-fx-font-size: 12px; -fx-text-fill: #666666;"/>
+        </VBox>
+    </HBox>
+
+    <!-- Footer -->
+    <Button text="CLOSE DASHBOARD" onAction="#handleClose"
+            style="-fx-background-color: #2E8B57; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px 20px; -fx-background-radius: 20px; -fx-cursor: hand;"/>
+</VBox>

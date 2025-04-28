@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+
+<BorderPane fx:id="borderPane" prefHeight="700.0" prefWidth="1000.0"
+            stylesheets="@modifier_commande.css"
+            styleClass="border-pane"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.Controllers.E_Commerce.ModifierCommandeController">
+
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+            <VBox spacing="20" styleClass="content-container">
+                <!-- Header -->
+                <HBox alignment="CENTER_LEFT" styleClass="header">
+                    <Label styleClass="header-title" text="Modifier la Commande" />
+                    <Region HBox.hgrow="ALWAYS" />
+                </HBox>
+
+                <!-- Global error label -->
+                <Label fx:id="globalErrorLabel" styleClass="error-label" visible="false"/>
+
+                <GridPane hgap="10" vgap="10" styleClass="grid-pane">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+
+                    <Label text="Total:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="totalField" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="300"/>
+                    <Label fx:id="totalErrorLabel" styleClass="error-label" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+
+                    <Label text="Adresse Livraison:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="adresseLivraisonField" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="300"/>
+                    <Label fx:id="adresseErrorLabel" styleClass="error-label" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+
+                    <Label text="Date Création:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <DatePicker fx:id="dateCreationPicker" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="300"/>
+                    <Label fx:id="dateErrorLabel" styleClass="error-label" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+
+                    <Label text="Heure Création:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <TextField fx:id="heureCreationField" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="300"/>
+                    <Label fx:id="heureErrorLabel" styleClass="error-label" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+
+                    <Label text="Statut:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="statusCombo" GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="300"/>
+                    <Label fx:id="statusErrorLabel" styleClass="error-label" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+
+                    <Label text="Mode Paiement:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="modePaiementCombo" GridPane.rowIndex="5" GridPane.columnIndex="1" prefWidth="300"/>
+                    <Label fx:id="paiementErrorLabel" styleClass="error-label" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
+
+                    <Label text="Statut Paiement:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="statusPaiementCombo" GridPane.rowIndex="6" GridPane.columnIndex="1" prefWidth="300"/>
+                    <Label fx:id="statusPaiementErrorLabel" styleClass="error-label" GridPane.rowIndex="6" GridPane.columnIndex="2"/>
+
+                    <Label text="Utilisateur:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="userCombo" GridPane.rowIndex="7" GridPane.columnIndex="1" prefWidth="300"/>
+                    <Label fx:id="userErrorLabel" styleClass="error-label" GridPane.rowIndex="7" GridPane.columnIndex="2"/>
+
+                    <Button text="Valider les modifications"
+                            fx:id="validerButton"
+                            onAction="#validerModifications"
+                            GridPane.rowIndex="8"
+                            GridPane.columnIndex="1"
+                            GridPane.halignment="RIGHT"
+                            prefWidth="200"/>
+                </GridPane>
+
+                <HBox fx:id="adminControls" spacing="15">
+                    <!-- Additional admin controls can be added here -->
+                </HBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

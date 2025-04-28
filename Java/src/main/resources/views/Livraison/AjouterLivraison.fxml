@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:id="borderPane" prefHeight="500.0" prefWidth="700.0" stylesheets="@ajouterL.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.Controllers.E_Commerce.AjouterLivraisonController"
+            styleClass="border-pane">
+
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+            <VBox styleClass="content-container" alignment="TOP_CENTER" spacing="20" prefWidth="650">
+                <Label text="Nouvelle Livraison" styleClass="header-title" />
+
+                <!-- Global error label -->
+                <Label fx:id="globalErrorLabel" styleClass="error-label" visible="false"/>
+
+                <GridPane fx:id="mainGrid" styleClass="grid-pane" hgap="15" vgap="15">
+                    <padding>
+                        <Insets top="15" right="15" bottom="15" left="15"/>
+                    </padding>
+
+                    <Label text="Commande:" styleClass="label" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="commandeCombo" disable="true" styleClass="combo-box" prefWidth="300"
+                              GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    <Label fx:id="commandeErrorLabel" styleClass="error-label" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+
+                    <Label text="Statut:" styleClass="label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="statutCombo" styleClass="combo-box" prefWidth="300"
+                              GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    <Label fx:id="statutErrorLabel" styleClass="error-label" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+
+                    <Label text="Transporteur:" styleClass="label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="transporteurField" styleClass="text-field" promptText="Nom du transporteur" prefWidth="300"
+                               GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    <Label fx:id="transporteurErrorLabel" styleClass="error-label" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+
+                    <Label text="Téléphone:" styleClass="label" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <TextField fx:id="numTelField" styleClass="text-field" promptText="Numéro du transporteur" prefWidth="300"
+                               GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                    <Label fx:id="numTelErrorLabel" styleClass="error-label" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+
+                    <Label text="Date Livraison:" styleClass="label" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <DatePicker fx:id="dateLivraisonPicker" styleClass="date-picker" prefWidth="300"
+                                GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                    <Label fx:id="dateErrorLabel" styleClass="error-label" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+
+                    <Button fx:id="ajouterButton" styleClass="add-button" text="Ajouter" prefWidth="150"
+                            GridPane.rowIndex="5" GridPane.columnIndex="1" GridPane.halignment="RIGHT" onAction="#ajouterLivraison"/>
+                </GridPane>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

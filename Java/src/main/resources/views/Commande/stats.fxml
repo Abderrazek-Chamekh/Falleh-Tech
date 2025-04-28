@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.Controllers.E_Commerce.StatsController"
+            stylesheets="@stats.css"
+            prefViewportWidth="850" prefViewportHeight="600"
+            pannable="true">
+
+    <!-- Main content container with padding -->
+    <VBox fx:id="mainContainer" spacing="20" styleClass="stats-container"
+          minWidth="850" minHeight="1200">  <!-- Increased minHeight to ensure scrolling -->
+
+        <Label text="Statistiques des Commandes" styleClass="stats-title"/>
+
+        <!-- Monthly Orders Chart Section -->
+        <VBox spacing="10" styleClass="chart-container">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Commandes par Mois" styleClass="chart-title"/>
+                <ComboBox fx:id="yearComboBox" styleClass="year-combo" prefWidth="150"/>
+            </HBox>
+            <BarChart fx:id="monthlyChart" title="Commandes par Mois"
+                      legendVisible="false" prefHeight="400" minWidth="800">
+                <xAxis>
+                    <CategoryAxis label="Mois" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Nombre de Commandes" />
+                </yAxis>
+            </BarChart>
+        </VBox>
+
+        <!-- Status and Payment Charts Section -->
+        <HBox spacing="20" styleClass="charts-row"
+              alignment="CENTER"
+              minHeight="450">  <!-- Fixed height for this row -->
+
+            <VBox spacing="10" styleClass="chart-container"
+                  alignment="CENTER"
+                  minWidth="400">
+                <Label text="Commandes par Statut" styleClass="chart-title"/>
+                <PieChart fx:id="statusChart" prefWidth="380" prefHeight="380"/>
+            </VBox>
+
+            <VBox spacing="10" styleClass="chart-container"
+                  alignment="CENTER"
+                  minWidth="400">
+                <Label text="Commandes par Mode de Paiement" styleClass="chart-title"/>
+                <PieChart fx:id="paymentChart" prefWidth="380" prefHeight="380"/>
+            </VBox>
+        </HBox>
+
+        <!-- Additional padding at the bottom -->
+        <Region prefHeight="40"/>
+    </VBox>
+</ScrollPane>

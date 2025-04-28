@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="cardContainer"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.Controllers.ouvrier.OffreCardOuvrierController"
+      styleClass="card-container"
+      spacing="12">
+
+
+
+    <Label fx:id="lblTitre" styleClass="label-title" />
+    <Label fx:id="lblDescription" styleClass="label-description" />
+
+    <Label text="Salaire:" />
+    <Label fx:id="lblSalaire" />
+
+    <Label text="Lieu:" />
+    <Label fx:id="lblLocation" />
+
+    <!-- Status Label -->
+    <Label fx:id="lblStatus" styleClass="status-badge status-pending" />
+
+    <!-- Buttons -->
+    <HBox spacing="10" styleClass="button-row">
+        <Button text="Postuler" fx:id="btnApply" styleClass="button-apply" />
+        <Button text="Contacter" fx:id="btnContact" styleClass="button-contact" />
+        <Button text="Retirer" fx:id="btnWithdraw" visible="false" styleClass="button-withdraw" />
+    </HBox>
+
+</VBox>

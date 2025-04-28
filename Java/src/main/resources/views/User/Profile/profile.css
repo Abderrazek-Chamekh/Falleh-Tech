@@ -1,0 +1,314 @@
+/* ========== GLOBAL VARIABLES ========== */
+.root {
+    -fx-primary-color: #2E8B57;
+    -fx-dark-primary: #1F6B4A;
+    -fx-light-primary: #E8F5E9;
+    -fx-accent-color: #4CAF50;
+    -fx-white: #FFFFFF;
+    -fx-light-gray: #F5F5F5;
+    -fx-medium-gray: #E0E0E0;
+    -fx-dark-gray: #333333;
+    -fx-danger-red: #E53935;
+    -fx-warning-orange: #FF9800;
+    -fx-info-blue: #2196F3;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* ========== SIDEBAR STYLES ========== */
+.sidebar {
+    -fx-background-color: linear-gradient(to bottom, -fx-primary-color, -fx-dark-primary);
+    -fx-padding: 20px 15px;
+    -fx-spacing: 25px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);
+}
+
+.logo-title-container {
+    -fx-padding: 0 0 20px 0;
+    -fx-border-color: rgba(255,255,255,0.2);
+    -fx-border-width: 0 0 1px 0;
+}
+
+.project-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* ========== NAVIGATION MENU ========== */
+.nav-menu {
+    -fx-padding: 15px 0;
+    -fx-spacing: 5px;
+}
+
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 12px 15px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-cursor: hand;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-graphic-text-gap: 15px;
+}
+
+.nav-btn:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-btn.active {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-font-weight: 600;
+    -fx-border-color: white;
+    -fx-border-width: 0 0 0 3px;
+    -fx-border-insets: 0 0 0 -3px;
+    -fx-padding: 12px 15px 12px 12px;
+}
+
+/* ========== USER PROFILE SECTION ========== */
+.user-profile {
+    -fx-alignment: CENTER;
+    -fx-padding: 25px 0 15px 0;
+    -fx-spacing: 15px;
+    -fx-border-color: rgba(255,255,255,0.2);
+    -fx-border-width: 1px 0 0 0;
+}
+
+.profile-img {
+    -fx-border-radius: 50%;
+    -fx-border-color: white;
+    -fx-border-width: 3px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);
+}
+
+.user-role {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.logout-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+    -fx-border-radius: 20px;
+    -fx-padding: 6px 20px 6px 15px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-graphic-text-gap: 8px;
+}
+
+.logout-btn:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ========== PROFILE CONTENT STYLES ========== */
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.profile-container {
+    -fx-background-color: -fx-light-gray;
+}
+
+.profile-header {
+    -fx-background-color: -fx-primary-color;
+    -fx-padding: 30px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-spacing: 20px;
+}
+
+.profile-info {
+    -fx-spacing: 8px;
+}
+
+.full-name {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.role-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-padding: 5px 15px;
+    -fx-background-color: rgba(255,255,255,0.2);
+    -fx-background-radius: 15px;
+}
+
+.details-section {
+    -fx-background-color: white;
+    -fx-padding: 30px;
+    -fx-spacing: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+.section-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-gray;
+    -fx-padding: 0 0 15px 0;
+}
+
+.info-grid {
+    -fx-vgap: 15px;
+    -fx-hgap: 20px;
+}
+
+.field-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #555555;
+}
+
+.field-value {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+    -fx-padding: 3px 0;
+}
+
+.action-buttons {
+    -fx-spacing: 15px;
+    -fx-alignment: CENTER;
+    -fx-padding: 20px;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+.edit-btn {
+    -fx-background-color: -fx-info-blue;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 25px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.edit-btn:hover {
+    -fx-background-color: #1976D2;
+}
+
+.change-password-btn {
+    -fx-background-color: -fx-primary-color;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 25px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.change-password-btn:hover {
+    -fx-background-color: -fx-dark-primary;
+}
+
+/* ========== FORM STYLES ========== */
+.edit-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-gray;
+}
+
+.form-grid {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 25px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+.form-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #555555;
+    -fx-padding: 5px 0;
+}
+
+.form-field {
+    -fx-font-size: 14px;
+    -fx-pref-height: 35px;
+    -fx-background-color: -fx-white;
+    -fx-border-color: -fx-medium-gray;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 0 10px;
+}
+
+.form-field:focused {
+    -fx-border-color: -fx-primary-color;
+}
+
+
+/* Button Styles */
+.save-btn {
+    -fx-background-color: -fx-primary-color;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 25px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.save-btn:hover {
+    -fx-background-color: -fx-dark-primary;
+}
+
+.cancel-btn {
+    -fx-background-color: -fx-medium-gray;
+    -fx-text-fill: -fx-dark-gray;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 25px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.cancel-btn:hover {
+    -fx-background-color: #d0d0d0;
+}
+
+/* Error Message Styling */
+.error-message {
+    -fx-text-fill: -fx-danger-red;
+    -fx-font-size: 13px;
+    -fx-font-weight: 500;
+    -fx-padding: 5px 0;
+}
+
+/* Password Strength Indicator */
+.password-strength {
+    -fx-font-size: 12px;
+    -fx-padding: 5px 0 0 0;
+}
+
+.password-weak {
+    -fx-text-fill: -fx-danger-red;
+}
+
+.password-medium {
+    -fx-text-fill: -fx-warning-orange;
+}
+
+.password-strong {
+    -fx-text-fill: -fx-primary-color;
+}
+
+/* Change Password Specific */
+.change-password-container {
+    -fx-padding: 20px;
+    -fx-background-color: -fx-light-gray;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .form-grid {
+        -fx-padding: 15px;
+    }
+
+    .edit-title {
+        -fx-font-size: 20px;
+    }
+}

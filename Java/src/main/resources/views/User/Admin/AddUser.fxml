@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.collections.FXCollections?>
+
+<?import java.lang.String?>
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            stylesheets="@dashboard.css" fx:controller="tn.esprit.Controllers.User.Admin.AddUserController">
+
+    <!-- Center Content -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+            <VBox spacing="20" styleClass="content-container" alignment="TOP_CENTER">
+                <!-- Header -->
+                <HBox styleClass="header" alignment="CENTER_LEFT">
+                    <Label styleClass="header-title" text="Add New User" />
+                    <Region HBox.hgrow="ALWAYS" />
+                </HBox>
+
+                <!-- Error Message (General) -->
+                <Label fx:id="generalError" styleClass="error-label" visible="false" />
+
+                <!-- User Form -->
+                <VBox styleClass="form-container" spacing="20" alignment="TOP_CENTER">
+                    <GridPane hgap="15" vgap="15">
+                        <columnConstraints>
+                            <ColumnConstraints halignment="RIGHT" hgrow="NEVER" prefWidth="150"/>
+                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="300"/>
+                        </columnConstraints>
+
+                        <!-- Basic Information -->
+                        <Label text="Basic Information:" GridPane.columnSpan="2" styleClass="form-section-label"/>
+
+                        <Label text="First Name:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="firstNameField" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="form-field"/>
+                        <Label fx:id="firstNameError" styleClass="field-error" GridPane.rowIndex="2" GridPane.columnIndex="1" visible="false" />
+
+                        <Label text="Last Name:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <TextField fx:id="lastNameField" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="form-field"/>
+                        <Label fx:id="lastNameError" styleClass="field-error" GridPane.rowIndex="4" GridPane.columnIndex="1" visible="false" />
+
+                        <Label text="Email:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                        <TextField fx:id="emailField" GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="form-field"/>
+                        <Label fx:id="emailError" styleClass="field-error" GridPane.rowIndex="6" GridPane.columnIndex="1" visible="false" />
+
+                        <Label text="Password:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                        <PasswordField fx:id="passwordField" GridPane.rowIndex="7" GridPane.columnIndex="1" styleClass="form-field"/>
+                        <Label fx:id="passwordError" styleClass="field-error" GridPane.rowIndex="8" GridPane.columnIndex="1" visible="false" />
+
+                        <Label text="Confirm Password:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                        <PasswordField fx:id="confirmPasswordField" GridPane.rowIndex="9" GridPane.columnIndex="1" styleClass="form-field"/>
+                        <Label fx:id="confirmPasswordError" styleClass="field-error" GridPane.rowIndex="10" GridPane.columnIndex="1" visible="false" />
+
+                        <Label text="Phone Number:" GridPane.rowIndex="11" GridPane.columnIndex="0"/>
+                        <TextField fx:id="phoneField" GridPane.rowIndex="11" GridPane.columnIndex="1" styleClass="form-field"/>
+                        <Label fx:id="phoneError" styleClass="field-error" GridPane.rowIndex="12" GridPane.columnIndex="1" visible="false" />
+
+                        <Label text="CIN:" GridPane.rowIndex="13" GridPane.columnIndex="0"/>
+                        <TextField fx:id="cinField" GridPane.rowIndex="13" GridPane.columnIndex="1" styleClass="form-field"/>
+                        <Label fx:id="cinError" styleClass="field-error" GridPane.rowIndex="14" GridPane.columnIndex="1" visible="false" />
+
+                        <Label text="Role:" GridPane.rowIndex="15" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="roleCombo" GridPane.rowIndex="15" GridPane.columnIndex="1" styleClass="form-field">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Agriculteur"/>
+                                    <String fx:value="Client"/>
+                                    <String fx:value="Ouvrier"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                        <Label fx:id="roleError" styleClass="field-error" GridPane.rowIndex="16" GridPane.columnIndex="1" visible="false" />
+
+                        <!-- Ouvrier Specific Fields -->
+                        <Label fx:id="ouvrierLabel" text="Ouvrier Information:" GridPane.rowIndex="17" GridPane.columnIndex="0" GridPane.columnSpan="2" styleClass="form-section-label" visible="false"/>
+
+                        <Label fx:id="disponibilityLabel" text="Disponibility:" GridPane.rowIndex="18" GridPane.columnIndex="0" visible="false"/>
+                        <DatePicker fx:id="disponibilityField" GridPane.rowIndex="18" GridPane.columnIndex="1" styleClass="form-field" visible="false"/>
+                        <Label fx:id="disponibilityError" styleClass="field-error" GridPane.rowIndex="19" GridPane.columnIndex="1" visible="false" />
+
+                        <Label fx:id="locationLabel" text="Location:" GridPane.rowIndex="20" GridPane.columnIndex="0" visible="false"/>
+                        <TextField fx:id="locationField" GridPane.rowIndex="20" GridPane.columnIndex="1" styleClass="form-field" visible="false"/>
+                        <Label fx:id="locationError" styleClass="field-error" GridPane.rowIndex="21" GridPane.columnIndex="1" visible="false" />
+
+                        <Label fx:id="experienceLabel" text="Experience:" GridPane.rowIndex="22" GridPane.columnIndex="0" visible="false"/>
+                        <TextField fx:id="experienceField" GridPane.rowIndex="22" GridPane.columnIndex="1" styleClass="form-field" visible="false"/>
+                        <Label fx:id="experienceError" styleClass="field-error" GridPane.rowIndex="23" GridPane.columnIndex="1" visible="false" />
+                    </GridPane>
+
+                    <!-- Form Buttons -->
+                    <HBox spacing="20" alignment="CENTER">
+                        <Button text="Save User" styleClass="save-btn" onAction="#handleSave" />
+                        <Button text="Reset Form" styleClass="reset-btn" onAction="#handleReset" />
+                    </HBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

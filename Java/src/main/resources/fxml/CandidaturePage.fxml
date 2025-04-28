@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.CandidatureController">
+    <children>
+        <TabPane fx:id="tabPane" layoutX="20.0" layoutY="20.0" prefWidth="850.0" prefHeight="520.0">
+            <tabs>
+                <!-- Affichage Tab for Candidature -->
+                <Tab text="Affichage">
+                    <AnchorPane>
+                        <TableView fx:id="candidatureTable" prefWidth="800.0" layoutX="20.0" layoutY="20.0">
+                            <columns>
+                                <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                                <TableColumn fx:id="colStatut" text="Statut" prefWidth="150"/>
+                                <TableColumn fx:id="colDate" text="Date Applied" prefWidth="200"/>
+                                <TableColumn fx:id="colRating" text="Rating" prefWidth="100"/>
+                            </columns>
+                        </TableView>
+                    </AnchorPane>
+                </Tab>
+
+                <!-- Add / Update Tab for Candidature -->
+                <Tab fx:id="ajoutTab" text="Ajouter / Modifier">
+                    <VBox spacing="10" alignment="TOP_LEFT">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+
+                        <!-- Shared label width style -->
+                        <HBox spacing="10">
+                            <Label text="Statut:" minWidth="150"/>
+                            <ComboBox fx:id="statutCombo" prefWidth="300"/>
+                        </HBox>
+                        <HBox spacing="10">
+                            <Label text="Rating:" minWidth="150"/>
+                            <TextField fx:id="ratingField" prefWidth="300"/>
+                        </HBox>
+                        <HBox spacing="10">
+                            <Label text="ID (si modification):" minWidth="150"/>
+                            <TextField fx:id="idField" prefWidth="300"/>
+                        </HBox>
+
+                        <HBox spacing="10">
+                            <Button text="Ajouter" onAction="#ajouterCandidature" styleClass="success-button"/>
+                            <Button text="Modifier" onAction="#modifierCandidature" styleClass="success-button"/>
+                            <Button text="Retourrrr" onAction="#goBackToMain" styleClass="ghost-button"/>
+                            <Button text="Afficher toutes les candidatures" onAction="#afficherToutesLesCandidatures" />
+
+                        </HBox>
+                    </VBox>
+                </Tab>
+
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

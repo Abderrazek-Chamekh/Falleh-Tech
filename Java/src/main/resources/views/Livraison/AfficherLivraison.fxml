@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<BorderPane fx:id="borderPane" prefHeight="683.0" prefWidth="967.0" stylesheets="@showLivraison.css" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.E_Commerce.AfficherLivraisonController">
+
+
+
+    <!-- Center Content (Posts Management) -->
+    <center>
+        <VBox spacing="20" styleClass="content-container">
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" styleClass="header">
+                <Label styleClass="header-title" text="Commandes Management" />
+                <Region HBox.hgrow="ALWAYS" />
+            </HBox>
+
+
+            <TableView fx:id="livraisonTableView">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID" />
+                    <TableColumn fx:id="commandeColumn" text="Commande ID" />
+                    <TableColumn fx:id="statutColumn" text="Statut" />
+                    <TableColumn fx:id="transporteurColumn" text="Transporteur" />
+                    <TableColumn fx:id="numTelColumn" text="Téléphone" />
+                    <TableColumn fx:id="dateLivraisonColumn" text="Date Livraison" />
+                    <TableColumn fx:id="actionsColumn" text="Actions" />
+                </columns>
+            </TableView>
+
+
+            <HBox fx:id="adminControls" spacing="15" >
+                <Button fx:id="retourButton" onAction="#handleRetour" styleClass="add-button" text="🔙 Return" />
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

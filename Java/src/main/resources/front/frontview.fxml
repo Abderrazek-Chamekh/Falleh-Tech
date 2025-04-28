@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Controllers.front.FrontViewController"
+            stylesheets="@../styles/sidebar_front.css">
+
+    <children>
+        <BorderPane AnchorPane.topAnchor="0"
+                    AnchorPane.bottomAnchor="0"
+                    AnchorPane.leftAnchor="0"
+                    AnchorPane.rightAnchor="0">
+
+            <!-- ✅ NAVBAR EN HAUT -->
+            <top>
+                <HBox spacing="10" alignment="CENTER" styleClass="navbar" prefHeight="60">
+                    <padding>
+                        <Insets top="5" bottom="5" left="15" right="15"/>
+                    </padding>
+
+                    <!-- 👇 Le titre de la page active -->
+                    <Label fx:id="activePageLabel" styleClass="navbar-title"/>
+
+                    <Region fx:id="navbarSpacer" HBox.hgrow="ALWAYS"/>
+                    <!-- ✅ Bouton Favoris -->
+                    <Button fx:id="btnFavoris" text="❤" onAction="#goToFavoris" styleClass="icon-button"/>
+                    <!-- ✅ Bouton Panier -->
+                    <Button fx:id="btnPanier" text="🛒" onAction="#goToPanier" styleClass="icon-button"/>
+
+                    <!-- 👇 Role Label -->
+                    <Label fx:id="roleLabel" style="-fx-font-size: 12px; -fx-text-fill: #666;" />
+                    <HBox fx:id="flammeBox" spacing="4" alignment="CENTER" onMouseClicked="#ouvrirRewards">
+                        <Label text="🔥" style="-fx-font-size: 18px;" />
+                        <Label fx:id="flammeCountLabel" text="0" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                    </HBox>
+
+
+                    <!-- ✅ Menu Profil déroulant (shrunk avatar/spacing) -->
+                    <MenuButton fx:id="profileMenu" popupSide="BOTTOM" styleClass="profile-menu-button">
+                        <graphic>
+                            <HBox spacing="6" alignment="CENTER">
+                                <ImageView fx:id="menuAvatar" fitWidth="22" fitHeight="22" preserveRatio="true"/>
+                                <Label fx:id="profileNameLabel" text="Sarah" styleClass="profile-name-label"/>
+                            </HBox>
+                        </graphic>
+                        <items>
+                            <MenuItem text="👤 Profile" styleClass="profile-item" onAction="#openProfile"/>
+                            <MenuItem text="🚪 Déconnexion" styleClass="logout-item" onAction="#logout"/>
+                        </items>
+                    </MenuButton>
+                </HBox>
+            </top>
+
+            <!-- ✅ SIDEBAR À GAUCHE -->
+            <left>
+                <VBox spacing="20" alignment="TOP_LEFT" styleClass="sidebar">
+                    <padding>
+                        <Insets top="20" bottom="20" left="20" right="10"/>
+                    </padding>
+
+                    <VBox alignment="CENTER" spacing="8" styleClass="logo-section">
+                        <ImageView fx:id="logoImage" fitWidth="140" preserveRatio="true"/>
+                    </VBox>
+
+                    <Button fx:id="accueilButton" text="Page d'accueil" onAction="#goToAccueil" styleClass="sidebar-button"/>
+                    <Button fx:id="produitsButton" text="Produits" onAction="#goToProduits" styleClass="sidebar-button"/>
+
+                    <VBox fx:id="categorieTreeContainer" visible="false" managed="false" spacing="5" styleClass="tree-container">
+                        <Label text="Catégories disponibles" styleClass="tree-title"/>
+                        <TreeView fx:id="categorieTree"/>
+                    </VBox>
+
+                    <Button fx:id="panierButton" text="Panier" onAction="#goToPanier" styleClass="sidebar-button"/>
+                    <Button fx:id="commandesButton" text="Commandes" onAction="#goToCommandes" styleClass="sidebar-button"/>
+                    <Button fx:id="offresButton" text="Offres de travail" onAction="#goToOffres" styleClass="sidebar-button"/>
+                    <Button fx:id="candidatures" text="Mes Candidatures" onAction="#goToCandidatureHistory" styleClass="sidebar-button"/>
+                    <Button fx:id="blogButton" text="Blog" onAction="#goToBlog" styleClass="sidebar-button"/>
+                </VBox>
+            </left>
+
+            <!-- ✅ CONTENU CENTRAL -->
+            <center>
+                <StackPane fx:id="contentPane"/>
+            </center>
+
+        </BorderPane>
+    </children>
+</AnchorPane>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<GridPane fx:controller="tn.esprit.Controllers.E_Commerce.DetailsCommandeController"
+          xmlns:fx="http://javafx.com/fxml/1"
+          styleClass="grid-pane"
+          stylesheets="@details_commande.css">
+    <padding>
+        <Insets top="25" right="30" bottom="25" left="30"/>
+    </padding>
+
+    <!-- Title -->
+    <Label text="Détails de la Commande"
+           styleClass="title"
+           GridPane.columnSpan="2"
+           GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+
+    <!-- Field Labels -->
+    <Label text="Date Création:" styleClass="field-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <Label text="Utilisateur:" styleClass="field-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <Label text="Total:" styleClass="field-label" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <Label text="Statut:" styleClass="field-label" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <Label text="Adresse Livraison:" styleClass="field-label" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <Label text="Mode Paiement:" styleClass="field-label" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+    <Label text="Date Paiement:" styleClass="field-label" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+    <Label text="Statut Paiement:" styleClass="field-label" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+
+    <!-- Value Labels -->
+    <Label fx:id="dateCreationLabel" styleClass="value-label" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Label fx:id="utilisateurLabel" styleClass="value-label" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <Label fx:id="totalLabel" styleClass="total-label" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <Label fx:id="statutLabel" styleClass="status-label" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <Label fx:id="adresseLivraisonLabel" styleClass="address-label" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    <Label fx:id="modePaiementLabel" styleClass="value-label" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+    <Label fx:id="datePaiementLabel" styleClass="value-label" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+    <Label fx:id="statutPaiementLabel" styleClass="payment-status-label" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+    <!-- Action Button -->
+    <Button text="Modifier la commande"
+            fx:id="modifierButton"
+            onAction="#modifierCommande"
+            styleClass="action-button"
+            GridPane.rowIndex="9"
+            GridPane.columnIndex="1"
+            GridPane.halignment="RIGHT">
+        <graphic>
+            <FontIcon iconLiteral="fas-edit" iconSize="14" iconColor="white"/>
+        </graphic>
+    </Button>
+
+
+</GridPane>

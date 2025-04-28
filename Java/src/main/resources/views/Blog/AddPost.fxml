@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Controllers.Blog.Post.AddPostController"
+            stylesheets="@AddPost.css"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <center>
+        <VBox spacing="20" styleClass="content-container">
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" styleClass="header">
+                <Label text="📝 Ajouter une Publication" styleClass="title-label" />
+                <Region HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <!-- Error Label -->
+            <Label fx:id="errorLabel" styleClass="error-label" visible="false" />
+
+            <!-- Category Section -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="📌 Category:" styleClass="label" />
+                <ComboBox fx:id="categoryComboBox" styleClass="input-field" promptText="Select a category">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Agriculture News"/>
+                            <String fx:value="Farming Tips"/>
+                            <String fx:value="Crop Management"/>
+                            <String fx:value="Livestock Care"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <Label fx:id="categoryError" styleClass="field-error" visible="false" />
+            </HBox>
+
+            <!-- Image Selection Section -->
+            <HBox spacing="20" alignment="CENTER">
+                <ImageView fx:id="imageView" fitWidth="300.0" fitHeight="200.0" preserveRatio="true" styleClass="image-preview" />
+                <Button onAction="#choisirImage" text="📷 Sélectionner une Image" styleClass="image-button" />
+                <Label fx:id="imageError" styleClass="field-error" visible="false" />
+            </HBox>
+
+            <VBox spacing="15" alignment="CENTER">
+                <!-- User Name -->
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="👤 Utilisateur :" styleClass="label" />
+                    <Label fx:id="userNameLabel" styleClass="user-name-label" />
+                </HBox>
+
+                <!-- Title -->
+                <VBox spacing="5">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="📝 Title :" styleClass="label" />
+                        <TextField fx:id="contenuField" promptText="Entrez le contenu de la publication" styleClass="input-field" />
+                    </HBox>
+                    <Label fx:id="titleError" styleClass="field-error" visible="false" />
+                </VBox>
+
+                <!-- Description -->
+                <VBox spacing="5">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="🗒️ Description :" styleClass="label" />
+                        <TextArea fx:id="descriptionField" promptText="Entrez la description de la publication" prefHeight="120" styleClass="input-area" />
+                    </HBox>
+                    <Label fx:id="descriptionError" styleClass="field-error" visible="false" />
+                </VBox>
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox spacing="30" alignment="CENTER">
+                <Button onAction="#handleAddAction" text="✅ Ajouter" styleClass="submit-button" />
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

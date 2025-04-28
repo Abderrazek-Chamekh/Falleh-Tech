@@ -1,0 +1,151 @@
+/* Root background */
+.root {
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-background-color: linear-gradient(to right, #f7fff7, #e4ffe4);
+}
+
+/* Left pane green with image */
+.left-pane {
+    -fx-background-color: linear-gradient(to bottom right, #0f9d58, #34a853);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.1, 0, 4);
+}
+
+/* Card container */
+.login-card {
+    -fx-background-color: white;
+    -fx-padding: 30;
+    -fx-spacing: 20;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 15, 0.3, 0, 8);
+    -fx-translate-y: 30;
+    -fx-opacity: 0;
+    -fx-min-width: 350;
+    -fx-max-width: 400;
+}
+
+/* Main title */
+.title {
+    -fx-font-size: 26px;
+    -fx-text-fill: #0f9d58;
+    -fx-font-weight: bold;
+    -fx-padding: 10 0 20 0;
+}
+
+/* TextField, PasswordField, ComboBox base style */
+.input-field {
+    -fx-pref-width: 280;
+    -fx-pref-height: 40;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: transparent;
+    -fx-padding: 0 0 0 10;
+    -fx-font-size: 14px;
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+/* In your CSS */
+.password-field, .text-field {
+    -fx-pref-width: 280;
+    -fx-pref-height: 40;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: transparent;
+    -fx-padding: 0 0 0 10;
+    -fx-font-size: 14px;
+}
+/* Focus effect for password fields */
+#passwordField:focused, #visiblePasswordField:focused {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #0f9d58;
+    -fx-effect: dropshadow(gaussian, #0f9d58, 6, 0.2, 0, 0);
+}
+/* Focus effect for input fields */
+.input-field:focused {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #0f9d58;
+    -fx-effect: dropshadow(gaussian, #0f9d58, 6, 0.2, 0, 0);
+}
+
+/* Special ComboBox inner arrows fix */
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #0f9d58;
+}
+/* Add these styles to your existing CSS */
+
+/* DatePicker styling to match other input fields */
+.date-picker.input-field {
+    -fx-pref-width: 280;
+    -fx-pref-height: 40;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+}
+
+.date-picker.input-field .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.date-picker.input-field .arrow {
+    -fx-background-color: #0f9d58;
+}
+
+.date-picker.input-field:focused {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #0f9d58;
+    -fx-effect: dropshadow(gaussian, #0f9d58, 6, 0.2, 0, 0);
+}
+
+/* Remove the previous #ouvrierFields styling and replace with: */
+#ouvrierFields {
+    -fx-pref-width: 280;
+}
+
+/* Signup / Login button */
+.green-button {
+    -fx-background-color: #0f9d58;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-font-size: 15px;
+    -fx-pref-width: 280;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0.2, 0, 4);
+    -fx-transition: background-color 0.3s ease;
+}
+
+.green-button:hover {
+    -fx-background-color: #0c7c43;
+}
+
+.green-button:pressed {
+    -fx-background-color: #095e31;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+.input-field {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 8 12;
+    -fx-background-color: #f4f4f4;
+}
+
+/* Hyperlink styling */
+.hyperlink {
+    -fx-text-fill: #0f9d58;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.hyperlink:hover {
+    -fx-underline: true;
+}

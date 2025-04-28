@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="tn.esprit.Controllers.Blog.Post.PostDetailsController"
+      spacing="10" style="-fx-padding: 20; -fx-background-color: #f8f9fa; -fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+
+    <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 0 0 15 0; -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0;">
+        <ImageView fx:id="postImage" fitWidth="300" fitHeight="200" preserveRatio="true"
+                   style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);"/>
+        <VBox spacing="10" style="-fx-padding: 0 0 0 15;">
+            <Label fx:id="titleLabel" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50; -fx-wrap-text: true;"/>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label fx:id="dateLabel" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d; -fx-graphic-text-gap: 5;">
+                    <graphic>
+                        <ImageView fitHeight="16" fitWidth="16">
+                            <Image url="@/Images/icons/calendar.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label fx:id="categoryLabel" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d; -fx-graphic-text-gap: 5;">
+                    <graphic>
+                        <ImageView fitHeight="16" fitWidth="16">
+                            <Image url="@/Images/icons/category.png"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label fx:id="likesLabel" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d; -fx-graphic-text-gap: 5;">
+                    <graphic>
+                        <ImageView fitHeight="16" fitWidth="16">
+                            <Image url="@/Images/icons/like.png"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+            </HBox>
+        </VBox>
+    </HBox>
+
+    <Text fx:id="contentText" style="-fx-font-size: 15px; -fx-line-spacing: 5px; -fx-fill: #333; -fx-padding: 15 0;" wrappingWidth="600"/>
+
+    <VBox fx:id="commentSection" spacing="10" style="-fx-padding: 15; -fx-background-color: #f1f8e9; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 1);">
+        <Label text="Comments:" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #2e7d32; -fx-padding: 0 0 5 0;"/>
+        <ListView fx:id="commentsList" style="-fx-background-color: transparent; -fx-border-color: #c8e6c9; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+    </VBox>
+
+    <Button text="Close" onAction="#handleClose"
+            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20; -fx-padding: 8 20; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(52,152,219,0.3), 5, 0, 0, 1);"/>
+</VBox>

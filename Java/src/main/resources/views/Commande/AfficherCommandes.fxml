@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane fx:id="borderPane" prefHeight="683.0" prefWidth="967.0" stylesheets="@showCommancdes.css" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.E_Commerce.AfficherCommandeController">
+
+    <!-- Left Sidebar -->
+    <left>
+        <Label fx:id="userRoleLabel" styleClass="user-role" />
+    </left>
+
+    <!-- Center Content (Posts Management) -->
+    <center>
+        <VBox spacing="20" styleClass="content-container">
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" styleClass="header">
+                <Label styleClass="header-title" text="Commandes Management" />
+                <Region HBox.hgrow="ALWAYS" />
+                <!-- Stats Button -->
+
+            </HBox>
+
+            <!-- Search Box -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="search-box">
+
+                <Label text="Search:" styleClass="search-label"/>
+                <TextField fx:id="searchField" promptText="Type to filter by user..." styleClass="search-field"/>
+                <Button onAction="#clearSearch" styleClass="clear-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-times" iconColor="#666" iconSize="16"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="statsButton" onAction="#handleShowStats" styleClass="stats-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-chart-bar" iconColor="#2ecc71" iconSize="30"/>
+                    </graphic>
+                </Button>
+            </HBox>
+
+            <!-- Table View -->
+            <TableView fx:id="commandeTableView">
+                <columns>
+                    <TableColumn fx:id="utilisateurColumn" text="Utilisateur" />
+                    <TableColumn fx:id="totalColumn" text="Total" />
+                    <TableColumn fx:id="statutColumn" text="Statut" />
+                    <TableColumn fx:id="adresseLivraisonColumn" text="Adresse Livraison" />
+                    <TableColumn fx:id="dateCreationColumn" text="Date Creation" />
+                    <TableColumn fx:id="modePaiementColumn" text="Mode Paiement" />
+                    <TableColumn fx:id="datePaiementColumn" text="Date Paiement" />
+                    <TableColumn fx:id="statutPaiementColumn" text="Statut Paiement" />
+                    <TableColumn fx:id="actionsColumn" text="Actions" />
+                </columns>
+            </TableView>
+
+            <HBox fx:id="adminControls" spacing="15">
+                <Button fx:id="addCommandeButton" onAction="#handleAddCommande" styleClass="add-button" text="➕ Add" />
+                <Button fx:id="goToLivraisonButton" onAction="#handleGoToLivraison" styleClass="add-button" text="🚚 Livraisons" />
+            </HBox>
+
+        </VBox>
+    </center>
+</BorderPane>

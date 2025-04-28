@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.UserListController"
+            prefWidth="800" prefHeight="600">
+
+    <TableView fx:id="userTable" layoutX="20" layoutY="20" prefWidth="760" prefHeight="560">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colName" text="Nom"/>
+            <TableColumn fx:id="colLastName" text="Prénom"/>
+            <TableColumn fx:id="colEmail" text="Email"/>
+            <TableColumn fx:id="colPhone" text="Téléphone"/>
+            <TableColumn fx:id="colRole" text="Rôle"/>
+            <TableColumn fx:id="colCarteIdentite" text="CIN"/>
+            <TableColumn fx:id="colLocation" text="Adresse"/>
+            <TableColumn fx:id="colExperience" text="Expérience"/>
+            <TableColumn fx:id="colActive" text="Actif"/>
+        </columns>
+    </TableView>
+</AnchorPane>

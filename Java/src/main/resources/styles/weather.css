@@ -1,0 +1,44 @@
+.dialog-pane {
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #4facfe;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.dialog-pane .button {
+    -fx-background-color: #4facfe;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5 15;
+    -fx-background-radius: 20;
+}
+
+.dialog-pane .button:hover {
+    -fx-background-color: #00f2fe;
+}
+
+.dialog-pane .label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2c3e50;
+}
+
+.combo-box {
+    -fx-font-size: 14px;
+    -fx-background-color: white;
+    -fx-border-color: #4facfe;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+
+.combo-box .list-cell {
+    -fx-padding: 5 10;
+    -fx-font-size: 14px;
+}
+
+.combo-box .list-view {
+    -fx-background-color: white;
+    -fx-border-color: #4facfe;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}

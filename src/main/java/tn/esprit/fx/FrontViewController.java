@@ -320,7 +320,17 @@ public class FrontViewController implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void goToSms() {
 
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/SendSmsView.fxml"));
+            Parent verifyView = loader.load();
+            contentPane.getChildren().setAll(verifyView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void goToBlog() {
         setActiveButton(blogButton);

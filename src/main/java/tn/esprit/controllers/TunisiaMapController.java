@@ -1,26 +1,31 @@
 package tn.esprit.controllers;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import javafx.util.Duration;
+import tn.esprit.entities.OffreEmploi;
+import tn.esprit.services.ServiceOffreEmploi;
 
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,10 +43,20 @@ public class TunisiaMapController implements Initializable {
     @FXML
     private Label offersCountLabel;
 
-    private Group mapGroup = new Group();
-    private HashMap<String, String> idToNameMap = new HashMap<>();
-    private HashMap<String, SVGPath> governoratePaths = new HashMap<>();
-    private Map<String, Integer> offersPerGovernorate = new HashMap<>(); // 🛠 REAL dynamic data
+    @FXML
+    private ToggleButton toggleMyOffersButton;
+
+    private final Group mapGroup = new Group();
+    private final HashMap<String, String> idToNameMap = new HashMap<>();
+    private final HashMap<String, SVGPath> governoratePaths = new HashMap<>();
+
+    private final ServiceOffreEmploi serviceOffre = new ServiceOffreEmploi();
+    private final Map<String, List<OffreEmploi>> offersByGovernorate = new HashMap<>();
+
+    private final Label tooltipLabel = new Label();
+
+    private boolean showingMyOffers = false;
+    private final int loggedInFarmerId = 16; // TODO: Replace with real logged-in farmer ID
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -49,14 +64,24 @@ public class TunisiaMapController implements Initializable {
         mapGroup.setCache(true);
         mapGroup.setCacheHint(javafx.scene.CacheHint.SCALE);
 
+        tooltipLabel.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-padding: 5px; -fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5;");
+        tooltipLabel.setVisible(false);
+        mapPane.getChildren().add(tooltipLabel);
+
         initializeGovernorateMap();
         loadTunisiaMap();
-        initializeOffers(); // 👈 ADD this
+        initializeRealOffers();
+        applyHeatMap();
 
         mapGroup.setScaleX(0.6);
         mapGroup.setScaleY(0.6);
         mapGroup.setLayoutX(-50);
         mapGroup.setLayoutY(-250);
+
+        toggleMyOffersButton.setOnAction(e -> {
+            showingMyOffers = toggleMyOffersButton.isSelected();
+            reloadMapOffers();
+        });
     }
 
     private void initializeGovernorateMap() {
@@ -86,32 +111,24 @@ public class TunisiaMapController implements Initializable {
         idToNameMap.put("TN83", "Tataouine");
     }
 
-    private void initializeOffers() {
-        // 💼 Simulated offers (later you can connect to your DB)
-        offersPerGovernorate.put("Tunis", 12);
-        offersPerGovernorate.put("Ariana", 8);
-        offersPerGovernorate.put("Ben Arous", 5);
-        offersPerGovernorate.put("Manubah", 6);
-        offersPerGovernorate.put("Nabeul", 9);
-        offersPerGovernorate.put("Zaghouan", 4);
-        offersPerGovernorate.put("Bizerte", 7);
-        offersPerGovernorate.put("Béja", 3);
-        offersPerGovernorate.put("Jendouba", 2);
-        offersPerGovernorate.put("Le Kef", 5);
-        offersPerGovernorate.put("Siliana", 3);
-        offersPerGovernorate.put("Kairouan", 6);
-        offersPerGovernorate.put("Kassérine", 4);
-        offersPerGovernorate.put("Sidi Bou Zid", 4);
-        offersPerGovernorate.put("Sousse", 10);
-        offersPerGovernorate.put("Monastir", 7);
-        offersPerGovernorate.put("Mahdia", 5);
-        offersPerGovernorate.put("Sfax", 11);
-        offersPerGovernorate.put("Gafsa", 3);
-        offersPerGovernorate.put("Tozeur", 2);
-        offersPerGovernorate.put("Kebili", 1);
-        offersPerGovernorate.put("Gabès", 4);
-        offersPerGovernorate.put("Médenine", 6);
-        offersPerGovernorate.put("Tataouine", 2);
+    private void initializeRealOffers() {
+        List<OffreEmploi> allOffers = serviceOffre.getAll();
+        for (OffreEmploi offre : allOffers) {
+            String governorate = offre.getLieu();
+            offersByGovernorate.computeIfAbsent(governorate, k -> new ArrayList<>()).add(offre);
+        }
+    }
+
+    private void applyHeatMap() {
+        int maxOffers = offersByGovernorate.values().stream().mapToInt(List::size).max().orElse(1);
+
+        for (String governorate : governoratePaths.keySet()) {
+            int count = offersByGovernorate.getOrDefault(governorate, Collections.emptyList()).size();
+            SVGPath path = governoratePaths.get(governorate);
+
+            int greenLevel = (int) (255 - (count / (double) maxOffers) * 150);
+            path.setFill(Color.rgb(100, greenLevel, 100));
+        }
     }
 
     private void loadTunisiaMap() {
@@ -127,7 +144,6 @@ public class TunisiaMapController implements Initializable {
 
                 SVGPath svgPath = new SVGPath();
                 svgPath.setContent(pathData);
-                svgPath.setFill(Color.LIGHTGREEN);
                 svgPath.setStroke(Color.BLACK);
                 svgPath.setStrokeWidth(0.5);
 
@@ -148,13 +164,64 @@ public class TunisiaMapController implements Initializable {
         }
     }
 
+    private void reloadMapOffers() {
+        mapGroup.getChildren().clear();
+
+        // Draw the full Tunisia map
+        for (SVGPath path : governoratePaths.values()) {
+            path.setStroke(Color.BLACK);
+            path.setStrokeWidth(0.5);
+            path.setFill(Color.LIGHTGREEN);
+            mapGroup.getChildren().add(path);
+        }
+
+        List<OffreEmploi> allOffers = serviceOffre.getAll();
+        Random random = new Random();
+
+        for (OffreEmploi offer : allOffers) {
+            if (showingMyOffers && offer.getIdEmployeur().getId() != loggedInFarmerId) {
+                continue;
+            }
+
+            String governorate = offer.getLieu();
+            SVGPath path = governoratePaths.get(governorate);
+            if (path == null) continue;
+
+            Bounds bounds = path.getBoundsInParent();
+            double width = bounds.getWidth();
+            double height = bounds.getHeight();
+
+            double randomX = bounds.getMinX() + random.nextDouble() * width;
+            double randomY = bounds.getMinY() + random.nextDouble() * height;
+
+            Circle offerPoint = new Circle(4, showingMyOffers ? Color.BLUE : Color.YELLOW);
+            offerPoint.setLayoutX(randomX);
+            offerPoint.setLayoutY(randomY);
+
+            mapGroup.getChildren().add(offerPoint);
+        }
+    }
+
     private void onHoverEnter(MouseEvent event) {
         SVGPath path = (SVGPath) event.getSource();
         ScaleTransition st = new ScaleTransition(Duration.millis(150), path);
         st.setToX(1.1);
         st.setToY(1.1);
         st.play();
-        path.setFill(Color.DARKGREEN);
+
+        String governorate = (String) path.getUserData();
+        int offers = offersByGovernorate.getOrDefault(governorate, Collections.emptyList()).size();
+        tooltipLabel.setText(governorate + " - " + offers + " offres");
+
+        tooltipLabel.setVisible(true);
+        moveTooltip(event);
+
+        path.setOnMouseMoved(this::moveTooltip);
+    }
+
+    private void moveTooltip(MouseEvent event) {
+        tooltipLabel.setLayoutX(event.getX() + 20);
+        tooltipLabel.setLayoutY(event.getY() + 20);
     }
 
     private void onHoverExit(MouseEvent event) {
@@ -163,7 +230,8 @@ public class TunisiaMapController implements Initializable {
         st.setToX(1.0);
         st.setToY(1.0);
         st.play();
-        path.setFill(Color.LIGHTGREEN);
+
+        tooltipLabel.setVisible(false);
     }
 
     private void onGovernorateClick(String governorateName) {
@@ -178,41 +246,70 @@ public class TunisiaMapController implements Initializable {
         clone.setStroke(Color.BLACK);
         clone.setStrokeWidth(0.5);
 
-        Group group = new Group(clone);
-        singleGovernoratePane.getChildren().add(group);
+        Group shapeGroup = new Group(clone);
+
+        List<OffreEmploi> offres = offersByGovernorate.getOrDefault(governorateName, Collections.emptyList());
+        Bounds bounds = clone.getBoundsInLocal();
+
+        double width = bounds.getWidth();
+        double height = bounds.getHeight();
+        Random random = new Random();
+
+        for (OffreEmploi offer : offres) {
+            Circle point = new Circle(3, Color.YELLOW);
+
+            boolean placed = false;
+            while (!placed) {
+                double randomX = bounds.getMinX() + random.nextDouble() * width;
+                double randomY = bounds.getMinY() + random.nextDouble() * height;
+
+                if (clone.contains(randomX, randomY)) {
+                    point.setCenterX(randomX);
+                    point.setCenterY(randomY);
+                    placed = true;
+                }
+            }
+
+            point.setUserData(offer);
+
+            point.setOnMouseClicked(e -> showOfferPopupInsideState((OffreEmploi) point.getUserData(), point.getCenterX(), point.getCenterY(), shapeGroup));
+
+            shapeGroup.getChildren().add(point);
+        }
+
+        singleGovernoratePane.getChildren().add(shapeGroup);
 
         Platform.runLater(() -> {
-            Bounds bounds = clone.getBoundsInLocal();
-            clone.setTranslateX(-bounds.getMinX());
-            clone.setTranslateY(-bounds.getMinY());
+            Bounds cloneBounds = clone.getBoundsInLocal();
+            shapeGroup.setTranslateX(-cloneBounds.getMinX());
+            shapeGroup.setTranslateY(-cloneBounds.getMinY());
 
-            double width = bounds.getWidth();
-            double height = bounds.getHeight();
+            double cloneWidth = cloneBounds.getWidth();
+            double cloneHeight = cloneBounds.getHeight();
 
             double paneWidth = singleGovernoratePane.getWidth();
             double paneHeight = singleGovernoratePane.getHeight();
 
-            double scaleX = (paneWidth * 0.7) / width;
-            double scaleY = (paneHeight * 0.7) / height;
+            double scaleX = (paneWidth * 0.7) / cloneWidth;
+            double scaleY = (paneHeight * 0.7) / cloneHeight;
             double finalScale = Math.min(scaleX, scaleY);
 
-            group.setScaleX(finalScale);
-            group.setScaleY(finalScale);
+            shapeGroup.setScaleX(finalScale);
+            shapeGroup.setScaleY(finalScale);
 
-            double offsetX = (paneWidth - width * finalScale) / 2;
-            double offsetY = (paneHeight - height * finalScale) / 2;
+            double offsetX = (paneWidth - cloneWidth * finalScale) / 2;
+            double offsetY = (paneHeight - cloneHeight * finalScale) / 2;
 
-            group.setLayoutX(offsetX);
-            group.setLayoutY(offsetY);
+            shapeGroup.setLayoutX(offsetX);
+            shapeGroup.setLayoutY(offsetY);
 
-            // Animate: FADE + ZOOM together
-            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(400), group);
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(400), shapeGroup);
             scaleTransition.setFromX(0);
             scaleTransition.setFromY(0);
             scaleTransition.setToX(finalScale);
             scaleTransition.setToY(finalScale);
 
-            FadeTransition fadeTransition = new FadeTransition(Duration.millis(400), group);
+            FadeTransition fadeTransition = new FadeTransition(Duration.millis(400), shapeGroup);
             fadeTransition.setFromValue(0);
             fadeTransition.setToValue(1);
 
@@ -220,9 +317,35 @@ public class TunisiaMapController implements Initializable {
             fadeTransition.play();
         });
 
-        // Update information
         governorateNameLabel.setText("📍 " + governorateName);
-        int offers = offersPerGovernorate.getOrDefault(governorateName, 0);
-        offersCountLabel.setText("💼 Nombre d'offres: " + offers);
+        offersCountLabel.setText("💼 Nombre d'offres: " + offres.size());
+    }
+
+    private void showOfferPopupInsideState(OffreEmploi offer, double localX, double localY, Group parentGroup) {
+        parentGroup.getChildren().removeIf(node -> node.getId() != null && node.getId().equals("offerPopup"));
+
+        VBox popup = new VBox(3);
+        popup.setId("offerPopup");
+        popup.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-padding: 5px; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 0);");
+
+        Label title = new Label("📋 " + offer.getTitre());
+        title.setStyle("-fx-font-weight: bold; -fx-text-fill: #2c3e50; -fx-font-size: 11px;");
+
+        Label salary = new Label("💰 " + offer.getSalaire() + " DT");
+        salary.setStyle("-fx-text-fill: #27ae60; -fx-font-size: 10px;");
+
+        Label startDate = new Label("📅 " + offer.getStartDate());
+        startDate.setStyle("-fx-text-fill: #2980b9; -fx-font-size: 10px;");
+
+        popup.getChildren().addAll(title, salary, startDate);
+
+        popup.setLayoutX(localX + 10);
+        popup.setLayoutY(localY + 10);
+
+        parentGroup.getChildren().add(popup);
+
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(e -> parentGroup.getChildren().remove(popup));
+        delay.play();
     }
 }

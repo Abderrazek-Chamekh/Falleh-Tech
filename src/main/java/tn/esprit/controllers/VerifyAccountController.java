@@ -1,35 +1,59 @@
+// ✅ Full updated and optimized VerifyAccountController.java
+// Now with super smooth animations for StackPane and animated progress bar.
+
 package tn.esprit.controllers;
 
+import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.geometry.NodeOrientation;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
+import tn.esprit.services.SmsService;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class VerifyAccountController {
 
+    @FXML private ProgressBar progressBar;
+    @FXML private StackPane stackPane;
+
+    @FXML private VBox cinBox;
+    @FXML private VBox smsBox;
+
     @FXML private ImageView idPreview;
-    @FXML private Label statusLabel;
-    @FXML private TextArea ocrOutput;
+    @FXML private Label statusLabelCin;
     @FXML private Label extractedCinLabel;
 
-    private File selectedFile;
+    @FXML private TextField phoneNumberField;
+    @FXML private TextArea messageField;
+    @FXML private Button sendButton;
+    @FXML private Label statusLabelSms;
 
-    // 🔐 Example connected user CIN — should be passed dynamically
-    private final String userCIN = "12725696";
+    private File selectedFile;
+    private String userCIN = "12725696"; // Example connected user CIN.
+    private String generatedCode = null;
+
+    @FXML
+    public void initialize() {
+        smsBox.setVisible(false);
+        smsBox.setTranslateX(800); // Pre-position SMS box off-screen
+        progressBar.setProgress(0);
+
+        sendButton.setOnAction(event -> sendSms());
+    }
 
     @FXML
     public void onChooseImage() {
@@ -38,99 +62,125 @@ public class VerifyAccountController {
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
         );
-
-        File file = fileChooser.showOpenDialog(null);
-        if (file != null) {
-            selectedFile = file;
-            Image image = new Image(file.toURI().toString());
-            idPreview.setImage(image);
-            statusLabel.setText("📎 Image chargée : " + file.getName());
-            statusLabel.setStyle("-fx-text-fill: #444;");
+        selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            idPreview.setImage(new Image(selectedFile.toURI().toString()));
+            statusLabelCin.setText("📎 Image chargée.");
         }
     }
+
     @FXML
-    public void onVerify() {
+    public void onVerifyCin() {
         try {
             if (selectedFile == null || !selectedFile.exists()) {
-                showAlert("Erreur", "Fichier image introuvable.");
+                statusLabelCin.setText("❌ Aucune image sélectionnée.");
                 return;
             }
 
-            // 🖼️ Read the FULL image (not cropped anymore!)
             BufferedImage image = ImageIO.read(selectedFile);
 
-            // 🧠 OCR Setup
             Tesseract tesseract = new Tesseract();
-            tesseract.setDatapath("C:\\Program Files\\Tesseract-OCR"); // Adjust this if needed
-            tesseract.setLanguage("eng"); // "fra" if your CIN includes French labels
+            tesseract.setDatapath("C:\\Program Files\\Tesseract-OCR");
+            tesseract.setLanguage("eng");
 
-            // 📝 Perform OCR
             String result = tesseract.doOCR(image);
 
-            // 📋 Display OCR result in the app
-            ocrOutput.setText(result);
-            ocrOutput.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-            ocrOutput.setStyle("-fx-font-family: 'Consolas'; -fx-font-size: 14px;");
-
-            // 🔍 Extract all potential 6–10 digit number strings with OCR noise correction
+            // Extract CIN
             Pattern pattern = Pattern.compile("\\b[0-9IOSB]{6,10}\\b");
             Matcher matcher = pattern.matcher(result);
 
             String bestCIN = null;
             while (matcher.find()) {
                 String raw = matcher.group();
-
-                // Fix common OCR misreads
                 String cleaned = raw.toUpperCase()
-                        .replace("I", "1")
-                        .replace("O", "0")
-                        .replace("S", "5")
-                        .replace("B", "8");
+                        .replace("I", "1").replace("O", "0")
+                        .replace("S", "5").replace("B", "8");
 
-                System.out.println("🔍 Found CIN candidate: " + raw + " → cleaned: " + cleaned);
-
-                // Check if it's a valid 8-digit CIN
                 if (cleaned.matches("\\d{8}")) {
                     bestCIN = cleaned;
-                    break; // Use the first valid one
+                    break;
                 }
             }
 
-            // 👁️ Display extracted CIN in the UI
             extractedCinLabel.setText(bestCIN != null ? bestCIN : "—");
 
-            // ✅ Compare to user CIN
-            if (bestCIN != null) {
-                if (bestCIN.equals(userCIN)) {
-                    statusLabel.setText("✅ Identité vérifiée avec succès !");
-                    statusLabel.setStyle("-fx-text-fill: green; -fx-font-weight: bold; -fx-font-size: 16px;");
-                } else {
-                    statusLabel.setText("❌ CIN ne correspond pas à votre profil !");
-                    statusLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold; -fx-font-size: 16px;");
-                }
+            if (bestCIN != null && bestCIN.equals(userCIN)) {
+                statusLabelCin.setText("✅ CIN vérifié avec succès !");
+                animateProgressBar(0.5);
+                slideToSmsVerification();
             } else {
-                statusLabel.setText("❌ Aucun CIN détecté.");
-                statusLabel.setStyle("-fx-text-fill: orange;");
+                statusLabelCin.setText("❌ CIN non valide !");
             }
 
         } catch (TesseractException | IOException e) {
+            statusLabelCin.setText("Erreur OCR: " + e.getMessage());
             e.printStackTrace();
-            showAlert("Erreur OCR", "Une erreur est survenue pendant l’analyse.");
         }
     }
 
+    private void slideToSmsVerification() {
+        TranslateTransition slideOut = new TranslateTransition(Duration.millis(600), cinBox);
+        slideOut.setToX(-800);
 
-    private BufferedImage cropTopRegion(BufferedImage original) {
-        int height = original.getHeight() / 4;
-        int width = original.getWidth();
-        return original.getSubimage(0, 0, width, height);
+        TranslateTransition slideIn = new TranslateTransition(Duration.millis(600), smsBox);
+        slideIn.setFromX(800);
+        slideIn.setToX(0);
+
+        slideOut.setOnFinished(e -> {
+            cinBox.setVisible(false);
+            smsBox.setVisible(true);
+            slideIn.play();
+        });
+
+        slideOut.play();
     }
 
-    private void showAlert(String title, String content) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
+    private void sendSms() {
+        String phoneNumber = phoneNumberField.getText().trim();
+
+        if (phoneNumber.isEmpty()) {
+            statusLabelSms.setText("❌ Entrez un numéro !");
+            return;
+        }
+
+        if (!phoneNumber.startsWith("+")) {
+            phoneNumber = "+216" + phoneNumber;
+        }
+
+        try {
+            generatedCode = String.format("%06d", new Random().nextInt(999999));
+            SmsService.send(phoneNumber, "Votre code de vérification: " + generatedCode);
+
+            messageField.setDisable(false);
+            messageField.clear();
+            messageField.setPromptText("Entrez le code reçu...");
+
+            sendButton.setText("Vérifier Code");
+            sendButton.setOnAction(event -> verifyCode());
+
+            statusLabelSms.setText("📩 Code envoyé !");
+        } catch (Exception e) {
+            e.printStackTrace();
+            statusLabelSms.setText("Erreur SMS: " + e.getMessage());
+        }
+    }
+
+    private void verifyCode() {
+        String inputCode = messageField.getText().trim();
+        if (inputCode.equals(generatedCode)) {
+            statusLabelSms.setText("✅ Téléphone vérifié !");
+            animateProgressBar(1.0);
+            sendButton.setDisable(true);
+        } else {
+            statusLabelSms.setText("❌ Code incorrect !");
+        }
+    }
+
+    private void animateProgressBar(double target) {
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(progressBar.progressProperty(), progressBar.getProgress())),
+                new KeyFrame(Duration.seconds(1), new KeyValue(progressBar.progressProperty(), target))
+        );
+        timeline.play();
     }
 }

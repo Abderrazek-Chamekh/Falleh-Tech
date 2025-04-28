@@ -7,48 +7,30 @@
       fx:controller="tn.esprit.controllers.ouvrier.OffreCardOuvrierController"
       styleClass="offre-card"
       spacing="16"
-      style="-fx-padding: 20;">
+      style="-fx-padding: 20; -fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
 
-    <!-- Header with Expand Button -->
+    <!-- Badge Top Right -->
     <HBox alignment="TOP_RIGHT">
         <Region HBox.hgrow="ALWAYS" />
-        <Button fx:id="btnExpand" text="See More" style=" -fx-font-size: 14;" />
+        <Label fx:id="lblStatus" styleClass="status-badge" />
     </HBox>
 
     <!-- Title & Short Description -->
-    <Label fx:id="lblTitre" styleClass="offre-title" />
-    <Label fx:id="lblDescription" styleClass="offre-description" wrapText="true" />
-
-    <!-- Static Info Grid -->
-    <GridPane hgap="10" vgap="5">
-        <Label text="💰 Salaire:" styleClass="offre-label" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <Label fx:id="lblSalaire" styleClass="offre-value" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-        <Label fx:id="lblEmployerId" style="-fx-font-size: 12px; -fx-text-fill: #555;" />
-
-        <Label text="📍 Lieu:" styleClass="offre-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <Label fx:id="lblLocation" styleClass="offre-value" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-    </GridPane>
-
-    <!-- Status Badge -->
-    <Label fx:id="lblStatus" id="lblStatus" />
-
-    <!-- Expandable Info -->
-    <VBox fx:id="expandableBox" visible="false" managed="false" spacing="8">
-        <Label text="📝 Description Complète:" styleClass="offre-label" />
-        <Label fx:id="lblFullDescription" wrapText="true" styleClass="offre-description" />
-
-        <Label text="📅 Date de début:" styleClass="offre-label" />
-        <Label fx:id="lblStartDate" styleClass="offre-value" />
-
-        <Label text="📅 Date de fin:" styleClass="offre-label" />
-        <Label fx:id="lblEndDate" styleClass="offre-value" />
+    <VBox spacing="5">
+        <Label fx:id="lblTitre" styleClass="offre-title" />
+        <Label fx:id="lblDescription" styleClass="offre-description" wrapText="true" />
     </VBox>
+
+    <!-- Location and Salary -->
+    <HBox spacing="20" alignment="CENTER_LEFT">
+        <Label fx:id="lblLocation" styleClass="offre-info" />
+        <Label fx:id="lblSalaire" styleClass="offre-info" />
+    </HBox>
 
     <!-- Action Buttons -->
     <HBox spacing="10" alignment="CENTER_RIGHT">
-        <Button fx:id="btnApply"  maxWidth="Infinity" id="btnApply" text="Postuler" />
-        <Button fx:id="btnContact"  maxWidth="Infinity" id="btnContact" text="Contacter" />
-        <Button fx:id="btnWithdraw"  maxWidth="Infinity" id="btnWithdraw" text="Retirer" visible="false" />
+        <Button fx:id="btnContact" text="Contacter" styleClass="btn-primary" />
+        <Button fx:id="btnWithdraw" text="Retirer" styleClass="btn-danger" visible="false" />
     </HBox>
 
 </VBox>

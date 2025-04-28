@@ -8,7 +8,7 @@
       style="-fx-padding: 30; -fx-background-color: #f8f9fa;"
       stylesheets="@/styles/offres-ouvrier.css">
 
-    <Label text="📋 Available Job Offers"
+    <Label text="Available Job Offers"
            style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
 
     <!-- Search + Filters -->

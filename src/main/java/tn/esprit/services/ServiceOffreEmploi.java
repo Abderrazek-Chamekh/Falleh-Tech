@@ -184,4 +184,28 @@ public class ServiceOffreEmploi implements services<OffreEmploi> {
             System.out.println("Erreur lors de l'ajout de l'offre depuis le front: " + e.getMessage());
         }
     }
+
+    public List<OffreEmploi> getByGovernorate(String governorate) {
+        List<OffreEmploi> offres = new ArrayList<>();
+        String sql = "SELECT * FROM offre_emploi WHERE lieu = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, governorate);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                OffreEmploi o = new OffreEmploi();
+                o.setId(rs.getInt("id"));
+                o.setTitre(rs.getString("titre"));
+                o.setDescription(rs.getString("description"));
+                o.setSalaire(rs.getFloat("salaire"));
+                o.setLieu(rs.getString("lieu"));
+                o.setStartDate(rs.getDate("start_date").toLocalDate());
+                o.setDateExpiration(rs.getDate("date_expiration").toLocalDate());
+                offres.add(o);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération par gouvernorat: " + e.getMessage());
+        }
+        return offres;
+    }
 }

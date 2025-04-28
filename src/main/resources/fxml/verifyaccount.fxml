@@ -1,47 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="tn.esprit.controllers.VerifyAccountController"
-      alignment="CENTER" spacing="20"
-      style="-fx-padding: 40; -fx-background-color: #f4f8f5;">
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.controllers.VerifyAccountController"
+            style="-fx-background-color: #f4f8f5;">
 
-    <Label text="🔐 Vérification d'identité"
-           style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+    <VBox alignment="TOP_CENTER" spacing="20" AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
 
-    <ImageView fx:id="idPreview"
-               fitWidth="250"
-               fitHeight="160"
-               preserveRatio="true"
-               style="-fx-border-color: #ccc; -fx-border-radius: 5px;" />
+        <Label text="🔄 Progression du profil" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+        <ProgressBar fx:id="progressBar" prefWidth="300"/>
 
-    <Button text="📷 Choisir une photo (CIN ou Passeport)"
-            onAction="#onChooseImage"
-            style="-fx-background-color: #2e7d32; -fx-text-fill: white; -fx-font-weight: bold;" />
+        <StackPane fx:id="stackPane" minHeight="500" minWidth="800" maxWidth="800" style="-fx-background-color: transparent;">
+            <!-- CIN Verification Pane -->
+            <VBox fx:id="cinBox" spacing="15" alignment="CENTER" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 30;">
+                <Label text="🔒 Vérification d'identité" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
 
-    <Button text="🧠 Extraire le texte"
-            onAction="#onVerify"
-            style="-fx-background-color: #1565c0; -fx-text-fill: white; -fx-font-weight: bold;" />
+                <ImageView fx:id="idPreview" fitWidth="250" fitHeight="160" preserveRatio="true" style="-fx-border-color: #ccc;"/>
 
-    <Label fx:id="statusLabel"
-           text=""
-           style="-fx-text-fill: #444; -fx-font-size: 14px;" />
+                <Button text="📷 Choisir une photo (CIN ou Passeport)" onAction="#onChooseImage"
+                        style="-fx-background-color: #2e7d32; -fx-text-fill: white; -fx-font-weight: bold;"/>
 
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="🆔 CIN extrait:"
-               style="-fx-font-weight: bold; -fx-font-size: 14px;" />
-        <Label fx:id="extractedCinLabel"
-               text="—"
-               style="-fx-font-size: 14px; -fx-text-fill: #333;" />
-    </HBox>
+                <Button text="🧠 Extraire le texte" onAction="#onVerifyCin"
+                        style="-fx-background-color: #1565c0; -fx-text-fill: white; -fx-font-weight: bold;"/>
 
-    <TextArea fx:id="ocrOutput"
-              prefWidth="500" prefHeight="200"
-              wrapText="true" editable="false"
-              style="-fx-font-family: 'Consolas'; -fx-font-size: 14px; -fx-border-color: #ccc; -fx-background-color: #fff;" />
+                <Label fx:id="statusLabelCin" text="" style="-fx-text-fill: #333;"/>
 
-</VBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="🆔 CIN extrait:" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="extractedCinLabel" text="—"/>
+                </HBox>
+            </VBox>
+
+            <!-- SMS Verification Pane -->
+            <VBox fx:id="smsBox" spacing="15" alignment="CENTER" visible="false" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 30;">
+                <Label text="📱 Vérification du numéro de téléphone" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+                <TextField fx:id="phoneNumberField" promptText="Entrez votre numéro (e.g., 95895491)" style="-fx-pref-width: 300px;"/>
+                <TextArea fx:id="messageField" promptText="Vous recevrez un code..." style="-fx-pref-width: 300px; -fx-pref-height: 80px;" disable="true"/>
+
+                <Button fx:id="sendButton" text="Envoyer SMS" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-pref-width: 300px;"/>
+
+                <Label fx:id="statusLabelSms" text="" style="-fx-text-fill: #333;"/>
+            </VBox>
+        </StackPane>
+
+    </VBox>
+</AnchorPane>

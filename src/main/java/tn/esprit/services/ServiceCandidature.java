@@ -376,5 +376,25 @@ public class ServiceCandidature implements services<Candidature> {
 
         return false;
     }
+    public int countCandidaturesByGovernorate(String governorate) {
+        int count = 0;
+        String sql = """
+        SELECT COUNT(*) AS total 
+        FROM candidature c
+        JOIN offre_emploi o ON c.id_offre_id = o.id
+        WHERE o.lieu = ?
+    """;
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, governorate);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors du comptage des candidatures: " + e.getMessage());
+        }
+        return count;
+    }
 
 }

@@ -67,6 +67,7 @@
                         <items>
 
                             <MenuItem text="️Carte" styleClass="profile-item" onAction="#goToMap"/>
+                            <MenuItem text="SMS" styleClass="profile-item" onAction="#goToSms"/>
                             <MenuItem text="️HeatMap" styleClass="profile-item" onAction="#goToHeatmap"/>
                             <MenuItem text="👤 Profile" styleClass="profile-item" onAction="#openProfile"/>
                             <MenuItem text="✔️ Vérifier le compte" styleClass="profile-item" onAction="#verifyAccount"/>

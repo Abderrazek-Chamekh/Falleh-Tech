@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2025 at 02:22 PM
+-- Generation Time: Apr 25, 2025 at 10:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -96,7 +96,9 @@ INSERT INTO `comment` (`id`, `post_id`, `user_id`, `contenu`, `date`) VALUES
 (23, 13, 10, 'Useful content as always.', '2025-04-17'),
 (24, 14, 12, 'Technology is changing agriculture!', '2025-04-17'),
 (26, 15, 17, 'No more chemicals? I’m in.', '2025-04-17'),
-(28, 12, 8, 'waaaa mamaaa', '2025-04-23');
+(28, 12, 8, 'waaaa mamaaa', '2025-04-23'),
+(29, 14, 8, 'hello', '2025-04-23'),
+(30, 14, 8, 'qzdqdzqdz', '2025-04-25');
 
 -- --------------------------------------------------------
 
@@ -155,7 +157,10 @@ INSERT INTO `like` (`id`, `post_id`, `user_id`) VALUES
 (28, 15, 10),
 (30, 16, 17),
 (31, 14, 17),
-(32, 12, 17);
+(32, 12, 17),
+(33, 14, 8),
+(34, 13, 8),
+(35, 12, 8);
 
 -- --------------------------------------------------------
 
@@ -208,6 +213,15 @@ CREATE TABLE `notification` (
   `message` longtext NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `notification`
+--
+
+INSERT INTO `notification` (`id`, `user_id`, `post_id`, `message`, `created_at`) VALUES
+(3, 8, 13, 'Fatima Zahra liked your post: Best irrigation methods for dry areas', '2025-04-25 02:01:35'),
+(4, 9, 14, 'Fatima Zahra commented on your post: Using IoT in agriculture', '2025-04-25 02:01:49'),
+(5, 7, 12, 'Fatima Zahra liked your post: Benefits of organic alternatives for soil', '2025-04-25 02:02:03');
 
 -- --------------------------------------------------------
 
@@ -354,7 +368,8 @@ INSERT INTO `user` (`id`, `name`, `last_name`, `email`, `password`, `phone_numbe
 (21, 'Samir', 'Ben Ammar', 'samir.agriculteur@example.com', '$2a$13$jz89t9nIMATSeuw0lKGQleT4ENGctAJD8wy7cxfkPc7', '+21623456789', 'Agriculteur', '33445566', NULL, 'Sfax', '10 years experience', 1),
 (22, 'Salma', 'Ben Youssef', 'salma.client@example.com', '$2a$13$jz89t9nIMATSeuw0lKGQleluFxm9bGEu.zg7Krwea2G', '+21634567890', 'Client', '55667788', NULL, 'Tunis', NULL, 1),
 (23, 'Hakim', 'Mansouri', 'hakim.ouvrier@example.com', '$2a$13$jz89t9nIMATSeuw0lKGQlea2ddswh3OLlluxKuqYygd', '+21645678901', 'Ouvrier', '77889900', '2023-12-25 08:00:00', 'Nabeul', '7 years in farming', 1),
-(24, 'Nadia', 'Chaabane', 'nadia.agriculteur@example.com', '$2a$13$jz89t9nIMATSeuw0lKGQleT4ENGctAJD8wy7cxfkPc7', '+21656789012', 'Agriculteur', '99001122', NULL, 'Bizerte', '8 years experience', 0);
+(24, 'Nadia', 'Chaabane', 'nadia.agriculteur@example.com', '$2a$13$jz89t9nIMATSeuw0lKGQleT4ENGctAJD8wy7cxfkPc7', '+21656789012', 'Agriculteur', '99001122', NULL, 'Bizerte', '8 years experience', 0),
+(25, 'test', 'test', 'test@gmail.com', '$2a$13$1jLkqYTp5/07o7ORbByuDuHI2txHw.4JMCXnoR/GIHQksjiXqlaR.', '51516262', 'Agriculteur', '62626262', NULL, NULL, NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -512,7 +527,7 @@ ALTER TABLE `commande`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `favoris`
@@ -524,7 +539,7 @@ ALTER TABLE `favoris`
 -- AUTO_INCREMENT for table `like`
 --
 ALTER TABLE `like`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `livraison`
@@ -542,7 +557,7 @@ ALTER TABLE `messenger_messages`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `offre_emploi`
@@ -584,7 +599,7 @@ ALTER TABLE `sous_categorie`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables

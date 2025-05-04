@@ -178,7 +178,7 @@ public class PanierController implements Initializable {
 
     private void afficherQRCode() {
         try {
-            String quizUrl = "http://192.168.1.15/quiz/quiz.html"; // 👈 ton IP locale pour le quiz
+            String quizUrl = "http://172.20.10.2/quiz/quiz.html"; // 👈 ton IP locale pour le quiz
             String filePath = "qr-code.png";
             QRCodeGenerator.generateQRCode(quizUrl, filePath, 250, 250);
 

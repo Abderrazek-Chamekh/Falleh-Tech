@@ -3,6 +3,7 @@ package tn.esprit.Controllers.produitdash;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -308,11 +309,19 @@ public class ProduitController implements Initializable {
 
     private void envoyerMailStockFaible(Produit produit) {
         try {
+            // Add SSL trust properties
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
             props.put("mail.smtp.starttls.enable", "true");
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.port", "587");
+            props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+            props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+
+            // Add timeout settings
+            props.put("mail.smtp.timeout", "10000");
+            props.put("mail.smtp.connectiontimeout", "10000");
+            props.put("mail.smtp.writetimeout", "10000");
 
             Session session = Session.getInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -320,9 +329,13 @@ public class ProduitController implements Initializable {
                 }
             });
 
+            // Enable debug
+            session.setDebug(true);
+
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("sarafaleh76@gmail.com"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("sarah.faleh@esprit.tn"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse("sarah.faleh@esprit.tn"));
             message.setSubject("Alerte : Stock faible pour le produit " + produit.getNom());
 
             message.setText("Bonjour,\n\n" +
@@ -332,16 +345,18 @@ public class ProduitController implements Initializable {
                     "Catégorie : " + produit.getCategorie().getNom() + "\n" +
                     "Sous-catégorie : " + produit.getSousCategorie().getNom() + "\n\n" +
                     "Merci de réapprovisionner ce produit rapidement.\n\n" +
-                    "Cordialement,\nL’équipe de gestion d’inventaire.");
+                    "Cordialement,\nL'équipe de gestion d'inventaire.");
 
             Transport.send(message);
-            new Alert(Alert.AlertType.INFORMATION, "Email envoyé avec succès !").showAndWait();
+
+            Platform.runLater(() ->
+                    new Alert(Alert.AlertType.INFORMATION, "Email envoyé avec succès !").showAndWait());
 
         } catch (Exception e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "Erreur d'envoi d'email !").showAndWait();
+            Platform.runLater(() ->
+                    new Alert(Alert.AlertType.ERROR, "Erreur d'envoi: " + e.getMessage()).showAndWait());
         }
-
     }
     @FXML
     private void ouvrirPopupFavoris() {

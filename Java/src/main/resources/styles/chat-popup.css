@@ -1,0 +1,71 @@
+/* ===============================
+   Chat Popup Messaging Styles
+   =============================== */
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+#chatArea {
+    -fx-spacing: 10;
+}
+
+.message-bubble {
+    -fx-padding: 10;
+    -fx-background-radius: 12;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.05), 2, 0, 0, 1);
+}
+
+.message-bubble.me {
+    -fx-background-color: #d4edda;
+    -fx-text-fill: #155724;
+    -fx-background-radius: 12;
+}
+
+.message-bubble.them {
+    -fx-background-color: #e2e3e5;
+    -fx-text-fill: #383d41;
+    -fx-background-radius: 12;
+}
+
+.hbox-right {
+    -fx-alignment: center-right;
+}
+
+.hbox-left {
+    -fx-alignment: center-left;
+}
+
+
+
+
+/* Chat header */
+#lblChatWith {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Send button */
+#sendButton {
+    -fx-background-color: #28a745;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-padding: 6 12;
+}
+
+#sendButton:hover {
+    -fx-background-color: #218838;
+}
+
+/* Message input field */
+#messageField {
+    -fx-background-radius: 8;
+    -fx-border-color: #ccc;
+    -fx-padding: 6;
+}

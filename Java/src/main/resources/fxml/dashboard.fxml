@@ -6,7 +6,7 @@
 <BorderPane fx:id="dashboardPane"
             xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="tn.esprit.Controllers.offre.DashboardController"
+            fx:controller="tn.esprit.controllers.DashboardController"
             stylesheets="@/styles/dashboard.css">
 
     <top>

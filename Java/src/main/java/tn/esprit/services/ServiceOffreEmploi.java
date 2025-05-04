@@ -2,8 +2,7 @@ package tn.esprit.services;
 
 import tn.esprit.entities.OffreEmploi;
 import tn.esprit.entities.User;
-import tn.esprit.tools.Database;
-
+import tn.esprit.tools.my_db;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class ServiceOffreEmploi implements services<OffreEmploi> {
     private final Connection con;
 
     public ServiceOffreEmploi() {
-        this.con = Database.getInstance().getConnection();
+        this.con = my_db.getInstance().getConnection();
     }
 
     @Override
@@ -74,7 +73,6 @@ public class ServiceOffreEmploi implements services<OffreEmploi> {
         }
     }
 
-
     @Override
     public void supprimer(OffreEmploi offre) {
         try {
@@ -107,10 +105,10 @@ public class ServiceOffreEmploi implements services<OffreEmploi> {
             System.out.println("❌ Erreur suppression depuis front: " + e.getMessage());
         }
     }
-
     public List<OffreEmploi> getAll() {
         List<OffreEmploi> offres = new ArrayList<>();
         String sql = "SELECT * FROM offre_emploi";
+
         try (Statement st = con.createStatement();
              ResultSet rs = st.executeQuery(sql)) {
 
@@ -124,9 +122,16 @@ public class ServiceOffreEmploi implements services<OffreEmploi> {
                 o.setStartDate(rs.getDate("start_date").toLocalDate());
                 o.setDateExpiration(rs.getDate("date_expiration").toLocalDate());
 
-                User staticUser = new User();
-                staticUser.setId(55);
-                o.setIdEmployeur(staticUser);
+                int employeurId = rs.getInt("id_employeur_id");
+
+                // ✅ CORRECT: Fetch real user dynamically
+                User employeur = new ServiceUser().findById(employeurId);
+                if (employeur != null) {
+                    o.setIdEmployeur(employeur);
+                } else {
+                    System.out.println("⚠️ No User found with ID: " + employeurId);
+                    continue; // skip or handle accordingly
+                }
 
                 offres.add(o);
             }
@@ -178,5 +183,29 @@ public class ServiceOffreEmploi implements services<OffreEmploi> {
         } catch (SQLException e) {
             System.out.println("Erreur lors de l'ajout de l'offre depuis le front: " + e.getMessage());
         }
+    }
+
+    public List<OffreEmploi> getByGovernorate(String governorate) {
+        List<OffreEmploi> offres = new ArrayList<>();
+        String sql = "SELECT * FROM offre_emploi WHERE lieu = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, governorate);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                OffreEmploi o = new OffreEmploi();
+                o.setId(rs.getInt("id"));
+                o.setTitre(rs.getString("titre"));
+                o.setDescription(rs.getString("description"));
+                o.setSalaire(rs.getFloat("salaire"));
+                o.setLieu(rs.getString("lieu"));
+                o.setStartDate(rs.getDate("start_date").toLocalDate());
+                o.setDateExpiration(rs.getDate("date_expiration").toLocalDate());
+                offres.add(o);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération par gouvernorat: " + e.getMessage());
+        }
+        return offres;
     }
 }

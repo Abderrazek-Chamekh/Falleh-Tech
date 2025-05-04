@@ -3,9 +3,9 @@
     -fx-border-color: #dddddd;
     -fx-border-radius: 12;
     -fx-background-radius: 12;
-    -fx-padding: 20;
+    -fx-padding: 15;
     -fx-spacing: 10;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 6, 0.3, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 6, 0.3, 0, 2);
     -fx-pref-width: 280;
 }
 
@@ -18,41 +18,38 @@
 .label-description {
     -fx-font-size: 13px;
     -fx-text-fill: #555;
-    -fx-wrap-text: true;
 }
 
-.button-apply {
-    -fx-background-color: #66bb6a;
-    -fx-text-fill: white;
+.offre-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #666;
+    -fx-font-weight: bold;
+}
+
+.offre-value {
+    -fx-font-size: 13px;
+    -fx-text-fill: #444;
+}
+
+/* Buttons */
+.button-edit, .button-delete, .button-candidature {
     -fx-font-weight: bold;
     -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 8 12;
 }
 
-.button-contact {
-    -fx-background-color: #e0e0e0;
-    -fx-text-fill: #333;
-    -fx-background-radius: 8;
-}
-
-.button-withdraw {
-    -fx-background-color: #ef5350;
+.button-edit {
+    -fx-background-color: #81c784;
     -fx-text-fill: white;
-    -fx-background-radius: 8;
 }
 
-.button-row {
-    -fx-spacing: 8;
+.button-delete {
+    -fx-background-color: #e57373;
+    -fx-text-fill: white;
 }
 
-/* Dynamic background status styles */
-.status-accepted {
-    -fx-background-color: #e1f5e1;
-}
-
-.status-rejected {
-    -fx-background-color: #fdecea;
-}
-
-.status-pending {
-    -fx-background-color: #fff8e1;
+.button-candidature {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: white;
 }

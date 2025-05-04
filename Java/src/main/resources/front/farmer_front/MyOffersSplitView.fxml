@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.farmer.MyoffresSplitView">
+
+    <stylesheets>
+        <URL value="@/styles/splitview.css" />
+    </stylesheets>
+
+    <!-- 🟩 Left Sidebar -->
+    <left>
+        <VBox spacing="10" style="-fx-padding: 20; -fx-background-color: #f4f4f4;">
+            <Label text="📋 Mes Offres d'Emploi" styleClass="label-title" />
+            <TextField fx:id="searchField" promptText="🔍 Rechercher une offre..." />
+            <ListView fx:id="offerListView" VBox.vgrow="ALWAYS" />
+        </VBox>
+    </left>
+
+
+    <!-- 🟦 Right Profile View -->
+    <center>
+        <VBox fx:id="detailsPane" spacing="10" style="-fx-padding: 20;" />
+    </center>
+</BorderPane>

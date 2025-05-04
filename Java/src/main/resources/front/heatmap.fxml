@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.HeatmapController"
+            fx:id="rootPane"
+            prefWidth="1000"
+            prefHeight="700"
+            style="-fx-background-color: #f8f9fa;">
+
+    <ImageView fx:id="mapImage"
+               fitWidth="800"
+               fitHeight="560"
+               preserveRatio="true"
+               layoutX="190"
+               layoutY="40"
+               style="
+                   -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 12, 0.3, 0, 4);
+                   -fx-border-color: #2c3e50;
+                   -fx-border-width: 3;
+                   -fx-border-radius: 12;
+                   -fx-background-radius: 12;
+
+               "
+               onMouseClicked="#handleMouseClick"
+
+    >
+        <image>
+            <Image url="/images/tunisia-map.png" />
+        </image>
+    </ImageView>
+
+</AnchorPane>

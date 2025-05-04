@@ -1,17 +1,35 @@
 package tn.esprit.entities;
+
 public enum StatutCandidature {
     EN_ATTENTE,
-    ACCEPTE,
-    REJETE,
-    TERMINEE; // ✅ NEW
+    ACCEPTEE,
+    REFUSEE,
+    TERMINEE,
+    CONFIRMEE;
+
+    @Override
+    public String toString() {
+        return switch (this) {
+            case EN_ATTENTE -> "en_attente";
+            case ACCEPTEE   -> "acceptee";
+            case REFUSEE    -> "refusee";
+            case TERMINEE   -> "terminee";
+            case CONFIRMEE  -> "confirmee";
+        };
+    }
+
 
     public static StatutCandidature fromString(String dbValue) {
         return switch (dbValue.trim().toLowerCase()) {
-            case "accepte", "acceptee" -> ACCEPTE;
-            case "rejete", "rejetee"   -> REJETE;
-            case "en_attente"          -> EN_ATTENTE;
-            case "terminee"            -> TERMINEE; // ✅ Handle it
-            default -> throw new IllegalArgumentException("Unknown statut: " + dbValue);
+            case "en_attente", "en attente"        -> EN_ATTENTE;
+            case "acceptee", "accepte"             -> ACCEPTEE;
+            case "refusee", "rejete", "rejetee"    -> REFUSEE;
+            case "terminee"                        -> TERMINEE;
+            case "confirmee"                       -> CONFIRMEE;
+            default -> {
+                System.err.println("⚠️ Statut inconnu: " + dbValue);
+                yield EN_ATTENTE;
+            }
         };
     }
 }

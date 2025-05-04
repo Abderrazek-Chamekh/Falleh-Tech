@@ -1,0 +1,70 @@
+.calendar-root {
+    -fx-padding: 20;
+    -fx-background-color: #f5fff5;
+}
+
+.calendar-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e7d32;
+}
+
+.calendar-grid {
+    -fx-alignment: center;
+}
+
+.day-cell {
+    -fx-fill: #e0f2f1;
+    -fx-stroke: #a5d6a7;
+    -fx-cursor: hand;
+}
+
+.day-cell:hover {
+    -fx-fill: #c8e6c9;
+}
+
+.day-number {
+    -fx-font-size: 16px;
+    -fx-text-fill: #2e7d32;
+}
+
+.today {
+    -fx-background-color: #aed581;
+}
+.calendar-root {
+    -fx-padding: 30;
+    -fx-background-color: #f1fef3;
+}
+
+.calendar-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e7d32;
+}
+
+.month-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #388e3c;
+}
+.today-cell {
+    -fx-background-color: #2e7d32;
+    -fx-text-fill: white;
+    -fx-border-color: #1b5e20;
+    -fx-border-width: 2px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+}
+.accepted-day {
+    -fx-background-color: #b2dfdb;
+    -fx-border-color: #00796b;
+    -fx-border-width: 2px;
+    -fx-background-radius: 8;
+}
+
+.today-cell {
+    -fx-background-color: #fff3cd;
+    -fx-border-color: #ffc107;
+    -fx-border-width: 2px;
+    -fx-background-radius: 8;
+}

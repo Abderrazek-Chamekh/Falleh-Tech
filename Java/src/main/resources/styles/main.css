@@ -1,3 +1,4 @@
+/* === Text and Layout Basics === */
 .heading {
     -fx-font-size: 18px;
     -fx-font-weight: bold;
@@ -8,7 +9,99 @@
     -fx-pref-width: 300px;
 }
 
+/* === General Button Styling === */
 .button {
     -fx-background-color: #2a9d5e;
     -fx-text-fill: white;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 40px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+/* === Sidebar Buttons === */
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #333;
+    -fx-alignment: CENTER_LEFT;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 40px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 8;
+    -fx-padding: 0 0 0 10;
+    -fx-cursor: hand;
+}
+
+/* Highlighted (active) sidebar button */
+.sidebar-button.active {
+    -fx-background-color: #2a9d5e;
+    -fx-text-fill: white;
+}
+
+/* === Sidebar Container === */
+.sidebar {
+    -fx-background-color: #f0f4f8;
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+/* === Navbar (Top) === */
+.navbar {
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-border-color: #ddd;
+    -fx-border-width: 0 0 1px 0;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.toggle-button, .icon-button, .profile-menu {
+    -fx-background-color: transparent;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+    -fx-text-fill: #2a9d5e;
+}
+
+.toggle-button:hover,
+.icon-button:hover,
+.profile-menu:hover {
+    -fx-background-color: #eeeeee;
+    -fx-background-radius: 5;
+}
+
+/* === Nav Items === */
+.nav-item {
+    -fx-font-size: 16;
+    -fx-text-fill: #333;
+    -fx-cursor: hand;
+}
+
+/* === Main Area === */
+.main-area {
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+/* === Card Style === */
+.folder-card {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-padding: 15;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+/* === Preview Pane === */
+.preview-pane {
+    -fx-background-color: #ffffff;
+    -fx-padding: 15;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+.role-button {
+    -fx-font-size: 10px;
+    -fx-pref-width: 130px;
+    -fx-padding: 4 10;
+    -fx-background-radius: 6;
 }

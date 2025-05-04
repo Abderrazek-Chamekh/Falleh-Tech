@@ -3,35 +3,35 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="tn.esprit.Controllers.front.farmer.OffreCardController"
-      spacing="12" alignment="TOP_LEFT" prefWidth="260"
-      styleClass="offre-card">
+<VBox spacing="10" prefWidth="300"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.controllers.farmer.OffreCardController"
+      styleClass="card">
 
-    <!-- 🔹 Title -->
-    <Label fx:id="lblTitre" styleClass="offre-title"/>
+    <!-- 🔵 Title -->
+    <Label fx:id="lblTitre" wrapText="true" styleClass="card-title"/>
 
-    <!-- 🔹 Description -->
-    <Label fx:id="lblDescription" wrapText="true" styleClass="offre-description"/>
+    <!-- 📝 Description -->
+    <Label fx:id="lblDescription" wrapText="true" styleClass="card-description"/>
 
-    <!-- 🔹 Salary & Location -->
-    <VBox spacing="4" styleClass="offre-details">
-        <HBox spacing="8">
-            <Label text="💰 Salaire:" styleClass="offre-label"/>
-            <Label fx:id="lblSalaire" styleClass="offre-value"/>
-        </HBox>
-        <HBox spacing="8">
-            <Label text="📍 Lieu:" styleClass="offre-label"/>
-            <Label fx:id="lblLocation" styleClass="offre-value"/>
-        </HBox>
-    </VBox>
-
-    <!-- 🔹 Action Buttons -->
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Button fx:id="btnEdit" text="✏️ Modifier" styleClass="btn-edit"/>
-        <Button fx:id="btnDelete" text="🗑️ Supprimer" styleClass="btn-delete"/>
+    <!-- 💰 Salaire -->
+    <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label text="💰 Salaire:" styleClass="text-muted"/>
+        <Label fx:id="lblSalaire" styleClass="card-salaire"/>
     </HBox>
 
-    <!-- 🔹 Candidatures -->
-    <Button fx:id="btnCandidatures" text="📄 Voir Candidatures" styleClass="btn-candidatures"/>
+    <!-- 📍 Lieu -->
+    <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label text="📍 Lieu:" styleClass="text-muted"/>
+        <Label fx:id="lblLocation" styleClass="card-lieu"/>
+    </HBox>
+
+    <!-- 🔘 Action Buttons -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button fx:id="btnCandidatures" text="👥 Candidatures" styleClass="secondary-btn"/>
+        <Button fx:id="btnEdit" text="✏️ Modifier" styleClass="primary-btn"/>
+        <Button fx:id="btnDelete" text="🗑 Supprimer" styleClass="danger-btn"/>
+    </HBox>
+
 </VBox>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.SVGPath?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.controllers.TunisiaMapController"
+            style="-fx-background-color: linear-gradient(to bottom right, #e0f7fa, #ffffff);">
+
+    <Label text="🗺️ Carte de la Tunisie"
+           layoutX="30" layoutY="20"
+           style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+
+
+    <ToggleButton fx:id="toggleMyOffersButton"
+                  text="👨‍🌾 Mes Offres"
+                  layoutX="700" layoutY="25"
+                  style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10px; -fx-padding: 5 15 5 15;" />
+
+    <HBox layoutX="30" layoutY="70" spacing="40">
+
+        <!-- Left Card: Selected Governorate -->
+        <VBox prefWidth="400" prefHeight="600"
+              style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 20; -fx-spacing: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 0);"
+              spacing="20" alignment="TOP_CENTER">
+
+            <Label text="🛡️ Gouvernorat sélectionné"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+
+            <Pane fx:id="singleGovernoratePane"
+                  prefWidth="360" prefHeight="300"
+                  style="-fx-background-color: #f8f8f8; -fx-background-radius: 10;" />
+
+            <Label fx:id="governorateNameLabel"
+                   text="📍 Aucun sélectionné"
+                   style="-fx-font-size: 18px; -fx-text-fill: #34495e;" />
+
+            <Label fx:id="offersCountLabel"
+                   text="💼 Nombre d'offres: 0"
+                   style="-fx-font-size: 16px; -fx-text-fill: #7f8c8d;" />
+
+            <VBox fx:id="offersList"
+                  spacing="10"
+                  style="-fx-padding: 10; -fx-background-color: #ecf0f1; -fx-background-radius: 10;"
+                  prefWidth="360" prefHeight="200" />
+
+        </VBox>
+
+        <!-- Right Card: Tunisia Full Map -->
+        <VBox prefWidth="800" prefHeight="600"
+              style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 20; -fx-spacing: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+
+            <Pane fx:id="mapPane"
+                  prefWidth="760" prefHeight="540"
+                  style="-fx-background-color: transparent;" />
+
+        </VBox>
+
+    </HBox>
+
+</AnchorPane>

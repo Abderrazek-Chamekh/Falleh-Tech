@@ -4,38 +4,68 @@
 <?import javafx.scene.layout.*?>
 
 <ScrollPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="tn.esprit.Controllers.front.farmer.AddOffreDialogController"
+            fx:controller="tn.esprit.controllers.farmer.AddOffreDialogController"
             fitToWidth="true"
-            prefHeight="380"
-            maxHeight="400"
-            prefWidth="450"
-            style="-fx-background-color:transparent;">
+            hbarPolicy="NEVER"
+            vbarPolicy="AS_NEEDED"
+            prefWidth="520" prefHeight="550"
+            styleClass="transparent-scroll"
+            stylesheets="/styles/add_offre_dialog.css">
 
     <content>
-        <VBox spacing="10" style="-fx-padding: 20;">
-            <Label text="Titre de l'offre" />
-            <TextField fx:id="txtTitre" />
-            <Label fx:id="errorTitre" styleClass="error-label"/>
+        <VBox alignment="CENTER" styleClass="dialog-body">
 
-            <Label text="Lieu" />
-            <TextField fx:id="txtLieu" />
-            <Label fx:id="errorLieu" styleClass="error-label"/>
+            <VBox spacing="20" maxWidth="500" alignment="CENTER">
 
-            <Label text="Date début" />
-            <DatePicker fx:id="dpStartDate" />
-            <Label fx:id="errorStart" styleClass="error-label"/>
+                <!-- 🧩 Draggable Header Bar -->
+                <HBox fx:id="headerBar" spacing="10" alignment="CENTER_LEFT" styleClass="dialog-header">
+                    <Label text="📋" styleClass="header-icon"/>
+                    <Label text="Nouvelle Offre" styleClass="header-title"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="btnClose" text="❌" styleClass="header-close"/>
+                </HBox>
 
-            <Label text="Date fin" />
-            <DatePicker fx:id="dpEndDate" />
-            <Label fx:id="errorEnd" styleClass="error-label"/>
+                <!-- 📦 Form Section -->
+                <VBox spacing="16" styleClass="form-section">
 
-            <Label text="Description" />
-            <TextArea fx:id="txtDescription" />
-            <Label fx:id="errorDesc" styleClass="error-label"/>
+                    <VBox spacing="4">
+                        <Label text="Titre de l'offre" styleClass="input-label"/>
+                        <TextField fx:id="txtTitre" styleClass="input-field"/>
+                        <Label fx:id="errorTitre" styleClass="error-label"/>
+                    </VBox>
 
-            <Label text="Salaire" />
-            <TextField fx:id="txtSalaire" />
-            <Label fx:id="errorSalaire" styleClass="error-label"/>
+                    <VBox spacing="4">
+                        <Label text="Lieu" styleClass="input-label"/>
+                        <ComboBox fx:id="comboLieu" promptText="📍 Sélectionnez un gouvernorat" styleClass="input-field"/>
+                        <Label fx:id="errorLieu" styleClass="error-label"/>
+                    </VBox>
+
+                    <VBox spacing="4">
+                        <Label text="Date début" styleClass="input-label"/>
+                        <DatePicker fx:id="dpStartDate" styleClass="input-field"/>
+                        <Label fx:id="errorStart" styleClass="error-label"/>
+                    </VBox>
+
+                    <VBox spacing="4">
+                        <Label text="Date fin" styleClass="input-label"/>
+                        <DatePicker fx:id="dpEndDate" styleClass="input-field"/>
+                        <Label fx:id="errorEnd" styleClass="error-label"/>
+                    </VBox>
+
+                    <VBox spacing="4">
+                        <Label text="Description" styleClass="input-label"/>
+                        <TextArea fx:id="txtDescription" styleClass="text-area"/>
+                        <Label fx:id="errorDesc" styleClass="error-label"/>
+                    </VBox>
+
+                    <VBox spacing="4">
+                        <Label text="Salaire (TND)" styleClass="input-label"/>
+                        <TextField fx:id="txtSalaire" styleClass="input-field"/>
+                        <Label fx:id="errorSalaire" styleClass="error-label"/>
+                    </VBox>
+
+                </VBox>
+            </VBox>
         </VBox>
     </content>
 </ScrollPane>

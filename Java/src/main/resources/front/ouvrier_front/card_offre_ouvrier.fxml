@@ -4,29 +4,33 @@
 
 <VBox fx:id="cardContainer"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="tn.esprit.Controllers.ouvrier.OffreCardOuvrierController"
-      styleClass="card-container"
-      spacing="12">
+      fx:controller="tn.esprit.controllers.ouvrier.OffreCardOuvrierController"
+      styleClass="offre-card"
+      spacing="16"
+      style="-fx-padding: 20; -fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
 
+    <!-- Badge Top Right -->
+    <HBox alignment="TOP_RIGHT">
+        <Region HBox.hgrow="ALWAYS" />
+        <Label fx:id="lblStatus" styleClass="status-badge" />
+    </HBox>
 
+    <!-- Title & Short Description -->
+    <VBox spacing="5">
+        <Label fx:id="lblTitre" styleClass="offre-title" />
+        <Label fx:id="lblDescription" styleClass="offre-description" wrapText="true" />
+    </VBox>
 
-    <Label fx:id="lblTitre" styleClass="label-title" />
-    <Label fx:id="lblDescription" styleClass="label-description" />
+    <!-- Location and Salary -->
+    <HBox spacing="20" alignment="CENTER_LEFT">
+        <Label fx:id="lblLocation" styleClass="offre-info" />
+        <Label fx:id="lblSalaire" styleClass="offre-info" />
+    </HBox>
 
-    <Label text="Salaire:" />
-    <Label fx:id="lblSalaire" />
-
-    <Label text="Lieu:" />
-    <Label fx:id="lblLocation" />
-
-    <!-- Status Label -->
-    <Label fx:id="lblStatus" styleClass="status-badge status-pending" />
-
-    <!-- Buttons -->
-    <HBox spacing="10" styleClass="button-row">
-        <Button text="Postuler" fx:id="btnApply" styleClass="button-apply" />
-        <Button text="Contacter" fx:id="btnContact" styleClass="button-contact" />
-        <Button text="Retirer" fx:id="btnWithdraw" visible="false" styleClass="button-withdraw" />
+    <!-- Action Buttons -->
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button fx:id="btnContact" text="Contacter" styleClass="btn-primary" />
+        <Button fx:id="btnWithdraw" text="Retirer" styleClass="btn-danger" visible="false" />
     </HBox>
 
 </VBox>

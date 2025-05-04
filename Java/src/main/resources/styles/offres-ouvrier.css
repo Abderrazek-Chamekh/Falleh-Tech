@@ -1,0 +1,113 @@
+
+.table-view {
+    -fx-background-color: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-table-cell-border-color: #e0e0e0;
+}
+
+/* === HEADER === */
+.table-view .column-header {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-padding: 12px;
+}
+
+/* === ROWS === */
+.table-row-cell {
+    -fx-padding: 14px 10px;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #f8f8f8;
+}
+
+/* === STATUS BADGES === */
+.status-badge {
+    -fx-padding: 6px 14px;
+    -fx-background-radius: 14px;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+    -fx-wrap-text: true;
+    -fx-alignment: center;
+    -fx-max-width: 120px;
+    -fx-ellipsize: center;
+}
+
+.status-en_attente {
+    -fx-background-color: #f1c40f;
+    -fx-text-fill: black;
+}
+
+.status-acceptee {
+    -fx-background-color: #2ecc71;
+}
+
+.status-refusee {
+    -fx-background-color: #e74c3c;
+}
+
+.status-terminee {
+    -fx-background-color: #3498db;
+}
+
+.status-available {
+    -fx-background-color: #27ae60;
+}
+
+/* === BUTTONS === */
+.btn-apply, .btn-info {
+    -fx-background-color: #2ecc71;
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 6px 16px;
+    -fx-max-width: 160px;
+    -fx-wrap-text: true;
+    -fx-ellipsis-string: "...";
+}
+
+.btn-apply:hover {
+    -fx-background-color: #27ae60;
+}
+
+.btn-disabled {
+    -fx-background-color: #bdc3c7;
+    -fx-text-fill: white;
+    -fx-cursor: default;
+}
+
+/* === Custom Alert Styling === */
+.dialog-pane {
+    -fx-background-color: #f9f9f9;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+}
+
+.dialog-pane .content.label {
+    -fx-text-fill: #2c3e50;
+    -fx-padding: 10px;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: transparent;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.alert-success .dialog-pane {
+    -fx-border-color: #2ecc71;
+}
+
+.alert-warning .dialog-pane {
+    -fx-border-color: #e74c3c;
+}

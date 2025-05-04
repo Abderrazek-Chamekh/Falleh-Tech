@@ -49,4 +49,12 @@ public class Favoris {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
 }

@@ -1,5 +1,7 @@
 package tn.esprit.entities;
 
+
+
 import jakarta.persistence.*;
 import javax.validation.constraints.*;   // ✅ This is what YOU should use (based on your dependencies)
 import java.time.LocalDateTime;
@@ -63,8 +65,16 @@ public class User {
 
    /* @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Favoris> favoris = new HashSet<>();*/
-
+   public User() {
+       // Required by JPA
+   }
     // Getters and setters
+    public User(String name, String email, String role) {
+        this.name = name;
+        this.email = email;
+        this.role = role;
+    }
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 

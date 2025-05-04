@@ -7,7 +7,7 @@
 <VBox spacing="15"
       xmlns="http://javafx.com/javafx/8"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="tn.esprit.Controllers.condidature.EditCandidatureController"
+      fx:controller="tn.esprit.controllers.EditCandidatureController"
       alignment="CENTER_LEFT"
       styleClass="popup-container"
 >

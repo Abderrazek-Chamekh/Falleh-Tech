@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.fx.AjouterSousCategorieController"
+            stylesheets="@../styles/agri-style.css"
+            prefWidth="420" prefHeight="400">
+
+    <VBox spacing="10" alignment="TOP_CENTER" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10"
+          AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10">
+
+        <padding>
+            <Insets top="20" bottom="20" left="20" right="20"/>
+        </padding>
+
+        <Label text="Sous-Catégorie" styleClass="form-title"/>
+
+        <!-- Nom -->
+        <VBox spacing="3" alignment="CENTER_LEFT">
+            <TextField fx:id="nomField" promptText="Nom de la sous-catégorie"/>
+            <Label fx:id="nomError" textFill="red" visible="false" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!-- Catégorie -->
+        <VBox spacing="3" alignment="CENTER_LEFT">
+            <ComboBox fx:id="categorieComboBox" promptText="Catégorie parente" prefWidth="200"/>
+            <Label fx:id="categorieError" textFill="red" visible="false" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!-- Image Choix -->
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Choisir Image" onAction="#choisirImage"/>
+            <Button text="Prendre Photo" onAction="#prendrePhoto"/>
+        </HBox>
+
+        <Label fx:id="imageError" textFill="red" visible="false" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+
+        <!-- Aperçu image -->
+        <ImageView fx:id="imagePreview" fitWidth="140" fitHeight="100" preserveRatio="true"
+                   style="-fx-border-color: lightgray;"/>
+
+        <!-- Actions -->
+        <HBox spacing="15" alignment="CENTER">
+            <Button text="Ajouter" onAction="#enregistrerSousCategorie" styleClass="add-button"/>
+
+            <Button text="Annuler" onAction="#fermerFenetre" styleClass="cancel-button"/>
+        </HBox>
+
+    </VBox>
+</AnchorPane>

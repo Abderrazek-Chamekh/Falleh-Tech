@@ -1,4 +1,4 @@
-/* === DialogPane base === */
+/* === Base Dialog Container === */
 .dialog-pane {
     -fx-background-color: #ffffff;
     -fx-padding: 0;
@@ -7,180 +7,168 @@
     -fx-background-radius: 10px;
 }
 
-/* === ScrollPane Content === */
+/* === Scroll Content === */
+.transparent-scroll {
+    -fx-background-color: transparent;
+}
+/* === Remove ScrollPane scrollbar look === */
 .scroll-pane {
-    -fx-max-height: 500px; /* limit height to avoid huge window */
-    -fx-pref-height: 500px;
-    -fx-fit-to-width: true;
-}
-
-.scroll-pane .viewport {
     -fx-background-color: transparent;
-}
-
-.scroll-pane .content {
-    -fx-padding: 20;
-}
-
-/* === VBox spacing inside the form === */
-.scroll-pane VBox {
-    -fx-spacing: 10;
-}
-
-/* === Labels === */
-.label {
-    -fx-font-size: 13px;
-    -fx-text-fill: #333333;
-}
-
-/* === Error labels under input === */
-.error-label {
-    -fx-text-fill: red;
-    -fx-font-size: 11px;
-    -fx-padding: 0 0 5 5;
-}
-
-/* === Input Fields (TextField, TextArea) === */
-.text-field,
-.text-area,
-.date-picker {
-    -fx-background-radius: 6;
-    -fx-border-radius: 6;
-    -fx-border-color: #ccc;
-    -fx-padding: 6;
-    -fx-pref-height: 36px;
-    -fx-pref-width: 100%;
-}
-
-.text-area {
-    -fx-pref-height: 80px;
-}
-
-.text-field:focused,
-.text-area:focused,
-.date-picker:focused {
-    -fx-border-color: #64b5f6;
-    -fx-background-color: #ffffff;
-}
-
-/* === DatePicker Enhancements === */
-.date-picker .arrow-button {
-    -fx-background-color: transparent;
-    -fx-padding: 0 8;
-}
-
-.date-picker .arrow {
-    -fx-background-color: #64b5f6;
-    -fx-shape: "M 0 0 L 4 4 L 8 0 Z"; /* triangle */
-    -fx-scale-shape: true;
-}
-
-/* === Buttons === */
-.button {
-    -fx-font-weight: bold;
-    -fx-background-radius: 6;
-    -fx-cursor: hand;
-}
-
-.button:default {
-    -fx-background-color: #4caf50;
-    -fx-text-fill: white;
-}
-
-.button:cancel {
-    -fx-background-color: #eeeeee;
-    -fx-text-fill: #444;
-}
-/* === DialogPane base === */
-.dialog-pane {
-    -fx-background-color: #ffffff;
+    -fx-border-color: transparent;
     -fx-padding: 0;
-    -fx-font-family: 'Segoe UI', sans-serif;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
 }
-
-/* === ScrollPane Content === */
-.scroll-pane {
-    -fx-max-height: 500px; /* limit height to avoid huge window */
-    -fx-pref-height: 500px;
-    -fx-fit-to-width: true;
-}
-
 .scroll-pane .viewport {
     -fx-background-color: transparent;
 }
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
 
-.scroll-pane .content {
+.form-section {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0.1, 0, 4);
+    -fx-background-insets: 0;
+}
+.dialog-body {
     -fx-padding: 20;
+    -fx-spacing: 20;
 }
 
-/* === VBox spacing inside the form === */
-.scroll-pane VBox {
-    -fx-spacing: 10;
+/* === Form Title === */
+.form-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e3a5f;
+    -fx-alignment: CENTER_LEFT;
 }
 
-/* === Labels === */
-.label {
+/* === Group Section Background === */
+.form-section {
+    -fx-background-color: #fafafa;
+    -fx-padding: 20;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* === Input Labels === */
+.input-label {
     -fx-font-size: 13px;
-    -fx-text-fill: #333333;
+    -fx-font-weight: 600;
+    -fx-text-fill: #444;
 }
 
-/* === Error labels under input === */
+/* === Error Messages === */
 .error-label {
     -fx-text-fill: red;
-    -fx-font-size: 11px;
-    -fx-padding: 0 0 5 5;
+    -fx-font-size: 12px;
+    -fx-padding: 2 0 0 4;
 }
 
-/* === Input Fields (TextField, TextArea) === */
-.text-field,
+/* === Unified Form Fields === */
+.input-field,
 .text-area,
-.date-picker {
-    -fx-background-radius: 6;
-    -fx-border-radius: 6;
-    -fx-border-color: #ccc;
-    -fx-padding: 6;
-    -fx-pref-height: 36px;
+.date-picker,
+.combo-box {
     -fx-pref-width: 100%;
-}
-
-.text-area {
-    -fx-pref-height: 80px;
-}
-
-.text-field:focused,
-.text-area:focused,
-.date-picker:focused {
-    -fx-border-color: #64b5f6;
+    -fx-max-width: 420px;
+    -fx-min-width: 420px;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #ccc;
+    -fx-padding: 6 10;
+    -fx-font-size: 13px;
     -fx-background-color: #ffffff;
 }
 
-/* === DatePicker Enhancements === */
+/* === Focus State === */
+.input-field:focused,
+.date-picker:focused,
+.combo-box:focused,
+.text-area:focused {
+    -fx-border-color: #2196f3;
+    -fx-effect: dropshadow(three-pass-box, rgba(33, 150, 243, 0.1), 6, 0.0, 0, 1);
+}
+
+/* === ComboBox Dropdown Items === */
+.combo-box .list-cell {
+    -fx-font-size: 13px;
+    -fx-padding: 6 10;
+}
+
+/* === DatePicker Styling === */
 .date-picker .arrow-button {
     -fx-background-color: transparent;
     -fx-padding: 0 8;
 }
-
 .date-picker .arrow {
-    -fx-background-color: #64b5f6;
-    -fx-shape: "M 0 0 L 4 4 L 8 0 Z"; /* triangle */
-    -fx-scale-shape: true;
+    -fx-background-color: #2196f3;
+    -fx-shape: "M 0 0 L 4 4 L 8 0 Z";
 }
 
-/* === Buttons === */
+/* === TextArea Specific === */
+.text-area {
+    -fx-pref-height: 90px;
+    -fx-padding: 8 10;
+    -fx-wrap-text: true;
+}
+
+/* === Buttons (Default / Cancel) === */
 .button {
     -fx-font-weight: bold;
-    -fx-background-radius: 6;
+    -fx-background-radius: 8;
     -fx-cursor: hand;
 }
-
 .button:default {
-    -fx-background-color: #4caf50;
+    -fx-background-color: #4CAF50;
     -fx-text-fill: white;
 }
-
 .button:cancel {
     -fx-background-color: #eeeeee;
     -fx-text-fill: #444;
 }
+.dialog-pane {
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+.dialog-header {
+    -fx-padding: 14 20 10 20;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12 12 0 0;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: solid;
+}
+
+.header-icon {
+    -fx-font-size: 20px;
+}
+
+.header-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e3a5f;
+}
+
+.header-close {
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-text-fill: #888;
+    -fx-cursor: hand;
+    -fx-padding: 2 8;
+}
+.header-close:hover {
+    -fx-text-fill: red;
+}
+.dialog-pane {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
+    -fx-padding: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0.1, 0, 4);
+}
+

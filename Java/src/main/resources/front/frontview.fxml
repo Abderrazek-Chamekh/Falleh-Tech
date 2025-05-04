@@ -41,15 +41,51 @@
 
 
                     <!-- ✅ Menu Profil déroulant (shrunk avatar/spacing) -->
+
+                    <!-- 👇 Role Label -->
+                    <Label fx:id="roleLabel" style="-fx-font-size: 12px; -fx-text-fill: #666;" />
+                    <!-- 🔔 Notification Button with Badge -->
+
+                    <StackPane fx:id="notificationWrapper" alignment="TOP_RIGHT" style="-fx-padding: 5;">
+                        <Button fx:id="notificationBell" onAction="#toggleNotificationsPopup" styleClass="notification-bell-button">
+                            <graphic>
+                                <HBox spacing="5" alignment="CENTER_LEFT">
+                                    <Label text="🔔" style="-fx-font-size: 20px;"/>
+                                    <Label text="Notifications" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                </HBox>
+                            </graphic>
+                        </Button>
+
+                        <Label fx:id="notificationBadge"
+                               text="0"
+                               visible="false"
+                               style="-fx-background-color: red;
+                  -fx-text-fill: white;
+                  -fx-font-size: 11px;
+                  -fx-padding: 2 6 2 6;
+                  -fx-background-radius: 50;
+                  -fx-translate-x: 12;
+                  -fx-translate-y: -8;
+                  -fx-font-weight: bold;"/>
+                    </StackPane>
+
+
+
+                    <!-- ✅ Menu Profil déroulant -->
                     <MenuButton fx:id="profileMenu" popupSide="BOTTOM" styleClass="profile-menu-button">
                         <graphic>
                             <HBox spacing="6" alignment="CENTER">
                                 <ImageView fx:id="menuAvatar" fitWidth="22" fitHeight="22" preserveRatio="true"/>
-                                <Label fx:id="profileNameLabel" text="Sarah" styleClass="profile-name-label"/>
+                                <Label fx:id="profileNameLabel" text="Abbassi Fares" styleClass="profile-name-label"/>
                             </HBox>
                         </graphic>
                         <items>
+
+                            <MenuItem text="️Carte" styleClass="profile-item" onAction="#goToMap"/>
+                            <MenuItem text="SMS" styleClass="profile-item" onAction="#goToSms"/>
+                            <MenuItem text="️HeatMap" styleClass="profile-item" onAction="#goToHeatmap"/>
                             <MenuItem text="👤 Profile" styleClass="profile-item" onAction="#openProfile"/>
+                            <MenuItem text="✔️ Vérifier le compte" styleClass="profile-item" onAction="#verifyAccount"/>
                             <MenuItem text="🚪 Déconnexion" styleClass="logout-item" onAction="#logout"/>
                         </items>
                     </MenuButton>
@@ -63,10 +99,12 @@
                         <Insets top="20" bottom="20" left="20" right="10"/>
                     </padding>
 
+                    <!-- 🔰 Logo -->
                     <VBox alignment="CENTER" spacing="8" styleClass="logo-section">
                         <ImageView fx:id="logoImage" fitWidth="140" preserveRatio="true"/>
                     </VBox>
 
+                    <!-- 🧭 Navigation -->
                     <Button fx:id="accueilButton" text="Page d'accueil" onAction="#goToAccueil" styleClass="sidebar-button"/>
                     <Button fx:id="produitsButton" text="Produits" onAction="#goToProduits" styleClass="sidebar-button"/>
 
@@ -80,6 +118,14 @@
                     <Button fx:id="offresButton" text="Offres de travail" onAction="#goToOffres" styleClass="sidebar-button"/>
                     <Button fx:id="candidatures" text="Mes Candidatures" onAction="#goToCandidatureHistory" styleClass="sidebar-button"/>
                     <Button fx:id="blogButton" text="Blog" onAction="#goToBlog" styleClass="sidebar-button"/>
+                    <Button fx:id="btnCalendrier" text="🗓️ Mon Calendrier" onAction="#openCalendrierView" styleClass="sidebar-button"/>
+                    <Button fx:id="addMapButton"
+                            text="🗺️ Ma Parcelle"
+                            onAction="#openLandDrawPage"
+                            styleClass="sidebar-button"/>
+
+                    <!-- ✅ New Messages Button -->
+                    <Button fx:id="btnMessages" text="💬 Messages" onAction="#openMessagingPage" styleClass="sidebar-button"/>
                 </VBox>
             </left>
 

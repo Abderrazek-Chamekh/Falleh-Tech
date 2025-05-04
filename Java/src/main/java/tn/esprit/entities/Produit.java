@@ -98,18 +98,6 @@ public class Produit {
         this.image = image;
     }
 
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public boolean isFavorite() {
-        return isFavorite;
-    }
-
     public void setFavorite(boolean favorite) {
         isFavorite = favorite;
     }

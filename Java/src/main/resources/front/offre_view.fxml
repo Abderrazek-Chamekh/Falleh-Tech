@@ -5,7 +5,7 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="tn.esprit.Controllers.front.OffreController"
+      fx:controller="tn.esprit.fx.OffreController"
       spacing="10" padding="10">
 
     <HBox spacing="10">

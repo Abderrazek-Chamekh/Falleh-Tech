@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.controllers.SendSmsController"
+      spacing="20"
+      alignment="CENTER"
+      style="-fx-padding: 30; -fx-background-color: #f0f4f8;">
+
+    <!-- Title -->
+    <Label text="📱 Phone Number Verification" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <!-- Phone Number Field -->
+    <TextField fx:id="phoneNumberField"
+               promptText="Enter your phone number (e.g., 95895491)"
+               style="-fx-pref-width: 300px;"/>
+
+    <!-- Code Entry Field (reuse the messageField) -->
+    <TextArea fx:id="messageField"
+              promptText="You will receive a code..."
+              style="-fx-pref-width: 300px; -fx-pref-height: 80px;"
+              disable="true" /> <!-- Initially disabled until SMS is sent -->
+
+    <!-- Send/Verify Button -->
+    <Button text="Send SMS" fx:id="sendButton"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-pref-width: 150px;"/>
+
+    <!-- Status Label -->
+    <Label fx:id="statusLabel"
+           text=""
+           style="-fx-text-fill: red; -fx-font-size: 14px;"/>
+
+</VBox>

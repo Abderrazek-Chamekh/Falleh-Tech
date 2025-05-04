@@ -5,35 +5,67 @@
 
 <StackPane xmlns="http://javafx.com/javafx/21.0.1"
            xmlns:fx="http://javafx.com/fxml"
-           fx:controller="tn.esprit.Controllers.front.farmer.MesOffresController"
-           fx:id="contentPaneRef">
+           fx:id="contentPaneRef"
+           fx:controller="tn.esprit.controllers.farmer.MesOffresController"
+           stylesheets="/styles/mesoffres.css">
 
     <AnchorPane>
-        <VBox spacing="20" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
-              AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0"
-              style="-fx-padding: 30;">
+        <VBox spacing="20"
+              AnchorPane.topAnchor="0"
+              AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0"
+              AnchorPane.bottomAnchor="0"
+              styleClass="main-background">
 
-            <!-- Title -->
-            <Label text="📋 Mes Offres d'Emploi"
-                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1e3a5f;" />
+            <!-- 🔵 Page Title -->
+            <Label text="📋 Mes Offres d'Emploi" styleClass="page-title" />
 
-            <!-- Toolbar -->
-            <HBox spacing="10">
-                <Button text="➕ Ajouter une offre" fx:id="btnAddOffer" />
-                <Region HBox.hgrow="ALWAYS" />
-                <ToggleButton fx:id="btnAllOffers" text="🌐 Toutes les offres" selected="true" />
-                <ToggleButton fx:id="btnMyOffers" text="👤 Mes offres" />
+            <!-- 🔘 Top Action Row -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button fx:id="btnAddOffer"
+                        text="➕ Ajouter une offre"
+                        styleClass="primary-btn" />
+                <Region HBox.hgrow="ALWAYS"/>
+                <ToggleButton fx:id="btnAllOffers"
+                              text="🌐 Toutes les offres"
+                              selected="true"
+                              styleClass="toggle-btn"/>
+                <ToggleButton fx:id="btnMyOffers"
+                              text="👤 Mes offres"
+                              styleClass="toggle-btn"/>
             </HBox>
 
-            <!-- Offers container -->
-            <ScrollPane fitToWidth="true" fx:id="scrollPane" style="-fx-background-color:transparent;">
+            <!-- 🔍 Filter + Sort Row -->
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <HBox spacing="10" HBox.hgrow="ALWAYS">
+                    <TextField fx:id="searchField"
+                               promptText="🔍 Rechercher..."
+                               styleClass="search-bar"
+                               HBox.hgrow="ALWAYS"/>
+                    <ComboBox fx:id="locationFilter"
+                              promptText="📍 Lieu"
+                              styleClass="filter-combo"
+                              HBox.hgrow="ALWAYS"/>
+                </HBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <ToggleButton fx:id="sortDateToggle"
+                              text="📅 Trier par date"
+                              styleClass="toggle-pill"/>
+            </HBox>
+
+            <!-- 🧱 Offer Cards Grid -->
+            <ScrollPane fx:id="scrollPane"
+                        fitToWidth="true"
+                        styleClass="transparent-scroll">
                 <FlowPane fx:id="offersGrid"
-                          hgap="20" vgap="20"
-                          style="-fx-padding: 20;">
-                    <!-- Cards will be dynamically added here -->
+                          alignment="CENTER"
+                          hgap="30"
+                          vgap="30"
+                          prefWrapLength="960"
+                          styleClass="offers-grid">
+                    <!-- Offer cards loaded dynamically -->
                 </FlowPane>
             </ScrollPane>
-
         </VBox>
     </AnchorPane>
 </StackPane>

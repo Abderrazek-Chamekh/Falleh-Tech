@@ -606,7 +606,6 @@ public class Main {
             setVisible(true);
         }
     }
-
     static class CandidaturePanel extends JPanel {
         private final tn.esprit.services.ServiceCandidature service = new tn.esprit.services.ServiceCandidature();
         private final tn.esprit.services.ServiceOffreEmploi offreService = new tn.esprit.services.ServiceOffreEmploi();

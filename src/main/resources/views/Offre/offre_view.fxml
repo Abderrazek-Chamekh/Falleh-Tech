@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0" prefWidth="1331.0" stylesheets="/styles/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.OffreController">
+<top>
+    <VBox alignment="CENTER_LEFT" spacing="10" />
+</top>
+<center>
+    <HBox spacing="10">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+        <TextField fx:id="titreField" promptText="Titre"/>
+        <TextField fx:id="descriptionField" promptText="Description"/>
+        <TextField fx:id="salaireField" promptText="Salaire"/>
+        <TextField fx:id="lieuField" promptText="Lieu"/>
+        <Button text="Ajouter" onAction="#ajouterOffre"/>
+    </HBox>
+
+    <TableView fx:id="offreTable" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="titreCol" text="Titre"/>
+            <TableColumn fx:id="descriptionCol" text="Description"/>
+            <TableColumn fx:id="lieuCol" text="Lieu"/>
+        </columns>
+    </TableView>
+</center>
+</BorderPane>
